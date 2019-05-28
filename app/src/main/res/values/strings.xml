@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Menu</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Main -->
+    <string name="main_welcome">Willkommen</string>
+    <string name="main_order_overview">Ihre Bestellung:</string>
+
+    <!-- OrderFragment -->
+    <string name="order_add">hinzufügen</string>
+
+    <string name="drinks">Getränke</string>
+    <string name="shisha">Shisha</string>
+</resources>
