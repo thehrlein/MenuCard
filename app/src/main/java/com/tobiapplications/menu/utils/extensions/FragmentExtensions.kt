@@ -98,9 +98,9 @@ fun BaseFragment.addFragment(fragment: BaseFragment) {
     fragmentManager?.beginTransaction()?.add(R.id.fragment_container, fragment)?.commit()
 }
 
-fun BaseFragment.replaceFragment(fragment: BaseFragment, addToStack: Boolean = true) {
+fun BaseFragment.replaceFragment(fragment: BaseFragment, container: Int = R.id.fragment_container, addToStack: Boolean = true) {
     fragmentManager?.beginTransaction()?.apply {
-        replace(R.id.fragment_container, fragment)
+        replace(container, fragment)
         if (addToStack) {
             addToBackStack(null)
         }

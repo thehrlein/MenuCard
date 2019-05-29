@@ -1,0 +1,25 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.tobiapplications.menu.ui.main.MainActivity">
+
+    <item
+        android:id="@+id/navigation_last_orders"
+        android:title="@string/menu_navigation_last_order"
+        android:icon="@drawable/ic_restaurant_menu_white"
+        android:orderInCategory="100"/>
+
+    <item
+        android:id="@+id/navigation_new_orders"
+        android:title="@string/menu_navigation_new_order"
+        android:icon="@drawable/ic_add_white"
+        android:orderInCategory="100"/>
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:title="@string/menu_navigation_profile"
+        android:icon="@drawable/ic_profile_white"
+        android:orderInCategory="100"/>
+
+</menu>

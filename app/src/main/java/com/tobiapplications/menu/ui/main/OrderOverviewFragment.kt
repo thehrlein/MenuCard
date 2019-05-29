@@ -3,8 +3,6 @@ package com.tobiapplications.menu.ui.main
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -80,7 +78,7 @@ class OrderOverviewFragment : BaseFragment() {
             return
         }
 
-        (parentFragment as? MainFragment)?.moveFabMenuUp()
+//        (parentFragment as? MainFragment)?.moveFabMenuAboveCollapseBottomSheet()
 
         postDelayed({
             bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HALF_EXPANDED
@@ -103,7 +101,13 @@ class OrderOverviewFragment : BaseFragment() {
             }
 
             override fun onStateChanged(p0: View, p1: Int) {
-
+                (parentFragment as? MainFragment)?.apply {
+                    when (p1) {
+                        BottomSheetBehavior.STATE_HALF_EXPANDED -> moveFabMenuToHalfScreen()
+                        BottomSheetBehavior.STATE_HIDDEN -> moveFabMenuDownToInitialPosition()
+                        BottomSheetBehavior.STATE_COLLAPSED -> moveFabMenuAboveCollapseBottomSheet()
+                    }
+                }
             }
         })
 
@@ -124,7 +128,6 @@ class OrderOverviewFragment : BaseFragment() {
         totalPrice.text = Constants.EMPTY_STRING
         postDelayed( {
             bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
-            (parentFragment as? MainFragment)?.moveFabMenuDown()
         }, 200)
     }
 

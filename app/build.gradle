@@ -81,6 +81,9 @@ dependencies {
     implementation "com.facebook.fresco:fresco:$fresco"
     implementation "de.hdodenhof:circleimageview:$circular_image_view"
 
+    // Loading Animation Indicator
+    implementation "com.wang.avi:library:$avi_loading_indicator"
+
     // Floating Action Button - Menu
     implementation "com.github.clans:fab:$fab"
 

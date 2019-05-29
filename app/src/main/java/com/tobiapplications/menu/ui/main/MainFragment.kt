@@ -47,7 +47,6 @@ class MainFragment : BaseFragment() {
 
     private fun setUpBottomSheetOverview() {
         bottomSheetBehavior = BottomSheetBehavior.from(view?.findViewById(R.id.orderLayout))
-
         bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
 
         val order = OrderUtils.getOrder()
@@ -62,16 +61,21 @@ class MainFragment : BaseFragment() {
         return R.layout.fragment_main
     }
 
-    fun moveFabMenuUp() {
-        postDelayed( {
-            val pixel = getDimen(R.dimen.menu_space_default)
-            ViewCompat.animate(fab_menu).translationY(-MenuUtils.pxFromDp(requireContext(), pixel)).start()
-        }, 200)
+    fun moveFabMenuAboveCollapseBottomSheet() {
+        moveFab(-getDimen(R.dimen.order_overview_title_height))
     }
 
-    fun moveFabMenuDown() {
+    fun moveFabMenuDownToInitialPosition() {
+        moveFab(0f)
+    }
+
+    fun moveFabMenuToHalfScreen() {
+        moveFab(-(view?.height?.div(2.0f) ?: 0f))
+    }
+
+    private fun moveFab(pixel: Float) {
         postDelayed( {
-            ViewCompat.animate(fab_menu).translationY(MenuUtils.pxFromDp(requireContext(), 0f)).start()
+            ViewCompat.animate(fab_menu).translationY(pixel).start()
         }, 200)
     }
 }

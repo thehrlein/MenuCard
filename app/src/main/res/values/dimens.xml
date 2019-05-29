@@ -20,6 +20,8 @@
     <dimen name="menu_space_giant">32dp</dimen>
     <dimen name="menu_space_colossal">48dp</dimen>
 
+    <!-- others -->
     <dimen name="order_overview_title_height">48dp</dimen>
+    <dimen name="bottom_navigation_height">56dp</dimen>
 
 </resources>

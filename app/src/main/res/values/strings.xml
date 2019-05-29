@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Menu</string>
-    <string name="action_settings">Settings</string>
+
+    <!-- LoadingScreen -->
+    <string name="loading_please_be_patient">Einen Moment …</string>
+
+    <!-- Menu -->
+    <string name="menu_welcome_message">Herzlich Willkommen in unserer Bar &amp; Shisha Lounge!\nSehen Sie Ihre alten bzw. aktuellen Bestellungen ein oder geben Sie eine neue auf. Viel Spaß :)</string>
+    <string name="menu_navigation_last_order">Bestellungen</string>
+    <string name="menu_navigation_new_order">Neue Bestellung</string>
+    <string name="menu_navigation_profile">Profil</string>
 
     <!-- Main -->
     <string name="main_welcome">Willkommen</string>
