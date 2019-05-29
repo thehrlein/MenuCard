@@ -4,10 +4,22 @@
 
     <!-- Main -->
     <string name="main_welcome">Willkommen</string>
-    <string name="main_order_overview">Ihre Bestellung:</string>
+    <string name="main_order_overview">Ihre Bestellung</string>
 
     <!-- OrderFragment -->
     <string name="order_add">hinzufügen</string>
+
+    <!-- OrderOverviewFragment -->
+    <string name="overview_position">Pos.</string>
+    <string name="overview_name">Name</string>
+    <string name="overview_size">Größe</string>
+    <string name="overview_price">Preis</string>
+    <string name="overview_count">Anzahl</string>
+    <string name="overview_total_price">Gesamtpreis:</string>
+    <string name="overview_confirm_order">Bestellung abschicken</string>
+    <string name="overview_delete_order">Möchten Sie Ihre Bestellung löschen?</string>
+    <string name="overview_delete_delete">löschen</string>
+    <string name="overview_delete_cancel">abbrechen</string>
 
     <string name="drinks">Getränke</string>
     <string name="shisha">Shisha</string>

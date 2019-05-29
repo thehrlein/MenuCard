@@ -36,5 +36,10 @@ open class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolde
         items?.forEach { itemList.add(it) }
         notifyDataSetChanged()
     }
+
+    fun clear() {
+        itemList.clear()
+        notifyDataSetChanged()
+    }
 }
 

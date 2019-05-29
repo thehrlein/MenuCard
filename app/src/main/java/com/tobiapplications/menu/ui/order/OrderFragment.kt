@@ -4,12 +4,14 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.Drink
+import com.tobiapplications.menu.model.OrderItem
 import com.tobiapplications.menu.model.Shisha
 import com.tobiapplications.menu.ui.base.BaseFragment
 import com.tobiapplications.menu.ui.viewhandler.OrderAdapter
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.enums.OrderType
 import com.tobiapplications.menu.utils.extensions.onClick
+import com.tobiapplications.menu.utils.extensions.orDefault
 import com.tobiapplications.menu.utils.general.OrderUtils
 import kotlinx.android.synthetic.main.fragment_order.*
 import java.io.Serializable
@@ -68,7 +70,7 @@ class OrderFragment : BaseFragment() {
 
     private fun initViews() {
         add.onClick {
-            OrderUtils.add(orderType, orderAdapter?.itemList)
+            OrderUtils.add(orderType, orderAdapter?.itemList?.filter { (it as? OrderItem)?.count.orDefault() > 0 })
             activity?.onBackPressed()
         }
     }

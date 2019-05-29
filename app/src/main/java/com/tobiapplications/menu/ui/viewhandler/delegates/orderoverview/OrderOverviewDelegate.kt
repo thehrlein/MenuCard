@@ -1,33 +1,33 @@
-package com.tobiapplications.menu.ui.viewhandler.delegates
+package com.tobiapplications.menu.ui.viewhandler.delegates.orderoverview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.Drink
-import com.tobiapplications.menu.ui.viewholder.DrinkViewHolder
+import com.tobiapplications.menu.model.OrderItem
+import com.tobiapplications.menu.ui.viewholder.OrderViewHolder
 import com.tobiapplications.menu.utils.general.DisplayableItem
 
 /**
- *  Created by tobiashehrlein on 2019-05-23
+ * Created by tobias.hehrlein on 2019-05-28.
  */
-class DrinkDelegate : AdapterDelegate<List<DisplayableItem>>() {
+class OrderOverviewDelegate : AdapterDelegate<List<DisplayableItem>>() {
 
     override fun isForViewType(items: List<DisplayableItem>, position: Int): Boolean {
-        return items[position] is Drink
+        return items[position] is OrderItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return DrinkViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.viewholder_drink, parent, false))
+        return OrderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.viewholder_order_item, parent, false))
     }
 
     override fun onBindViewHolder(items: List<DisplayableItem>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {
-        val viewHolder = holder as? DrinkViewHolder
-        val item = items[position] as? Drink
+        val orderHolder = holder as? OrderViewHolder
+        val item = items[position] as? OrderItem
 
         if (item != null) {
-            viewHolder?.setDrink(item)
+            orderHolder?.setOrder(item)
         }
     }
 }

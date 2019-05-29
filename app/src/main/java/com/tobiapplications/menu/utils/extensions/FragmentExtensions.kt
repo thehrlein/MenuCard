@@ -108,6 +108,11 @@ fun BaseFragment.replaceFragment(fragment: BaseFragment, addToStack: Boolean = t
     }
 }
 
+fun BaseFragment.getDimen(dimen: Int) : Float {
+    return resources.getDimension(dimen)
+}
+
+
 ///**
 // *  < =============================== Dialog Fragments =============================== >
 // */

@@ -11,7 +11,7 @@
         android:id="@+id/plus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_plus_1_white" />
+        android:src="@drawable/ic_add_white" />
 
     <TextView
         android:id="@+id/value"
@@ -25,6 +25,6 @@
         android:id="@+id/minus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_minus_1_white" />
+        android:src="@drawable/ic_remove_white" />
 
 </LinearLayout>

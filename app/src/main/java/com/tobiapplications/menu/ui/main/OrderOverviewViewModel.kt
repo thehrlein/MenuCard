@@ -10,27 +10,25 @@ import javax.inject.Inject
 class OrderOverviewViewModel @Inject constructor(): ViewModel() {
 
     companion object {
-        // Threshold for when normal header views and description views should "change places".
         // This should be a value between 0 and 1, coinciding with a point between the bottom
         // sheet's collapsed (0) and expanded (1) states.
         private const val ALPHA_CHANGEOVER = 0.33f
-        // Threshold for when description views reach maximum alpha. Should be a value between
-        // 0 and [ALPHA_CHANGEOVER], inclusive.
-        private const val ALPHA_DESC_MAX = 0f
         // Threshold for when normal header views reach maximum alpha. Should be a value between
         // [ALPHA_CHANGEOVER] and 1, inclusive.
         private const val ALPHA_HEADER_MAX = 0.67f
+
+        private const val ALPHA_CLEAR_ICON_MAX = 0.33f
+        private const val ALPHA_CLEAR_ICON_CHANGEOVER = 0.2f
     }
 
     var headerAlpha = SingleLiveEvent(1f)
-    var descriptionAlpha = SingleLiveEvent(0f)
+    var clearOrderAlpha = SingleLiveEvent(1f)
 
     fun updateFilterHeadersAlpha(slideOffset: Float) {
         // Alpha of normal header views increases as the sheet expands, while alpha of description
         // views increases as the sheet collapses. To prevent overlap, we use a threshold at which
         // the views "trade places".
         headerAlpha.value = offsetToAlpha(slideOffset, ALPHA_CHANGEOVER, ALPHA_HEADER_MAX)
-//        descriptionAlpha.value = offsetToAlpha(slideOffset, ALPHA_CHANGEOVER, ALPHA_DESC_MAX)
     }
 
     /**

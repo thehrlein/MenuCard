@@ -20,24 +20,39 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="@dimen/order_overview_title_height" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <include
+        android:id="@+id/headline"
+        layout="@layout/view_order_item_headline"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/menu_space_default"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guide_peek_height" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:nestedScrollingEnabled="false"
         android:orientation="vertical"
-        android:paddingHorizontal="@dimen/menu_space_default"
-        android:paddingVertical="@dimen/menu_space_default"
+        android:padding="@dimen/menu_space_default"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guide_peek_height"
-        app:layoutManager="GridLayoutManager"
-        app:spanCount="2"
-        tools:targetApi="o" />
+        app:layout_constraintTop_toBottomOf="@id/headline" />
+
+    <include
+        android:id="@+id/bottomLayout"
+        layout="@layout/view_order_item_bottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/menu_space_default"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerView" />
 
     <!--
       ~ Mimics raising the elevation of a container around the header elements (like when an
@@ -53,36 +68,20 @@
         android:alpha="0"
         android:background="@drawable/shadow_order_overview"
         android:stateListAnimator="@animator/active_alpha"
-        app:layout_constraintTop_toBottomOf="@id/guide_peek_height" />
-
-    <!-- Description view shown when tag filters are active -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/filter_description_tags"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/menu_space_default"
-        android:fadingEdgeLength="@dimen/menu_space_giant"
-        android:orientation="horizontal"
-        android:requiresFadingEdge="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/guide_peek_height"
-        app:layout_constraintEnd_toStartOf="@id/clearOrder"
+        app:layout_constraintTop_toBottomOf="@id/guide_peek_height"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="LinearLayoutManager"
-        tools:visibility="gone" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-
-    <!-- Shortcut for clearing the current filters, shown with the filters description -->
     <ImageButton
         android:id="@+id/clearOrder"
         android:layout_width="@dimen/order_overview_title_height"
         android:layout_height="@dimen/order_overview_title_height"
-        android:layout_marginEnd="@dimen/menu_space_mini"
+        android:layout_marginStart="@dimen/menu_space_mini"
         android:background="?selectableItemBackgroundBorderless"
         android:scaleType="center"
         android:tint="@color/colorGrey"
         app:layout_constraintBottom_toTopOf="@id/guide_peek_height"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_clear_all"
         tools:visibility="gone" />

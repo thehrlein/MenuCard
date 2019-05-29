@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/menu_space_small"
+    android:background="@drawable/border_order_overview_item">
+
+    <TextView
+        android:id="@+id/position"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        tools:text="1."/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        tools:text="Bier"/>
+
+    <TextView
+        android:id="@+id/size"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        tools:text="0.5L"/>
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        tools:text="3,90 €"/>
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        tools:text="4"/>
+
+</LinearLayout>

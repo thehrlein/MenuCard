@@ -18,8 +18,23 @@ object OrderUtils {
         }
 
         when (type) {
-            OrderType.DRINKS -> order.drinks = order.drinks.union(list.map { it as? Drink}).filterNotNull().toList()
-            OrderType.SHISHA -> order.shisha = order.shisha.union(list.map { it as? Shisha}).filterNotNull().toList()
+            OrderType.DRINKS -> addDrinks(list)
+            OrderType.SHISHA -> addShishas(list)
+        }
+    }
+
+    private fun addDrinks(list: List<DisplayableItem>) {
+        list.forEach { order ->
+            if (order !is Drink) return
+            this.order.drinks.firstOrNull { it.name == order.name }?.increaseCount(order.count) ?: this.order.drinks.add(order)
+        }
+    }
+
+    private fun addShishas(list: List<DisplayableItem>) {
+        list.forEach { order ->
+            if (order !is Shisha) return
+            this.order.shisha.firstOrNull { it.name == order.name }?.increaseCount(order.count) ?: this.order.shisha.add(order)
+
         }
     }
 
@@ -28,8 +43,7 @@ object OrderUtils {
     }
 
     fun clearOrder() {
-        order.drinks = emptyList()
-        order.shisha = emptyList()
+        order.drinks.clear()
+        order.shisha.clear()
     }
-
 }

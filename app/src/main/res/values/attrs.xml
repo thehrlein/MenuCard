@@ -7,4 +7,8 @@
         <attr name="textColor" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="FloatingActionMenu">
+        <attr name="autoHide" format="boolean" />
+    </declare-styleable>
+
 </resources>
