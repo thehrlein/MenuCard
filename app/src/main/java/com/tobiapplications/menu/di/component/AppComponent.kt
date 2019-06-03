@@ -18,7 +18,8 @@ import javax.inject.Singleton
     AppModule::class,
     NetworkModule::class,
     ViewModelModule::class,
-    PersistenceModule::class
+    PersistenceModule::class,
+    FirebaseModule::class
 ])
 interface AppComponent {
 

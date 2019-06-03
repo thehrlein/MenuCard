@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion compileSdk
@@ -86,6 +87,10 @@ dependencies {
 
     // Floating Action Button - Menu
     implementation "com.github.clans:fab:$fab"
+
+    // Firebase
+    implementation "com.google.firebase:firebase-database:$firebase"
+    implementation "com.google.firebase:firebase-auth:$firebase"
 
     // Testing
     testImplementation "junit:junit:$junit"

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "665916160001",
+    "firebase_url": "https://menucard-1ea61.firebaseio.com",
+    "project_id": "menucard-1ea61",
+    "storage_bucket": "menucard-1ea61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665916160001:android:5289338328fe839a",
+        "android_client_info": {
+          "package_name": "com.tobiapplications.menu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665916160001-r17s82moq3u2qhcocn0qtsj5an1ipgde.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tobiapplications.menu",
+            "certificate_hash": "19aa3d2db390a5631647181fba78e7a1b4fb218e"
+          }
+        },
+        {
+          "client_id": "665916160001-ltgtnbqh4bs1ev5lm6vso4v04g6vn911.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXy5Pohcz6SsJ90UoFk7WbgRfXYydvYJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665916160001-ltgtnbqh4bs1ev5lm6vso4v04g6vn911.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
