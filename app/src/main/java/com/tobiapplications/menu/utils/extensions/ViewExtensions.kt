@@ -3,8 +3,11 @@ package com.tobiapplications.menu.utils.extensions
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.jakewharton.rxbinding2.view.RxView
@@ -95,4 +98,25 @@ fun View.show() {
 
 fun View.setGone() {
     visibility = View.GONE
+}
+
+
+/**
+ * Extension function to simplify setting an afterTextChanged action
+ */
+fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(editable: Editable?) { afterTextChanged.invoke(editable.toString()) }
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+    })
+}
+
+/**
+ * Extension function to simplify setting an onFocusLostListener
+ */
+fun EditText.onFocusLost(onFocusLost: () -> Unit) {
+    this.setOnFocusChangeListener { v, hasFocus ->
+        if (!hasFocus) { onFocusLost.invoke() }
+    }
 }

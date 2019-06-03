@@ -1,8 +1,18 @@
 <resources>
+
+    <!-- General -->
     <string name="app_name">Menu</string>
+    <string name="drinks">Getränke</string>
+    <string name="shisha">Shisha</string>
+    <string name="general_attention">Achtung</string>
+    <string name="general_please_wait">Bitte warten …</string>
 
     <!-- LoadingScreen -->
     <string name="loading_please_be_patient">Einen Moment …</string>
+    <string name="loading_not_logged_in_title">Möchten Sie sich anmelden oder anonym bestellen?</string>
+    <string name="loading_not_logged_in_message">Eingeloggte Nutzer sehen neben Ihrem Profil alte Bestellungen</string>
+    <string name="loading_not_logged_login">Einloggen</string>
+    <string name="loading_not_logged_stay_anonymous">Als Gast bestellen</string>
 
     <!-- Menu -->
     <string name="menu_welcome_message">Herzlich Willkommen in unserer Bar &amp; Shisha Lounge!\nSehen Sie Ihre alten bzw. aktuellen Bestellungen ein oder geben Sie eine neue auf. Viel Spaß :)</string>
@@ -29,6 +39,20 @@
     <string name="overview_delete_delete">löschen</string>
     <string name="overview_delete_cancel">abbrechen</string>
 
-    <string name="drinks">Getränke</string>
-    <string name="shisha">Shisha</string>
+    <!-- Login & Registraion-->
+    <string name="login_hint_email">E-Mail</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_new_to_menucard">Neu bei MenuCard?</string>
+    <string name="login_reset_password">Passwort vergessen?</string>
+    <string name="login_already_signed_up">Bereits registriert?</string>
+    <string name="login_go_to_registration">für MenuCard registieren</string>
+    <string name="login_action_sign_in">einloggen</string>
+    <string name="login_action_sign_up">registrieren</string>
+    <string name="login_validation_field_required">Pflichtfeld</string>
+    <string name="login_validation_email_invalid">Bitte geben Sie eine gültige E-Mail ein</string>
+    <string name="login_validation_password_too_short">Bitte geben Sie mindestens 6 Zeichen ein</string>
+    <string name="login_error_user_not_exists">Es wurde kein Account zu dieser E-Mail gefunden</string>
+    <string name="login_error_user_already_exists">Es existiert bereits ein Account zu dieser E-Mail</string>
+    <string name="login_error_unknown_error">Es ist ein unbekannter Fehler aufgetreten</string>
+    <string name="login_error_bad_password">Falsches Passwort</string>
 </resources>

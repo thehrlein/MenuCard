@@ -15,4 +15,9 @@ object Constants {
      * Identifier
      */
     const val ORDER_TYPE = "order_type"
+
+    /**
+     * Shared Preference Keys
+     */
+    const val USER_IS_LOGGED_IN = "user_is_logged_in"
 }

@@ -17,3 +17,7 @@ fun Int?.orDefault() : Int {
 fun Double.formatEuro() : String {
     return String.format("%.2f €", this)
 }
+
+fun Boolean?.orFalse() : Boolean {
+    return this ?: false
+}

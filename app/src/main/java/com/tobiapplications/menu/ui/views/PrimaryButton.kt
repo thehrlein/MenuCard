@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.utils.extensions.getColor
+import com.tobiapplications.menu.utils.extensions.onClick
 import kotlinx.android.synthetic.main.view_primary_button.view.*
 
 /**
@@ -20,8 +22,7 @@ class PrimaryButton @JvmOverloads constructor(context: Context, attrs: Attribute
         val text = styles.getString(R.styleable.PrimaryButton_text)
         title.text = text
         setTextColor(styles.getColorStateList(R.styleable.PrimaryButton_textColor))
-        isEnabled = styles.getBoolean(R.styleable.PrimaryButton_enabled, true)
-
+        setState(styles.getBoolean(R.styleable.PrimaryButton_secondary, false))
         styles.recycle()
     }
 
@@ -31,11 +32,23 @@ class PrimaryButton @JvmOverloads constructor(context: Context, attrs: Attribute
         }
     }
 
-    fun setButtonSecondaryState() {
+    private fun setState(secondary: Boolean) {
+        if (secondary) {
+            setButtonSecondaryState()
+        } else {
+            setButtonPrimaryState()
+        }
+    }
+
+    private fun setButtonSecondaryState() {
         layoutButtons.setBackgroundColor(getColor(R.color.colorLightGrey))
         title.setTextColor(getColor(R.color.colorBlack))
     }
 
+    private fun setButtonPrimaryState() {
+        layoutButtons.setBackgroundColor(getColor(R.color.buttonBackgroundBlue))
+        title.setTextColor(getColor(R.color.colorWhite))
+    }
 
     override fun setEnabled(enabled: Boolean) {
         if (enabled) {
@@ -46,7 +59,4 @@ class PrimaryButton @JvmOverloads constructor(context: Context, attrs: Attribute
 
         super.setEnabled(enabled)
     }
-
-
-
 }

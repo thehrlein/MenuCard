@@ -25,4 +25,21 @@
         <item name="android:theme">@style/ThemeOverlay.MaterialComponents.Dark</item>
     </style>
 
+    <style name="EditErrorText">
+        <item name="android:textSize">11sp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
+    <style name="Loading_Dialog_Half_Width" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowMinWidthMinor">50%</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
 </resources>

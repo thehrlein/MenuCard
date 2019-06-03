@@ -1,4 +1,4 @@
-package com.tobiapplications.timeline.utils.extensions
+package com.tobiapplications.menu.utils.extensions
 
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat

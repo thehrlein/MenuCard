@@ -3,6 +3,7 @@ package com.tobiapplications.menu.di.module
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import com.tobiapplications.menu.utils.persistence.SharedPreferencesManager
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -19,9 +20,9 @@ class PersistenceModule  {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideSharedPreferencesManager(sharedPreferences: SharedPreferences): SharedPreferencesManager {
-//        return SharedPreferencesManager(sharedPreferences)
-//    }
+    @Provides
+    @Singleton
+    fun provideSharedPreferencesManager(sharedPreferences: SharedPreferences): SharedPreferencesManager {
+        return SharedPreferencesManager(sharedPreferences)
+    }
 }

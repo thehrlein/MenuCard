@@ -2,13 +2,21 @@
 <resources>
 
     <declare-styleable name="PrimaryButton">
-        <attr name="enabled" format="boolean"/>
         <attr name="text" format="string" />
         <attr name="textColor" format="color" />
+        <attr name="secondary" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="FloatingActionMenu">
         <attr name="autoHide" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AuthEditText">
+        <attr name="type" format="enum">
+            <enum name="password" value="1" />
+            <enum name="email" value="2" />
+        </attr>
+        <attr name="hint" format="string" />
     </declare-styleable>
 
 </resources>
