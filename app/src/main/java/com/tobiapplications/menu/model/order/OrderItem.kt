@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.model
+package com.tobiapplications.menu.model.order
 
 import com.tobiapplications.menu.utils.general.DisplayableItem
 

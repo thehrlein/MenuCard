@@ -4,10 +4,8 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.ui.base.BaseActivity
+import com.tobiapplications.menu.ui.fragments.base.BaseActivity
 
 /**
  * Acitivity extension functions

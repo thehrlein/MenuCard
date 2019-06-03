@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.ui.base
+package com.tobiapplications.menu.ui.fragments.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

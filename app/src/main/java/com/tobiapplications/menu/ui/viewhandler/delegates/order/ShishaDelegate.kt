@@ -5,9 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.Drink
-import com.tobiapplications.menu.model.Shisha
-import com.tobiapplications.menu.ui.viewholder.DrinkViewHolder
+import com.tobiapplications.menu.model.order.Shisha
 import com.tobiapplications.menu.ui.viewholder.ShishaViewHolder
 import com.tobiapplications.menu.utils.general.DisplayableItem
 

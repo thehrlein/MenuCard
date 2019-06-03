@@ -1,11 +1,12 @@
 package com.tobiapplications.menu.di.module
 
-import com.tobiapplications.menu.ui.loadingscreen.LoadingScreenFragment
-import com.tobiapplications.menu.ui.main.MainActivity
-import com.tobiapplications.menu.ui.main.MainFragment
-import com.tobiapplications.menu.ui.main.OrderOverviewFragment
-import com.tobiapplications.menu.ui.menu.MenuFragment
-import com.tobiapplications.menu.ui.order.OrderFragment
+import com.tobiapplications.menu.ui.fragments.loadingscreen.LoadingScreenFragment
+import com.tobiapplications.menu.ui.fragments.main.MainActivity
+import com.tobiapplications.menu.ui.fragments.main.MainFragment
+import com.tobiapplications.menu.ui.fragments.main.OrderOverviewFragment
+import com.tobiapplications.menu.ui.fragments.menu.MenuFragment
+import com.tobiapplications.menu.ui.fragments.addtoorder.AddToOrderFragment
+import com.tobiapplications.menu.ui.fragments.main.PreviousOrdersFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -28,9 +29,12 @@ abstract class ActivityBuilder {
     abstract fun bindMainFragment() : MainFragment
 
     @ContributesAndroidInjector
-    abstract fun bindOrderFragment(): OrderFragment
+    abstract fun bindOrderFragment(): AddToOrderFragment
 
     @ContributesAndroidInjector
     abstract fun bindOrderOverviewFragment(): OrderOverviewFragment
+
+    @ContributesAndroidInjector
+    abstract fun bindPreviousOrdersFragment(): PreviousOrdersFragment
 }
 

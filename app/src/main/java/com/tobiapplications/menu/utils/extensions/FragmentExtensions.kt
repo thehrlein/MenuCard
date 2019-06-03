@@ -1,5 +1,6 @@
 package com.tobiapplications.menu.utils.extensions
 
+import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -7,7 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.ui.base.BaseFragment
+import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import timber.log.Timber
 
 /**
@@ -111,7 +112,6 @@ fun BaseFragment.replaceFragment(fragment: BaseFragment, container: Int = R.id.f
 fun BaseFragment.getDimen(dimen: Int) : Float {
     return resources.getDimension(dimen)
 }
-
 
 ///**
 // *  < =============================== Dialog Fragments =============================== >

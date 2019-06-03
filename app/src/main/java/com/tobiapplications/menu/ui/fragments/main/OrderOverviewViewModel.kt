@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.ui.main
+package com.tobiapplications.menu.ui.fragments.main
 
 import androidx.lifecycle.ViewModel
 import com.tobiapplications.menu.utils.mvvm.SingleLiveEvent
@@ -17,18 +17,18 @@ class OrderOverviewViewModel @Inject constructor(): ViewModel() {
         // [ALPHA_CHANGEOVER] and 1, inclusive.
         private const val ALPHA_HEADER_MAX = 0.67f
 
-        private const val ALPHA_CLEAR_ICON_MAX = 0.33f
-        private const val ALPHA_CLEAR_ICON_CHANGEOVER = 0.2f
     }
 
     var headerAlpha = SingleLiveEvent(1f)
-    var clearOrderAlpha = SingleLiveEvent(1f)
 
     fun updateFilterHeadersAlpha(slideOffset: Float) {
         // Alpha of normal header views increases as the sheet expands, while alpha of description
         // views increases as the sheet collapses. To prevent overlap, we use a threshold at which
         // the views "trade places".
-        headerAlpha.value = offsetToAlpha(slideOffset, ALPHA_CHANGEOVER, ALPHA_HEADER_MAX)
+        headerAlpha.value = offsetToAlpha(slideOffset,
+            ALPHA_CHANGEOVER,
+            ALPHA_HEADER_MAX
+        )
     }
 
     /**

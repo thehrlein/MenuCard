@@ -1,8 +1,8 @@
 package com.tobiapplications.menu.utils.general
 
-import com.tobiapplications.menu.model.Drink
-import com.tobiapplications.menu.model.Order
-import com.tobiapplications.menu.model.Shisha
+import com.tobiapplications.menu.model.order.Drink
+import com.tobiapplications.menu.model.order.Order
+import com.tobiapplications.menu.model.order.Shisha
 import com.tobiapplications.menu.utils.enums.OrderType
 
 /**

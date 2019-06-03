@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.ui.main
+package com.tobiapplications.menu.ui.fragments.main
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.ui.base.BaseFragment
+import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.viewhandler.OrderOverviewAdapter
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
@@ -78,8 +78,6 @@ class OrderOverviewFragment : BaseFragment() {
             return
         }
 
-//        (parentFragment as? MainFragment)?.moveFabMenuAboveCollapseBottomSheet()
-
         postDelayed({
             bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }, 200)
@@ -106,6 +104,7 @@ class OrderOverviewFragment : BaseFragment() {
                         BottomSheetBehavior.STATE_HALF_EXPANDED -> moveFabMenuToHalfScreen()
                         BottomSheetBehavior.STATE_HIDDEN -> moveFabMenuDownToInitialPosition()
                         BottomSheetBehavior.STATE_COLLAPSED -> moveFabMenuAboveCollapseBottomSheet()
+                        else -> Unit
                     }
                 }
             }

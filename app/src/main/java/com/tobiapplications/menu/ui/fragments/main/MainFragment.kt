@@ -1,24 +1,20 @@
-package com.tobiapplications.menu.ui.main
+package com.tobiapplications.menu.ui.fragments.main
 
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.ui.base.BaseFragment
-import com.tobiapplications.menu.ui.order.OrderFragment
+import com.tobiapplications.menu.ui.fragments.base.BaseFragment
+import com.tobiapplications.menu.ui.fragments.addtoorder.AddToOrderFragment
 import com.tobiapplications.menu.utils.enums.OrderType
 import com.tobiapplications.menu.utils.extensions.getDimen
 import com.tobiapplications.menu.utils.extensions.onClick
 import com.tobiapplications.menu.utils.extensions.postDelayed
 import com.tobiapplications.menu.utils.extensions.replaceFragment
-import com.tobiapplications.menu.utils.general.MenuUtils
 import com.tobiapplications.menu.utils.general.OrderUtils
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.orderLayout
-import kotlinx.android.synthetic.main.fragment_order_overview.*
 
 /**
  *  Created by tobiashehrlein on 2019-05-23
@@ -35,8 +31,8 @@ class MainFragment : BaseFragment() {
 
     override fun init() {
         fab_menu.setClosedOnTouchOutside(true)
-        fab_drinks.onClick { replaceFragment(OrderFragment.newInstance(OrderType.DRINKS)) }
-        fab_shisha.onClick { replaceFragment(OrderFragment.newInstance(OrderType.SHISHA)) }
+        fab_drinks.onClick { replaceFragment(AddToOrderFragment.newInstance(OrderType.DRINKS)) }
+        fab_shisha.onClick { replaceFragment(AddToOrderFragment.newInstance(OrderType.SHISHA)) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

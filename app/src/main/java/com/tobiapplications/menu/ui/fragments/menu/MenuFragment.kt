@@ -1,10 +1,11 @@
-package com.tobiapplications.menu.ui.menu
+package com.tobiapplications.menu.ui.fragments.menu
 
 import android.view.WindowManager
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.ui.base.BaseFragment
-import com.tobiapplications.menu.ui.main.MainActivity
-import com.tobiapplications.menu.ui.main.MainFragment
+import com.tobiapplications.menu.ui.fragments.base.BaseFragment
+import com.tobiapplications.menu.ui.fragments.main.MainActivity
+import com.tobiapplications.menu.ui.fragments.main.MainFragment
+import com.tobiapplications.menu.ui.fragments.main.PreviousOrdersFragment
 import com.tobiapplications.menu.utils.extensions.consume
 import com.tobiapplications.menu.utils.extensions.replaceFragment
 import kotlinx.android.synthetic.main.fragment_menu.*
@@ -26,7 +27,7 @@ class MenuFragment : BaseFragment() {
 
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.navigation_last_orders -> consume { replaceFragment(MainFragment.newInstance()) }
+                R.id.navigation_last_orders -> consume { replaceFragment(PreviousOrdersFragment.newInstance()) }
                 R.id.navigation_new_orders -> consume { replaceFragment(MainFragment.newInstance()) }
                 R.id.navigation_profile -> consume { replaceFragment(MainFragment.newInstance()) }
                 else -> false

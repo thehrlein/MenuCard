@@ -2,8 +2,8 @@ package com.tobiapplications.menu.ui.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.tobiapplications.menu.model.Drink
-import com.tobiapplications.menu.model.OrderItem
+import com.tobiapplications.menu.model.order.Drink
+import com.tobiapplications.menu.model.order.OrderItem
 import com.tobiapplications.menu.utils.extensions.formatEuro
 import kotlinx.android.synthetic.main.viewholder_order_item.view.*
 

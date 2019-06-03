@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.OrderItem
+import com.tobiapplications.menu.model.order.OrderItem
 import com.tobiapplications.menu.ui.viewholder.OrderViewHolder
 import com.tobiapplications.menu.utils.general.DisplayableItem
 

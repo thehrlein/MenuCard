@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.model
+package com.tobiapplications.menu.model.order
 
 
 /**

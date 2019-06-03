@@ -3,7 +3,7 @@ package com.tobiapplications.menu.di.module
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tobiapplications.menu.di.scopes.ViewModelKey
-import com.tobiapplications.menu.ui.main.OrderOverviewViewModel
+import com.tobiapplications.menu.ui.fragments.main.OrderOverviewViewModel
 import com.tobiapplications.menu.utils.mvvm.ViewModelFactory
 import dagger.Binds
 import dagger.Module

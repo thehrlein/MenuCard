@@ -14,7 +14,7 @@
     <string name="main_welcome">Willkommen</string>
     <string name="main_order_overview">Ihre Bestellung</string>
 
-    <!-- OrderFragment -->
+    <!-- AddToOrderFragment -->
     <string name="order_add">hinzufügen</string>
 
     <!-- OrderOverviewFragment -->

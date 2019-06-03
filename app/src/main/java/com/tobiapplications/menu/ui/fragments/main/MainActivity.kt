@@ -1,11 +1,9 @@
-package com.tobiapplications.menu.ui.main
+package com.tobiapplications.menu.ui.fragments.main
 
-import android.view.Menu
-import android.view.MenuItem
 import android.view.WindowManager
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.ui.base.BaseActivity
-import com.tobiapplications.menu.ui.loadingscreen.LoadingScreenFragment
+import com.tobiapplications.menu.ui.fragments.base.BaseActivity
+import com.tobiapplications.menu.ui.fragments.loadingscreen.LoadingScreenFragment
 import com.tobiapplications.menu.utils.extensions.replaceFragment
 import com.tobiapplications.menu.utils.extensions.setVisible
 

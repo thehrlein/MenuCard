@@ -1,10 +1,10 @@
-package com.tobiapplications.menu.ui.loadingscreen
+package com.tobiapplications.menu.ui.fragments.loadingscreen
 
 import android.view.WindowManager
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.ui.base.BaseFragment
-import com.tobiapplications.menu.ui.main.MainActivity
-import com.tobiapplications.menu.ui.menu.MenuFragment
+import com.tobiapplications.menu.ui.fragments.base.BaseFragment
+import com.tobiapplications.menu.ui.fragments.main.MainActivity
+import com.tobiapplications.menu.ui.fragments.menu.MenuFragment
 import com.tobiapplications.menu.utils.extensions.postDelayed
 import com.tobiapplications.menu.utils.extensions.replaceFragment
 import kotlinx.android.synthetic.main.fragment_loading_screen.*
@@ -30,7 +30,7 @@ class LoadingScreenFragment : BaseFragment() {
     }
 
     private fun openMenu() {
-        stopAnimation()
+//        stopAnimation()
         replaceFragment(MenuFragment.newInstance(), addToStack = false)
     }
 

@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.tobiapplications.menu.ui.main.MainActivity">
+    tools:context="com.tobiapplications.menu.ui.fragments.main.MainActivity">
 
     <item
         android:id="@+id/navigation_last_orders"
