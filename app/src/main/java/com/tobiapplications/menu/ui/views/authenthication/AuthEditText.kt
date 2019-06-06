@@ -62,10 +62,12 @@ class AuthEditText @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     fun setErrorText(error: Int?) {
         if (error == null) {
-            errorText.setGone()
+//            errorText.setGone()
+            loginEditText.error = null
         } else {
-            errorText.show()
-            errorText.text = getString(error)
+            loginEditText.error = getString(error)
+//            errorText.show()
+//            errorText.text = getString(error)
         }
     }
 }

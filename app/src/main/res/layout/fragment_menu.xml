@@ -20,6 +20,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/bottom_navigation_height"
         android:background="@color/colorPrimary"
+        android:visibility="gone"
         app:itemTextColor="@color/colorWhite"
         app:itemIconTint="@color/colorWhite"
         app:labelVisibilityMode="selected"

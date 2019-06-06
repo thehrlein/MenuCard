@@ -99,7 +99,7 @@ class OrderOverviewFragment : BaseFragment() {
             }
 
             override fun onStateChanged(p0: View, p1: Int) {
-                (parentFragment as? MainFragment)?.apply {
+                (parentFragment as? NewOrderFragment)?.apply {
                     when (p1) {
                         BottomSheetBehavior.STATE_HALF_EXPANDED -> moveFabMenuToHalfScreen()
                         BottomSheetBehavior.STATE_HIDDEN -> moveFabMenuDownToInitialPosition()

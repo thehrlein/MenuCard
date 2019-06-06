@@ -6,8 +6,8 @@ import androidx.lifecycle.Observer
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.fragments.login.LoginFragment
-import com.tobiapplications.menu.ui.fragments.main.MainActivity
-import com.tobiapplications.menu.ui.fragments.menu.MenuFragment
+import com.tobiapplications.menu.ui.activitys.MainActivity
+import com.tobiapplications.menu.ui.fragments.main.MainFragment
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.postDelayed
 import com.tobiapplications.menu.utils.extensions.replaceFragment
@@ -67,7 +67,7 @@ class LoadingScreenFragment : BaseFragment() {
     }
 
     private fun openMenu() {
-        replaceFragment(MenuFragment.newInstance(), addToStack = false)
+        replaceFragment(MainFragment.newInstance(), addToStack = false)
     }
 
     private fun startAnimation() {

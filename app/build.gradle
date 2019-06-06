@@ -38,6 +38,8 @@ dependencies {
 
     // RxJava & RxBinding
     implementation "com.jakewharton.rxbinding2:rxbinding:$rx_binding"
+    implementation "com.jakewharton.rxbinding:rxbinding-kotlin:$rx_binding_kotlin"
+
     implementation "io.reactivex.rxjava2:rxjava:$rx_java"
     implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin"
 

@@ -1,27 +1,23 @@
 package com.tobiapplications.menu.ui.fragments.main
 
-import android.os.Bundle
-import android.view.View
-import androidx.core.view.ViewCompat
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import android.view.WindowManager
+import androidx.lifecycle.Observer
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
-import com.tobiapplications.menu.ui.fragments.addtoorder.AddToOrderFragment
-import com.tobiapplications.menu.utils.enums.OrderType
-import com.tobiapplications.menu.utils.extensions.getDimen
-import com.tobiapplications.menu.utils.extensions.onClick
-import com.tobiapplications.menu.utils.extensions.postDelayed
+import com.tobiapplications.menu.ui.activitys.MainActivity
+import com.tobiapplications.menu.ui.fragments.FragmentComponent
+import com.tobiapplications.menu.utils.extensions.consume
+import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.replaceFragment
-import com.tobiapplications.menu.utils.general.OrderUtils
-import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.fragment_main.orderLayout
+import com.tobiapplications.menu.utils.extensions.setVisible
+import kotlinx.android.synthetic.main.fragment_menu.*
 
 /**
- *  Created by tobiashehrlein on 2019-05-23
+ * Created by tobias.hehrlein on 2019-05-29.
  */
 class MainFragment : BaseFragment() {
 
-    private var bottomSheetBehavior : BottomSheetBehavior<View>? = null
+    private lateinit var viewModel: MainFragmentViewModel
 
     companion object {
         fun newInstance() : MainFragment {
@@ -30,48 +26,38 @@ class MainFragment : BaseFragment() {
     }
 
     override fun init() {
-        fab_menu.setClosedOnTouchOutside(true)
-        fab_drinks.onClick { replaceFragment(AddToOrderFragment.newInstance(OrderType.DRINKS)) }
-        fab_shisha.onClick { replaceFragment(AddToOrderFragment.newInstance(OrderType.SHISHA)) }
+        initViews()
+        initViewModel()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun initViews() {
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        (activity as? MainActivity)?.showToolbar(true)
 
-        setUpBottomSheetOverview()
-    }
-
-    private fun setUpBottomSheetOverview() {
-        bottomSheetBehavior = BottomSheetBehavior.from(view?.findViewById(R.id.orderLayout))
-        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
-
-        val order = OrderUtils.getOrder()
-        if (order.drinks.isEmpty() && order.shisha.isEmpty()) {
-            return
+        navigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_last_orders -> consume { replaceFragment(PreviousOrdersFragment.newInstance()) }
+                R.id.navigation_new_orders -> consume { replaceFragment(NewOrderFragment.newInstance()) }
+                R.id.navigation_profile -> consume { replaceFragment(ProfileFragment.newInstance()) }
+                else -> false
+            }
         }
 
-        (orderLayout as? OrderOverviewFragment)?.invalidate()
+        navigation.selectedItemId = R.id.navigation_new_orders
     }
+
+    private fun initViewModel() {
+        viewModel = obtainViewModel()
+        viewModel.loginStatus.observe(this, Observer { navigation.setVisible(it) })
+        viewModel.toolbarMenu.observe(this, Observer { setToolbarMenuRes(it ?: FragmentComponent.NO_MENU) })
+    }
+
+    private fun replaceFragment(fragment: BaseFragment) {
+        replaceFragment(fragment, container = R.id.child_fragment_container, addToStack = false)
+    }
+
 
     override fun getLayout(): Int {
-        return R.layout.fragment_main
-    }
-
-    fun moveFabMenuAboveCollapseBottomSheet() {
-        moveFab(-getDimen(R.dimen.order_overview_title_height))
-    }
-
-    fun moveFabMenuDownToInitialPosition() {
-        moveFab(0f)
-    }
-
-    fun moveFabMenuToHalfScreen() {
-        moveFab(-(view?.height?.div(2.0f) ?: 0f))
-    }
-
-    private fun moveFab(pixel: Float) {
-        postDelayed( {
-            ViewCompat.animate(fab_menu).translationY(pixel).start()
-        }, 200)
+        return R.layout.fragment_menu
     }
 }

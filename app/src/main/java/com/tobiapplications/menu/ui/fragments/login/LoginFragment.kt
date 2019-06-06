@@ -1,7 +1,5 @@
 package com.tobiapplications.menu.ui.fragments.login
 
-import android.app.Dialog
-import android.content.SharedPreferences
 import android.view.WindowManager
 import androidx.lifecycle.Observer
 import com.google.android.gms.tasks.Task
@@ -9,17 +7,18 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.login.LoginDataState
+import com.tobiapplications.menu.model.authentication.LoginDataState
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
-import com.tobiapplications.menu.ui.fragments.main.MainActivity
+import com.tobiapplications.menu.ui.activitys.MainActivity
+import com.tobiapplications.menu.ui.fragments.main.MainFragment
 import com.tobiapplications.menu.ui.views.general.LoadingStateDialog
 import com.tobiapplications.menu.ui.views.general.LoadingStateDialogHolder
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.onClick
+import com.tobiapplications.menu.utils.extensions.replaceFragment
 import com.tobiapplications.menu.utils.extensions.toast
 import kotlinx.android.synthetic.main.fragment_authentication_login.*
 import java.lang.Exception
-import javax.inject.Inject
 
 /**
  * Created by Tobias Hehrlein on 05.03.2018.
@@ -27,12 +26,8 @@ import javax.inject.Inject
 
 class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 
-    @Inject
-    lateinit var sharedPreferences : SharedPreferences
-
     private lateinit var viewModel: LoginViewModel
     private var loadingDialog : LoadingStateDialog? = null
-//    private var loginData : LoginData? = null
 
     companion object {
         fun newInstance() : LoginFragment {
@@ -43,7 +38,6 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
     override fun init() {
         initViews()
         initViewModel()
-//        initListener()
     }
 
     private fun initViewModel() {
@@ -53,13 +47,14 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 //        viewModel.onStart(createAuthGroup(), loginData)
 //        viewModel.loading.observe(this, Observer { showLoading(it) })
         viewModel.loginException.observe(this, Observer { tryExceptionHandling(it) })
-        viewModel.loginTask.observe(this, Observer { onLogins(it) })
+        viewModel.loginSuccess.observe(this, Observer { onLoginSuccess(it) })
 //        viewModel.loginSuccessful.observe(this, Observer { onLoginSuccessful(it) })
 //        viewModel.resetEmailResult.observe(this, Observer { onResetEmailResult(it) })
     }
 
-    private fun onLogins(it: Task<AuthResult>?) {
-        val a = it
+    private fun onLoginSuccess(it: Task<AuthResult>?) {
+        dismissDialog {  }
+        replaceFragment(MainFragment.newInstance(), addToStack = false)
     }
 
     private fun validateLoginData(loginState: LoginDataState?) {
@@ -83,12 +78,18 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
         password.onFocusLost { viewModel.validateUi(emailAutoComplete.getText(true), it) }
         password.onEditorActionClicked { viewModel.login(emailAutoComplete.getText(), password.getText()) }
 
-        signInButton.onClick { viewModel.login(emailAutoComplete.getText(), password.getText()) }
+        signInButton.onClick {
+            viewModel.login(emailAutoComplete.getText(), password.getText())
+        }
     }
 
     private fun tryExceptionHandling(exception: Exception?) {
+        if (exception == null) {
+            return
+        }
+
         setDialogFailureState(try {
-            throw exception ?: RuntimeException()
+            throw exception
         } catch (e: FirebaseAuthInvalidUserException) {
            getString(R.string.login_error_user_not_exists)
         } catch (e: FirebaseAuthInvalidCredentialsException) {
@@ -111,7 +112,7 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 //    private fun onLoginSuccessful(user: User?) {
 //        if (user?.verified == true) {
 //            showWelcomeToast(user.name)
-//            openFragment(MenuFragment.newInstance(user), false)
+//            openFragment(MainFragment.newInstance(user), false)
 //        } else {
 //            showAccountNotValidated()
 //        }

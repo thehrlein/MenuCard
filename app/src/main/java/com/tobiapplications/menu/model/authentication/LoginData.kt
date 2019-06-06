@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.model.login
+package com.tobiapplications.menu.model.authentication
 
 /**
  *  Created by tobiashehrlein on 2019-06-03

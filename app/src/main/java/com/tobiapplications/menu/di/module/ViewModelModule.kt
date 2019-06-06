@@ -3,9 +3,12 @@ package com.tobiapplications.menu.di.module
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tobiapplications.menu.di.scopes.ViewModelKey
+import com.tobiapplications.menu.ui.activitys.MainActivityViewModel
 import com.tobiapplications.menu.ui.fragments.loadingscreen.LoadingScreenViewModel
 import com.tobiapplications.menu.ui.fragments.login.LoginViewModel
+import com.tobiapplications.menu.ui.fragments.main.MainFragmentViewModel
 import com.tobiapplications.menu.ui.fragments.main.OrderOverviewViewModel
+import com.tobiapplications.menu.ui.fragments.main.ProfileViewModel
 import com.tobiapplications.menu.utils.mvvm.ViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -22,6 +25,16 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(MainActivityViewModel::class)
+    abstract fun bindMainActivityViewModel(viewModel: MainActivityViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainFragmentViewModel::class)
+    abstract fun bindMainFragmentViewModel(viewModel: MainFragmentViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(LoginViewModel::class)
     abstract fun bindLoginViewModel(viewModel: LoginViewModel) : ViewModel
 
@@ -34,6 +47,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoadingScreenViewModel::class)
     abstract fun bindLoadingScreenViewModel(viewModel: LoadingScreenViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun bindProfileViewModel(viewModel: ProfileViewModel) : ViewModel
 
 }
 

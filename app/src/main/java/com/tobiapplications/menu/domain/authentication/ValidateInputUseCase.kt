@@ -2,8 +2,8 @@ package com.tobiapplications.menu.domain.authentication
 
 import android.util.Patterns
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.login.LoginData
-import com.tobiapplications.menu.model.login.LoginDataState
+import com.tobiapplications.menu.model.authentication.LoginData
+import com.tobiapplications.menu.model.authentication.LoginDataState
 import com.tobiapplications.menu.utils.mvvm.UseCase
 import javax.inject.Inject
 

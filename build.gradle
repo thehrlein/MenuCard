@@ -36,6 +36,7 @@ buildscript {
         recycler_view = '1.1.0-alpha05'
         retrofit = '2.5.0'
         rx_binding = '2.2.0'
+        rx_binding_kotlin = '0.4.0'
         rx_java = '2.1.13'
         rx_kotlin = '2.2.0'
         support_library = '27.1.1'

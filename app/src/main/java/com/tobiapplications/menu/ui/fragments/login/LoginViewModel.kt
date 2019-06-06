@@ -9,22 +9,21 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.tobiapplications.menu.domain.authentication.LoginUseCase
+import com.tobiapplications.menu.domain.authentication.SignInUseCase
 import com.tobiapplications.menu.domain.authentication.ValidateInputUseCase
-import com.tobiapplications.menu.model.login.LoginData
-import com.tobiapplications.menu.model.login.LoginDataState
+import com.tobiapplications.menu.model.authentication.LoginData
+import com.tobiapplications.menu.model.authentication.LoginDataState
 import com.tobiapplications.menu.utils.extensions.map
 import com.tobiapplications.menu.utils.mvvm.Result
 import com.tobiapplications.menu.utils.mvvm.SingleLiveEvent
 import java.lang.Exception
-import java.lang.RuntimeException
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
                                          private val databaseReference: DatabaseReference,
                                          private val sharedPreferences: SharedPreferences,
                                          private val validateInputUseCase: ValidateInputUseCase,
-                                         private val loginUseCase: LoginUseCase) : ViewModel() {
+                                         private val signInUseCase: SignInUseCase) : ViewModel() {
 
 
 
@@ -39,7 +38,7 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
     val validation : LiveData<LoginDataState?>
     val loading = SingleLiveEvent<Boolean>()
     private val loginTaskResult : MediatorLiveData<Result<Task<AuthResult>>>
-    val loginTask : LiveData<Task<AuthResult>?>
+    val loginSuccess : LiveData<Task<AuthResult>?>
     val loginException : LiveData<Exception?>
 
     init {
@@ -47,9 +46,9 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
             (it as? Result.Success<LoginDataState>)?.data
         }
 
-        loginTaskResult = loginUseCase.observe()
+        loginTaskResult = signInUseCase.observe()
 
-        loginTask = loginTaskResult.map {
+        loginSuccess = loginTaskResult.map {
             (it as? Result.Success<Task<AuthResult>>)?.data
         }
 
@@ -64,8 +63,15 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
     }
 
     fun login(email: String, password: String) {
-        loading.value = true
-        loginUseCase.execute(LoginData(email, password))
+        val loginResult = ((validateInputUseCase.executeNow(LoginData(email, password))) as? Result.Success<LoginDataState>)?.data
+        if (loginValid(loginResult)) {
+            loading.value = true
+            signInUseCase.execute(LoginData(email, password))
+        }
+    }
+
+    private fun loginValid(loginResult: LoginDataState?): Boolean {
+        return loginResult != null && loginResult.emailError == null && loginResult.passwordError == null
     }
 
 

@@ -52,10 +52,12 @@ class EmailAutoCompleteTextView(context: Context, attrs: AttributeSet?) : Linear
 
     fun setErrorText(error: Int?) {
         if (error == null) {
-            errorText.setGone()
+            email.error = null
+//            errorText.setGone()
         } else {
-            errorText.show()
-            errorText.text = getString(error)
+            email.error = getString(error)
+//            errorText.show()
+//            errorText.text = getString(error)
         }
     }
 }
