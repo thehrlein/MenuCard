@@ -14,6 +14,9 @@ import javax.inject.Inject
 class SignInUseCase @Inject constructor(private val firebaseAuth: FirebaseAuth) : MediatorUseCase<LoginData, Task<AuthResult>>() {
 
     override fun execute(parameters: LoginData) {
+        if (parameters.email == null || parameters.password == null) {
+            return
+        }
         firebaseAuth.signInWithEmailAndPassword(parameters.email, parameters.password)
             .addOnCompleteListener { onResult(it) }
     }

@@ -13,6 +13,7 @@ import com.tobiapplications.menu.domain.authentication.SignInUseCase
 import com.tobiapplications.menu.domain.authentication.ValidateInputUseCase
 import com.tobiapplications.menu.model.authentication.LoginData
 import com.tobiapplications.menu.model.authentication.LoginDataState
+import com.tobiapplications.menu.utils.enums.AuthenticationUiType
 import com.tobiapplications.menu.utils.extensions.map
 import com.tobiapplications.menu.utils.general.CoreService
 import com.tobiapplications.menu.utils.mvvm.Result
@@ -59,8 +60,9 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
         }
     }
 
-    fun validateUi(email: String, password: String) {
-        validateInputUseCase(LoginData(email, password), validationResult)
+    fun validateUi(value: String, type: AuthenticationUiType) {
+        val loginData = if (type == AuthenticationUiType.EMAIL) LoginData(value, null) else LoginData(null, value)
+        validateInputUseCase(loginData, validationResult)
     }
 
     fun login(email: String, password: String) {
@@ -68,6 +70,8 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
         if (loginValid(loginResult)) {
             loading.value = true
             signInUseCase.execute(LoginData(email, password))
+        } else {
+            validateInputUseCase(LoginData(email, password), validationResult)
         }
     }
 

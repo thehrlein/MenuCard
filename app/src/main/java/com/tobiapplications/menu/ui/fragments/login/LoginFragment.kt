@@ -13,6 +13,7 @@ import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.main.MainFragment
 import com.tobiapplications.menu.ui.views.general.LoadingStateDialog
 import com.tobiapplications.menu.ui.views.general.LoadingStateDialogHolder
+import com.tobiapplications.menu.utils.enums.AuthenticationUiType
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.onClick
 import com.tobiapplications.menu.utils.extensions.replaceFragment
@@ -71,11 +72,11 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
         (activity as? MainActivity)?.showToolbar(true)
 
         emailAutoComplete.addOnTextChangeListener { emailAutoComplete.setErrorText(null) }
-        emailAutoComplete.onFocusLost { viewModel.validateUi(it, password.getText(true)) }
+        emailAutoComplete.onFocusLost { viewModel.validateUi(it, AuthenticationUiType.EMAIL) }
         emailAutoComplete.onEditorActionClicked { password.requestFocus() }
 
         password.addOnTextChangeListener { emailAutoComplete.setErrorText(null) }
-        password.onFocusLost { viewModel.validateUi(emailAutoComplete.getText(true), it) }
+        password.onFocusLost { viewModel.validateUi(it, AuthenticationUiType.PASSWORD) }
         password.onEditorActionClicked { viewModel.login(emailAutoComplete.getText(), password.getText()) }
 
         signInButton.onClick {

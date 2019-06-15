@@ -24,8 +24,14 @@ class ValidateInputUseCase @Inject constructor() : UseCase<LoginData, LoginDataS
     }
 
     override fun execute(param: LoginData): LoginDataState {
-        val emailError = validateEmail(param.email)
-        val passwordError = validatePassword(param.password)
+        var emailError: Int? = null
+        var passwordError : Int? = null
+        if (param.email != null) {
+            emailError = validateEmail(param.email)
+        }
+        if (param.password != null) {
+            passwordError = validatePassword(param.password)
+        }
 
         return LoginDataState(emailError, passwordError)
     }

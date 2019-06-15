@@ -34,7 +34,7 @@ class MainActivity : BaseActivity() {
             if (it.hasLoggedIn) {
 ////                replaceFragment(Ma inFragment.newInstance(), addToStack = false)
             } else if (it.hasLoggedOut) {
-                replaceFragment(LoadingScreenFragment.newInstance(), addToStack = false)
+                replaceFragment(MainFragment.newInstance(), addToStack = false)
             }
         })
 
