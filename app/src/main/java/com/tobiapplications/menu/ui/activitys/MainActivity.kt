@@ -31,9 +31,7 @@ class MainActivity : BaseActivity() {
     private fun initViewModel() {
         viewModel = obtainViewModel()
         viewModel.loginStateChanged.observe(this, Observer {
-            if (it.hasLoggedIn) {
-////                replaceFragment(Ma inFragment.newInstance(), addToStack = false)
-            } else if (it.hasLoggedOut) {
+            if (it.hasLoggedOut) {
                 replaceFragment(MainFragment.newInstance(), addToStack = false)
             }
         })

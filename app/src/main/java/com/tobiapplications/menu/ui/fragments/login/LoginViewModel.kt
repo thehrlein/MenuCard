@@ -9,10 +9,12 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.tobiapplications.menu.domain.authentication.ResetPasswordUseCase
 import com.tobiapplications.menu.domain.authentication.SignInUseCase
 import com.tobiapplications.menu.domain.authentication.ValidateInputUseCase
 import com.tobiapplications.menu.model.authentication.LoginData
 import com.tobiapplications.menu.model.authentication.LoginDataState
+import com.tobiapplications.menu.model.authentication.ResetPasswordResponse
 import com.tobiapplications.menu.utils.enums.AuthenticationUiType
 import com.tobiapplications.menu.utils.extensions.map
 import com.tobiapplications.menu.utils.general.CoreService
@@ -26,7 +28,7 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
                                          private val sharedPreferences: SharedPreferences,
                                          private val validateInputUseCase: ValidateInputUseCase,
                                          private val signInUseCase: SignInUseCase,
-                                         coreService: CoreService) : ViewModel() {
+                                         private val resetPasswordUseCase: ResetPasswordUseCase) : ViewModel() {
 
 
 
@@ -43,6 +45,7 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
     private val loginTaskResult : MediatorLiveData<Result<Task<AuthResult>>>
     val loginSuccess : LiveData<Task<AuthResult>?>
     val loginException : LiveData<Exception?>
+    val resetPasswordResult : LiveData<ResetPasswordResponse?>
 
     init {
         validation = validationResult.map {
@@ -57,6 +60,10 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
 
         loginException = loginTaskResult.map {
             (it as? Result.Success<Task<AuthResult>>)?.data?.exception
+        }
+
+        resetPasswordResult = resetPasswordUseCase.observe().map {
+            (it as? Result.Success<ResetPasswordResponse>)?.data
         }
     }
 
@@ -79,71 +86,13 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
         return loginResult != null && loginResult.emailError == null && loginResult.passwordError == null
     }
 
+    fun sendResetPassword(email: String) {
+        loading.value = true
+        resetPasswordUseCase.execute(email)
+    }
 
-//
-//    fun onStart(authenticationGroup: AuthenticationGroup?, loginData: LoginData?) {
-//        authGroup = authenticationGroup
-//        authGroup?.setLoginListenerFor(AuthenticationUtils.EMAIL)
-//        authGroup?.setLoginListenerFor(AuthenticationUtils.PW)
-//
-//        loginData?.let {
-//            authGroup?.setTextFor(AuthenticationUtils.EMAIL, it.email)
-//            authGroup?.setTextFor(AuthenticationUtils.PW, it.password)
-//        }
-//    }
-//
-//    fun attemptLogin() {
-//        val emailCorrect = authGroup?.isInputCorrectFrom(AuthenticationUtils.EMAIL) ?: false
-//        val passwordCorrect = authGroup?.isInputCorrectFrom(AuthenticationUtils.PW) ?: false
-//
-//        if (emailCorrect && passwordCorrect) {
-//            showLoading(true)
-//            trySignIn()
-//        }
-//    }
-//
-//    private fun showLoading(load : Boolean) {
-//        loading.value = load
-//    }
-//
-//    private fun trySignIn() {
-//        val email = getEmail()
-//        loggedIn = false
-//        firebaseAuth.signInWithEmailAndPassword(email, getPassword())
-//                .addOnCompleteListener { checkLoginResult(it, email) }
-//    }
-//
-//    private fun checkLoginResult(result: Task<AuthResult>, email: String) {
-//        if (result.isSuccessful) {
-//            if (!loggedIn) {
-//                loggedIn = true
-//                retrieveUserData()
-//            } else {
-//                showLoading(false)
-//            }
-//        } else {
-//            showLoading(false)
-//            loginException.value = LoginException(result, email)
-//        }
-//    }
-//
-//    private fun retrieveUserData() {
-//        val firebaseUser = firebaseAuth.currentUser
-//
-//        firebaseUser?.let { user ->
-//            val email = user.email
-//
-//            safeUserInFirebaseDatabase(user)
-//
-//            currentUser = User(user)
-//
-//            email?.let {
-//                safeEmailToDictionary(it)
-//            }
-//            showLoading(false)
-//            loginSuccessful.value = currentUser
-//        }
-//    }
+
+
 //
 //    private fun safeUserInFirebaseDatabase(user: FirebaseUser) {
 //        databaseReference
@@ -156,12 +105,6 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
 //        AuthenticationUtils.addEmailToDictionary(sharedPreferences, email, AuthenticationUtils.EmailListType.LOGIN)
 //    }
 //
-//
-//    fun onConfirmResetEmail(inputText: String) {
-//        showLoading(true)
-//        firebaseAuth.sendPasswordResetEmail(inputText)
-//                .addOnCompleteListener { onResetCompleted(it, inputText) }
-//    }
 //
 //    private fun onResetCompleted(result: Task<Void>, email: String) {
 //        showLoading(false)

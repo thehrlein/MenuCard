@@ -1,6 +1,8 @@
 package com.tobiapplications.menu.ui.fragments.login
 
+import android.view.LayoutInflater
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -8,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.authentication.LoginDataState
+import com.tobiapplications.menu.model.authentication.ResetPasswordResponse
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.main.MainFragment
@@ -19,6 +22,7 @@ import com.tobiapplications.menu.utils.extensions.onClick
 import com.tobiapplications.menu.utils.extensions.replaceFragment
 import com.tobiapplications.menu.utils.extensions.toast
 import kotlinx.android.synthetic.main.fragment_authentication_login.*
+import kotlinx.android.synthetic.main.view_login_reset_password_input.view.*
 import java.lang.Exception
 
 /**
@@ -41,32 +45,6 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
         initViewModel()
     }
 
-    private fun initViewModel() {
-        viewModel = obtainViewModel()
-        viewModel.validation.observe(this, Observer { validateLoginData(it) })
-        viewModel.loading.observe(this, Observer { if (it) setDialogLoadingState(getString(R.string.general_please_wait)) })
-//        viewModel.onStart(createAuthGroup(), loginData)
-//        viewModel.loading.observe(this, Observer { showLoading(it) })
-        viewModel.loginException.observe(this, Observer { tryExceptionHandling(it) })
-        viewModel.loginSuccess.observe(this, Observer { onLoginSuccess(it) })
-//        viewModel.loginSuccessful.observe(this, Observer { onLoginSuccessful(it) })
-//        viewModel.resetEmailResult.observe(this, Observer { onResetEmailResult(it) })
-    }
-
-    private fun onLoginSuccess(it: Task<AuthResult>?) {
-        dismissDialog {  }
-        replaceFragment(MainFragment.newInstance(), addToStack = false)
-    }
-
-    private fun validateLoginData(loginState: LoginDataState?) {
-        if (loginState != null) {
-
-            emailAutoComplete.setErrorText(loginState.emailError)
-            password.setErrorText(loginState.passwordError)
-
-        }
-    }
-
     private fun initViews() {
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         (activity as? MainActivity)?.showToolbar(true)
@@ -81,6 +59,65 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 
         signInButton.onClick {
             viewModel.login(emailAutoComplete.getText(), password.getText())
+        }
+
+        resetPassword.onClick { showResetEmailDialog(emailAutoComplete.getText()) }
+    }
+
+    private fun initViewModel() {
+        viewModel = obtainViewModel()
+        viewModel.validation.observe(this, Observer { validateLoginData(it) })
+        viewModel.loading.observe(this, Observer { if (it) setDialogLoadingState(getString(R.string.general_please_wait)) })
+        viewModel.loginException.observe(this, Observer { tryExceptionHandling(it) })
+        viewModel.loginSuccess.observe(this, Observer { onLoginSuccess(it) })
+        viewModel.resetPasswordResult.observe(this, Observer { onResetEmailResult(it) })
+    }
+
+    private fun onLoginSuccess(it: Task<AuthResult>?) {
+        dismissDialog {  }
+        replaceFragment(MainFragment.newInstance(), addToStack = false)
+    }
+
+    private fun onResetEmailResult(it: ResetPasswordResponse?) {
+        if (it == null) {
+            setDialogFailureState(getString(R.string.login_forgot_password_general_error))
+            return
+        }
+
+        if (it.result.isSuccessful) {
+            toast(R.string.login_forgot_password_send_success)
+        } else {
+            onResetEmailFailed(it.result, it.email)
+        }
+    }
+
+    private fun onResetEmailFailed(result: Task<Void>, email: String?) {
+        val exception = result.exception
+        if (exception == null) {
+            setDialogFailureState(getString(R.string.login_forgot_password_general_error))
+            return
+        }
+
+        setDialogFailureState(try {
+            throw exception
+        } catch (e: FirebaseAuthInvalidUserException){
+            getString(R.string.login_error_user_not_exists)
+        } catch (e: FirebaseAuthInvalidCredentialsException) {
+          getString(R.string.login_validation_email_invalid)
+        } catch (e: Exception) {
+            getString(R.string.login_forgot_password_general_error)
+        })
+
+        dismissDialogDelayed { showResetEmailDialog(email) }
+
+    }
+
+    private fun validateLoginData(loginState: LoginDataState?) {
+        if (loginState != null) {
+
+            emailAutoComplete.setErrorText(loginState.emailError)
+            password.setErrorText(loginState.passwordError)
+
         }
     }
 
@@ -110,24 +147,7 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 //        }
 //    }
 //
-//    private fun onLoginSuccessful(user: User?) {
-//        if (user?.verified == true) {
-//            showWelcomeToast(user.name)
-//            openFragment(MainFragment.newInstance(user), false)
-//        } else {
-//            showAccountNotValidated()
-//        }
-//    }
-//
 
-//    private fun initListener() {
-//        ClickUtils.clicks(signInButton, Action1 { viewModel.attemptLogin() })
-//        ClickUtils.clicks(goToRegistration, Action1 {
-//            val regFragment = RegistrationFragment.newInstance(viewModel.getEmail(), viewModel.getPassword())
-//            regFragment.setTargetFragment(this, Constants.REQUEST_CODE)
-//            openFragment(regFragment,true) })
-//        ClickUtils.clicks(resetPassword, Action1 { showResetEmailDialog(viewModel.getEmail()) })
-//    }
 //
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
@@ -138,66 +158,27 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 //        loginData = LoginData(email, pw)
 //    }
 //
-//    private fun createAuthGroup(): AuthenticationGroup? {
-//        val authGroup = AuthenticationGroup(this)
-//        authGroup.addLoginView(emailAutoComplete, AuthenticationUtils.EMAIL)
-//        authGroup.addLoginView(password, AuthenticationUtils.PW)
-//        return authGroup
-//    }
 //
-//    override fun doEditorAction() {
-//        viewModel.attemptLogin()
-//    }
-//
-//    private fun showLoading(load : Boolean) {
-//        InputHandler.closeKeyboard(activity)
-//        if (load) {
-//            if (isDialogShowing(loadingDialog)) {
-//                loadingDialog?.dismiss()
-//            }
-//            loadingDialog = indeterminateProgressDialog(context!!.getString(R.string.general_loading))
-//            loadingDialog?.show()
-//        } else {
-//            loadingDialog?.dismiss()
-//        }
-//    }
-//
-    private fun showWelcomeToast(name: String?) {
-        if (name != null) {
-            toast("Welcome back $name")
-        } else {
-            toast("Welcome")
+    private fun showResetEmailDialog(input: String?) {
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.view_login_reset_password_input, null)
+        view.emailInput.setText(input)
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.login_forgot_password_title))
+            .setMessage(getString(R.string.login_forgot_password_message))
+            .setView(view)
+            .setCancelable(false)
+            .setPositiveButton(R.string.login_forgot_password_send) { _, _ -> }
+            .setNegativeButton(R.string.login_forgot_password_cancel, null)
+            .create()
+        dialog.show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).onClick {
+            val email = view.emailInput.getText()
+            if (email.isNotEmpty()) {
+                viewModel.sendResetPassword(email)
+                dialog.dismiss()
+            }
         }
     }
-//
-//    private fun tryExceptionHandling(loginException: LoginException) {
-//        val dialog : Dialog = try {
-//            throw loginException.task.exception ?: RuntimeException()
-//        } catch (e: FirebaseAuthInvalidUserException) {
-//            DialogBuilderUtil.createOneButtonDialog(context, "Error", getString(R.string.error_user_not_exists, loginException.email))
-//        } catch (e: FirebaseAuthInvalidCredentialsException) {
-//            DialogBuilderUtil.createOneButtonDialog(context, "Error", getString(R.string.error_bad_password))
-//        } catch (e: Exception) {
-//            DialogBuilderUtil.createOneButtonDialog(context, "Error", getString(R.string.error_unknown_error))
-//        }
-//
-//        dialog.show()
-//    }
-//
-//    private fun showResetEmailDialog(input: String?) {
-//        val dialog = ResetEmailDialog(context!!, R.style.Theme_Transparent_Full_Width, sharedPreferences)
-//        dialog.title = getString(R.string.title_reset_password)
-//        dialog.emailHint = getString(R.string.hint_email)
-//        dialog.prefillEmail(input!!)
-//        dialog.setConfirmButton(getString(R.string.action_send), object : EditTextDialogListener {
-//            override fun onConfirm(inputText: String) {
-//                dialog.dismiss()
-//                viewModel.onConfirmResetEmail(inputText)
-//            }
-//        })
-//        dialog.setCancelButton(getString(R.string.action_cancel), View.OnClickListener { dialog.dismiss() })
-//        dialog.show()
-//    }
 //
 //    private fun showResetEmailSendDialog(email: String) {
 //        val dialog = alert(getString(R.string.successful), getString(R.string.action_reset_password_send, email))
@@ -218,14 +199,6 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 //        }
 //
 //        dialog.show()
-//    }
-//
-//    private fun showAccountNotValidated() {
-//        DialogBuilderUtil.createOneButtonDialog(context, getString(R.string.alert_dialog_title_attention), getString(R.string.error_email_not_validated)).show()
-//    }
-//
-//    private fun openFragment(fragment: Fragment, addToStack: Boolean) {
-//        replaceFragment(fragment, addToStack)
 //    }
 
     override fun canModifyAppComponents(): Boolean {

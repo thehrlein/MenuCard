@@ -38,6 +38,14 @@ inline fun <reified VM : ViewModel> BaseFragment.obtainViewModel(activity: Fragm
 
 /**
  * Create a toast by simple calling "toast(message)"
+ * @param message non-null int res
+ */
+fun BaseFragment.toast(messageRes : Int) {
+    toast(getString(messageRes))
+}
+
+/**
+ * Create a toast by simple calling "toast(message)"
  * @param message non-null string
  */
 fun BaseFragment.toast(message : String) {

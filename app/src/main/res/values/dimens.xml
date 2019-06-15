@@ -23,5 +23,6 @@
     <!-- others -->
     <dimen name="order_overview_title_height">48dp</dimen>
     <dimen name="bottom_navigation_height">56dp</dimen>
+    <dimen name="login_password_forgot_alert_input_margin">20dp</dimen>
 
 </resources>

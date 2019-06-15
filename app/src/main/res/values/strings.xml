@@ -56,4 +56,12 @@
     <string name="login_error_user_already_exists">Es existiert bereits ein Account zu dieser E-Mail</string>
     <string name="login_error_unknown_error">Es ist ein unbekannter Fehler aufgetreten</string>
     <string name="login_error_bad_password">Falsches Passwort</string>
+    <string name="login_forgot_password_title">Haben Sie Ihr Password vergessen?</string>
+    <string name="login_forgot_password_message">Geben Sie hier Ihre E-Mail ein und Sie werden ein neues Passwort zugeschickt bekommen.</string>
+    <string name="login_forgot_password_send">Absenden</string>
+    <string name="login_forgot_password_cancel">Abbrechen</string>
+    <string name="login_forgot_password_general_error">Es ist ein Fehler aufgetreten</string>
+    <string name="login_forgot_password_send_success">Es wurde eine E-Mail an %s gesendet</string>
+
+
 </resources>

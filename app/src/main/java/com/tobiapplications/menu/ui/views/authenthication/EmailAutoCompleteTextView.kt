@@ -46,7 +46,7 @@ class EmailAutoCompleteTextView(context: Context, attrs: AttributeSet?) : Linear
         return email.text.toString()
     }
 
-    fun setText(text: String) {
+    fun setText(text: String?) {
         email.setText(text)
     }
 
