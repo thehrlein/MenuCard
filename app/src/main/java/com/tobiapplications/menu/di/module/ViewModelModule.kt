@@ -6,9 +6,7 @@ import com.tobiapplications.menu.di.scopes.ViewModelKey
 import com.tobiapplications.menu.ui.activitys.MainActivityViewModel
 import com.tobiapplications.menu.ui.fragments.loadingscreen.LoadingScreenViewModel
 import com.tobiapplications.menu.ui.fragments.login.LoginViewModel
-import com.tobiapplications.menu.ui.fragments.main.MainFragmentViewModel
-import com.tobiapplications.menu.ui.fragments.main.OrderOverviewViewModel
-import com.tobiapplications.menu.ui.fragments.main.ProfileViewModel
+import com.tobiapplications.menu.ui.fragments.main.*
 import com.tobiapplications.menu.utils.mvvm.ViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -47,6 +45,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoadingScreenViewModel::class)
     abstract fun bindLoadingScreenViewModel(viewModel: LoadingScreenViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NewOrderViewModel::class)
+    abstract fun bindNewOrderViewModel(viewModel: NewOrderViewModel) : ViewModel
 
     @Binds
     @IntoMap

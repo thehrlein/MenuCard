@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.MenuRes
+import androidx.appcompat.widget.Toolbar
 import com.tobiapplications.menu.ui.fragments.FragmentComponent
 import com.tobiapplications.menu.utils.general.CoreService
 import com.tobiapplications.menu.utils.mvvm.ViewModelFactory
@@ -32,24 +33,31 @@ abstract class BaseFragment : DaggerFragment(), FragmentComponent {
         init()
         setToolbarTitle()
         setToolbarMenuRes(getToolbarMenuResId())
-        setToolbarMenuClickListener()
+        setToolbarMenuClickListener(getToolbarMenuClickListener())
     }
 
     private fun setToolbarTitle() {
-        coreService.setTitle(getToolbarTitle())
+        if (canModifyAppComponents()) {
+            coreService.setTitle(getToolbarTitle())
+        }
     }
 
     fun setToolbarMenuRes(@MenuRes menuRes : Int) {
-        coreService.setToolbarMenu(menuRes)
+        if (canModifyAppComponents()) {
+            coreService.setToolbarMenu(menuRes)
+        }
     }
 
-    fun setToolbarMenuClickListener() {
-        getToolbarMenuClickListener()?.let {
-            coreService.setToolbarMenuListener(it)
+    fun setToolbarMenuClickListener(toolbarMenuClickListener: Toolbar.OnMenuItemClickListener?) {
+        if (canModifyAppComponents()) {
+            coreService.setToolbarMenuListener(toolbarMenuClickListener)
         }
     }
 
     abstract fun init()
     abstract fun getLayout(): Int
+    open fun canModifyAppComponents() : Boolean {
+        return false
+    }
 }
 

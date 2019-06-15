@@ -1,17 +1,19 @@
 package com.tobiapplications.menu.ui.fragments.main
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tobiapplications.menu.R
+import com.tobiapplications.menu.ui.fragments.FragmentComponent
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.fragments.addtoorder.AddToOrderFragment
+import com.tobiapplications.menu.ui.fragments.login.LoginFragment
 import com.tobiapplications.menu.utils.enums.OrderType
-import com.tobiapplications.menu.utils.extensions.getDimen
-import com.tobiapplications.menu.utils.extensions.onClick
-import com.tobiapplications.menu.utils.extensions.postDelayed
-import com.tobiapplications.menu.utils.extensions.replaceFragment
+import com.tobiapplications.menu.utils.extensions.*
+import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.general.OrderUtils
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.orderLayout
@@ -21,24 +23,46 @@ import kotlinx.android.synthetic.main.fragment_main.orderLayout
  */
 class NewOrderFragment : BaseFragment() {
 
+    private lateinit var viewModel: NewOrderViewModel
     private var bottomSheetBehavior : BottomSheetBehavior<View>? = null
 
     companion object {
-        fun newInstance() : NewOrderFragment {
-            return NewOrderFragment()
+        fun newInstance(loggedIn: Boolean): NewOrderFragment {
+            val args = Bundle().apply { putBoolean(Constants.LOGGED_IN, loggedIn) }
+            return NewOrderFragment().apply { arguments = args }
         }
     }
 
     override fun init() {
+        initViews()
+        initViewModel()
+    }
+
+    private fun initViews() {
         fab_menu.setClosedOnTouchOutside(true)
         fab_drinks.onClick { replaceFragment(AddToOrderFragment.newInstance(OrderType.DRINKS)) }
         fab_shisha.onClick { replaceFragment(AddToOrderFragment.newInstance(OrderType.SHISHA)) }
+    }
+
+    private fun initViewModel() {
+        viewModel = obtainViewModel()
+    }
+
+    private fun onMenuItemClicked(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.menu_action_login -> consume { replaceFragment(LoginFragment.newInstance(), addToStack = true) }
+            else -> false
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setUpBottomSheetOverview()
+
+        val loggedIn = arguments?.getBoolean(Constants.LOGGED_IN) ?: false
+        setToolbarMenuRes(if (loggedIn) FragmentComponent.NO_MENU else R.menu.menu_main_anonym)
+        setToolbarMenuClickListener(if (loggedIn) null else Toolbar.OnMenuItemClickListener { item ->  onMenuItemClicked(item) })
     }
 
     private fun setUpBottomSheetOverview() {
@@ -55,6 +79,10 @@ class NewOrderFragment : BaseFragment() {
 
     override fun getLayout(): Int {
         return R.layout.fragment_main
+    }
+
+    override fun canModifyAppComponents(): Boolean {
+        return true
     }
 
     fun moveFabMenuAboveCollapseBottomSheet() {

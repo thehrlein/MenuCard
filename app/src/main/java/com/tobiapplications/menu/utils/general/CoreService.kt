@@ -4,7 +4,9 @@ import androidx.appcompat.widget.Toolbar
 import rx.Observer
 import rx.subjects.PublishSubject
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CoreService @Inject constructor() {
 
     private var titleObservable : PublishSubject<String> = PublishSubject.create()
@@ -27,7 +29,7 @@ class CoreService @Inject constructor() {
         toolbarMenu.subscribe(observer)
     }
 
-    fun setToolbarMenuListener(listener: Toolbar.OnMenuItemClickListener) {
+    fun setToolbarMenuListener(listener: Toolbar.OnMenuItemClickListener?) {
         toolbarMenuListener.onNext(listener)
     }
 

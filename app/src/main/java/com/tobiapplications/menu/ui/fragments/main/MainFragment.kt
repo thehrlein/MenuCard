@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.activitys.MainActivity
-import com.tobiapplications.menu.ui.fragments.FragmentComponent
 import com.tobiapplications.menu.utils.extensions.consume
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.replaceFragment
@@ -18,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_menu.*
 class MainFragment : BaseFragment() {
 
     private lateinit var viewModel: MainFragmentViewModel
+    private var loggedIn = false
 
     companion object {
         fun newInstance() : MainFragment {
@@ -37,25 +37,25 @@ class MainFragment : BaseFragment() {
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_last_orders -> consume { replaceFragment(PreviousOrdersFragment.newInstance()) }
-                R.id.navigation_new_orders -> consume { replaceFragment(NewOrderFragment.newInstance()) }
+                R.id.navigation_new_orders -> consume { replaceFragment(NewOrderFragment.newInstance(loggedIn)) }
                 R.id.navigation_profile -> consume { replaceFragment(ProfileFragment.newInstance()) }
                 else -> false
             }
         }
-
-        navigation.selectedItemId = R.id.navigation_new_orders
     }
 
     private fun initViewModel() {
         viewModel = obtainViewModel()
-        viewModel.loginStatus.observe(this, Observer { navigation.setVisible(it) })
-        viewModel.toolbarMenu.observe(this, Observer { setToolbarMenuRes(it ?: FragmentComponent.NO_MENU) })
+        viewModel.loginStatus.observe(this, Observer {
+            loggedIn = it
+            navigation.setVisible(loggedIn)
+            navigation.selectedItemId = R.id.navigation_new_orders
+        })
     }
 
     private fun replaceFragment(fragment: BaseFragment) {
         replaceFragment(fragment, container = R.id.child_fragment_container, addToStack = false)
     }
-
 
     override fun getLayout(): Int {
         return R.layout.fragment_menu

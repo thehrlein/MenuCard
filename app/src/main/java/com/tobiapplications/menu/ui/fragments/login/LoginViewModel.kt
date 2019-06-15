@@ -14,6 +14,7 @@ import com.tobiapplications.menu.domain.authentication.ValidateInputUseCase
 import com.tobiapplications.menu.model.authentication.LoginData
 import com.tobiapplications.menu.model.authentication.LoginDataState
 import com.tobiapplications.menu.utils.extensions.map
+import com.tobiapplications.menu.utils.general.CoreService
 import com.tobiapplications.menu.utils.mvvm.Result
 import com.tobiapplications.menu.utils.mvvm.SingleLiveEvent
 import java.lang.Exception
@@ -23,7 +24,8 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
                                          private val databaseReference: DatabaseReference,
                                          private val sharedPreferences: SharedPreferences,
                                          private val validateInputUseCase: ValidateInputUseCase,
-                                         private val signInUseCase: SignInUseCase) : ViewModel() {
+                                         private val signInUseCase: SignInUseCase,
+                                         coreService: CoreService) : ViewModel() {
 
 
 
@@ -55,7 +57,6 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
         loginException = loginTaskResult.map {
             (it as? Result.Success<Task<AuthResult>>)?.data?.exception
         }
-
     }
 
     fun validateUi(email: String, password: String) {

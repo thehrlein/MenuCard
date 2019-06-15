@@ -17,15 +17,10 @@ class MainFragmentViewModel @Inject constructor(getLoginStatusUseCase: GetLoginS
 
     private val loginStatusResult = MutableLiveData<Result<Boolean>>()
     val loginStatus : LiveData<Boolean>
-    val toolbarMenu : LiveData<Int?>
 
     init {
         loginStatus = loginStatusResult.map {
             (it as? Result.Success<Boolean>)?.data.orFalse()
-        }
-
-        toolbarMenu = loginStatus.map {
-            if (it) null else R.menu.menu_main_anonym
         }
 
         getLoginStatusUseCase(Unit, loginStatusResult)

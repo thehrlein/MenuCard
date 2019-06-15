@@ -38,57 +38,40 @@ class MainActivityViewModel @Inject constructor(firebaseAuth: FirebaseAuth,
     }
 
     private fun observeTitle() {
-//        coreService.subscribeTitle(object : OnNextObserver<String> {
-//            override fun onNext(t: String) {
-//                title.value = t
-//            }
-//        })
+        coreService.subscribeTitle(object : Observer<String> {
+            override fun onError(e: Throwable?) {}
+
+            override fun onNext(t: String?) {
+                title.value = t
+            }
+
+            override fun onCompleted() {}
+        })
     }
 
     private fun observeMenuLayoutRes() {
         coreService.subscribeToolbarMenu(object : Observer<Int> {
-            override fun onError(e: Throwable?) {
-                val a = 1
-            }
+            override fun onError(e: Throwable?) {}
 
             override fun onNext(t: Int?) {
                 toolbarMenuRes.value = t
             }
 
-            override fun onCompleted() {
-                val a = 1
-            }
+            override fun onCompleted() {}
         })
-//        coreService.subscribeToolbarMenu(object : Observer<Int> {
-//            override fun onNext(t: Int) {
-//                toolbarMenuRes.value = t
-//            }
-//
-//            override fun onComplete() {
-//
-//            }
-//
-//            override fun onSubscribe(d: Disposable) {
-//
-//            }
-//
-//            override fun onError(e: Throwable) {
-//
-//            }
-//        })
-//        coreService.subscribeToolbarMenu(object: OnNextObserver<Int> {
-//            override fun onNext(t: Int) {
-//                toolbarMenuRes.value = t
-//            }
-//        })
+
     }
 
     private fun observeMenuToolbarListener() {
-//        coreService.subscribeToolbarMenuListener(object: OnNextObserver<Toolbar.OnMenuItemClickListener> {
-//            override fun onNext(t: Toolbar.OnMenuItemClickListener) {
-//                toolbarMenuListener.value = t
-//            }
-//        })
+        coreService.subscribeToolbarMenuListener(object : Observer<Toolbar.OnMenuItemClickListener> {
+            override fun onError(e: Throwable?) {}
+
+            override fun onNext(t: Toolbar.OnMenuItemClickListener?) {
+                toolbarMenuListener.value = t
+            }
+
+            override fun onCompleted() {}
+        })
     }
 }
 

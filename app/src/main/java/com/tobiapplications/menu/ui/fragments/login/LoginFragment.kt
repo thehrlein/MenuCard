@@ -227,6 +227,10 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 //        replaceFragment(fragment, addToStack)
 //    }
 
+    override fun canModifyAppComponents(): Boolean {
+        return true
+    }
+
     override fun getLayout(): Int {
         return R.layout.fragment_authentication_login
     }

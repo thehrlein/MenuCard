@@ -15,9 +15,6 @@ interface FragmentComponent {
     fun getToolbarTitle() : String {
         return "MenuCard"
     }
-    fun enabledToolbarBackButton() : Boolean {
-        return false
-    }
 
     fun getToolbarMenuResId() : Int {
         return NO_MENU
