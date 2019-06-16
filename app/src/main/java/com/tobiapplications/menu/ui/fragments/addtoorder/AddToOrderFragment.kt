@@ -3,7 +3,7 @@ package com.tobiapplications.menu.ui.fragments.addtoorder
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.order.Drink
+import com.tobiapplications.menu.model.order.OrderDrink
 import com.tobiapplications.menu.model.order.OrderItem
 import com.tobiapplications.menu.model.order.Shisha
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
@@ -54,11 +54,11 @@ class AddToOrderFragment : BaseFragment() {
         orderAdapter?.setItems(
             when (orderType) {
                 OrderType.DRINKS -> listOf(
-                        Drink("Beer", "0.5 l", 2.90),
-                        Drink("Cola", "0.33 l", 2.50),
-                        Drink("Fanta", "0.33 l", 2.50),
-                        Drink("Water", "0.7 l", 1.90),
-                        Drink("Jägermeister", "0.2 l", 1.00)
+                        OrderDrink("Beer", "0.5 l", 2.90),
+                        OrderDrink("Cola", "0.33 l", 2.50),
+                        OrderDrink("Fanta", "0.33 l", 2.50),
+                        OrderDrink("Water", "0.7 l", 1.90),
+                        OrderDrink("Jägermeister", "0.2 l", 1.00)
                 )
                 else -> listOf(
                         Shisha("Cherry", 5.00),

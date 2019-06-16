@@ -7,6 +7,7 @@ import com.tobiapplications.menu.R
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.fragments.login.LoginFragment
 import com.tobiapplications.menu.ui.activitys.MainActivity
+import com.tobiapplications.menu.ui.fragments.admin.AdminStartPageFragment
 import com.tobiapplications.menu.ui.fragments.main.MainFragment
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.postDelayed
@@ -68,7 +69,7 @@ class LoadingScreenFragment : BaseFragment() {
 
     // TODO Change back to MainFragment
     private fun openMenu() {
-        replaceFragment(LoginFragment.newInstance(), addToStack = false)
+        replaceFragment(AdminStartPageFragment.newInstance(), addToStack = false)
     }
 
     private fun startAnimation() {

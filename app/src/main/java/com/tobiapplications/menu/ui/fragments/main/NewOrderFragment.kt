@@ -70,7 +70,7 @@ class NewOrderFragment : BaseFragment() {
         bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
 
         val order = OrderUtils.getOrder()
-        if (order.drinks.isEmpty() && order.shisha.isEmpty()) {
+        if (order.orderDrinks.isEmpty() && order.shisha.isEmpty()) {
             return
         }
 

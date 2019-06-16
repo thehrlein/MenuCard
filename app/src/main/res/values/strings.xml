@@ -7,6 +7,8 @@
     <string name="general_attention">Achtung</string>
     <string name="general_please_wait">Bitte warten …</string>
     <string name="general_unknown_error">Es ist ein unbekannter Fehler aufgetreten</string>
+    <string name="general_cancel">abbrechen</string>
+    <string name="general_add">hinzufügen</string>
 
     <!-- LoadingScreen -->
     <string name="loading_please_be_patient">Einen Moment …</string>
@@ -27,7 +29,6 @@
     <string name="main_order_overview">Ihre Bestellung</string>
 
     <!-- AddToOrderFragment -->
-    <string name="order_add">hinzufügen</string>
 
     <!-- OrderOverviewFragment -->
     <string name="overview_position">Pos.</string>
@@ -39,7 +40,6 @@
     <string name="overview_confirm_order">Bestellung abschicken</string>
     <string name="overview_delete_order">Möchten Sie Ihre Bestellung löschen?</string>
     <string name="overview_delete_delete">löschen</string>
-    <string name="overview_delete_cancel">abbrechen</string>
 
     <!-- Login & Registraion-->
     <string name="login_toolbar_title">Login</string>
@@ -75,6 +75,15 @@
     <string name="admin_manage_shisha">Tabake verwalten</string>
     <string name="admin_welcome_message">Hallo Admin, über die betreffenden Buttons erhälst du Einsicht in die Getränke &amp; Shisha Tabak Auswahl und kannst diese bearbeiten.</string>
     <string name="admin_toolbar_title">Admin</string>
+    <string name="admin_manage_drinks_toolbar_title">Getränke verwalten</string>
+    <string name="admin_manage_shisha_toolbar_title">Tabak verwalten</string>
+    <string name="admin_drink_name">Name</string>
+    <string name="admin_drink_size">Größe (in L)</string>
+    <string name="admin_drink_price">Preis (in €)</string>
+    <string name="admin_add_drink_title">Welches Getränk möchten Sie hinzufügen?</string>
+    <string name="admin_add_drink_clear_input">löschen</string>
+    <string name="admin_add_drink_success">Getränk erfolgreich angelegt</string>
+    <string name="admin_add_drink_failed">Fehler: Getränk konnte nicht angelegt werden</string>
 
 
 </resources>

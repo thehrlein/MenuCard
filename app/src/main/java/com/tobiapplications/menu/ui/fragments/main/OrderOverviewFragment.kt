@@ -74,7 +74,7 @@ class OrderOverviewFragment : BaseFragment() {
 
     private fun setOrder() {
         val order = OrderUtils.getOrder()
-        if (order.drinks.isEmpty() && order.shisha.isEmpty()) {
+        if (order.orderDrinks.isEmpty() && order.shisha.isEmpty()) {
             return
         }
 
@@ -82,7 +82,7 @@ class OrderOverviewFragment : BaseFragment() {
             bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }, 200)
 
-        val list = order.drinks.plus(order.shisha)
+        val list = order.orderDrinks.plus(order.shisha)
         orderOverviewAdapter?.setItems(list)
 
         bottomLayout.totalPrice.text = list.sumByDouble { it.price * it.count }.formatEuro()
@@ -117,7 +117,7 @@ class OrderOverviewFragment : BaseFragment() {
             .setTitle(getString(R.string.overview_delete_order))
             .setCancelable(false)
             .setPositiveButton(R.string.overview_delete_delete) { _, _ ->  deleteOrder()}
-            .setNegativeButton(R.string.overview_delete_cancel, null)
+            .setNegativeButton(R.string.general_cancel, null)
             .show()
     }
 

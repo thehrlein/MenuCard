@@ -1,6 +1,6 @@
 package com.tobiapplications.menu.utils.general
 
-import com.tobiapplications.menu.model.order.Drink
+import com.tobiapplications.menu.model.order.OrderDrink
 import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.model.order.Shisha
 import com.tobiapplications.menu.utils.enums.OrderType
@@ -25,8 +25,8 @@ object OrderUtils {
 
     private fun addDrinks(list: List<DisplayableItem>) {
         list.forEach { order ->
-            if (order !is Drink) return
-            this.order.drinks.firstOrNull { it.name == order.name }?.increaseCount(order.count) ?: this.order.drinks.add(order)
+            if (order !is OrderDrink) return
+            this.order.orderDrinks.firstOrNull { it.name == order.name }?.increaseCount(order.count) ?: this.order.orderDrinks.add(order)
         }
     }
 
@@ -43,7 +43,7 @@ object OrderUtils {
     }
 
     fun clearOrder() {
-        order.drinks.clear()
+        order.orderDrinks.clear()
         order.shisha.clear()
     }
 }

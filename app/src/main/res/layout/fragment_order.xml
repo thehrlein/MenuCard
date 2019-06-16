@@ -30,6 +30,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:text="@string/order_add"/>
+        app:text="@string/general_add"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

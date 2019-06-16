@@ -2,7 +2,7 @@ package com.tobiapplications.menu.ui.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.tobiapplications.menu.model.order.Drink
+import com.tobiapplications.menu.model.order.OrderDrink
 import com.tobiapplications.menu.model.order.OrderItem
 import com.tobiapplications.menu.utils.extensions.formatEuro
 import kotlinx.android.synthetic.main.viewholder_order_item.view.*
@@ -22,7 +22,7 @@ class OrderViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         view.price.text = item.price.formatEuro()
         view.count.text = item.count.toString()
 
-        if (item is Drink) {
+        if (item is OrderDrink) {
             view.size.text = item.size
         }
     }

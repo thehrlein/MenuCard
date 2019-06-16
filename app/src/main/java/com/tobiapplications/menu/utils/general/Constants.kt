@@ -31,4 +31,6 @@ object Constants {
      * FireBase FireStore
      */
     const val USER_COLLECTION = "users"
+    const val DRINK_COLLECTION = "drinks"
+    const val TOBACCO_COLLECTION = "tobacco"
 }

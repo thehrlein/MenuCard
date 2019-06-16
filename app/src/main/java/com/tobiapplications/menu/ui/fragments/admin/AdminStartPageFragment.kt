@@ -1,8 +1,11 @@
 package com.tobiapplications.menu.ui.fragments.admin
 
+import android.view.WindowManager
 import com.tobiapplications.menu.R
+import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.utils.extensions.onClick
+import com.tobiapplications.menu.utils.extensions.replaceFragment
 import kotlinx.android.synthetic.main.fragment_admin_start_page.*
 
 /**
@@ -17,8 +20,11 @@ class AdminStartPageFragment : BaseFragment() {
     }
 
     override fun init() {
-        manageDrinks.onClick {  }
-        manageShisha.onClick {  }
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        (activity as? MainActivity)?.showToolbar(true)
+
+        manageDrinks.onClick { replaceFragment(ManageDrinksFragment.newInstance()) }
+        manageShisha.onClick { replaceFragment(ManageShishaFragment.newInstance()) }
     }
 
     override fun getToolbarTitle(): String {

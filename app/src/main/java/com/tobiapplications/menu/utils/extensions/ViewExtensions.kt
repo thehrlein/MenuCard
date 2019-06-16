@@ -100,6 +100,10 @@ fun View.setGone() {
     visibility = View.GONE
 }
 
+fun View.hide() {
+    visibility = View.INVISIBLE
+}
+
 
 /**
  * Extension function to simplify setting an afterTextChanged action

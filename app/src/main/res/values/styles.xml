@@ -14,10 +14,14 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="FloatingActionButtonSmall">
-        <item name="fab_size">mini</item>
+    <style name="FloatingActionButton">
+        <item name="fab_size">normal</item>
         <item name="fab_colorNormal">@color/colorWhite</item>
         <item name="fab_colorPressed">@color/colorLightGrey</item>
+    </style>
+
+    <style name="FloatingActionButtonSmall" parent="FloatingActionButton">
+        <item name="fab_size">mini</item>
     </style>
 
     <style name="BottomNavigation" parent="@style/Widget.MaterialComponents.BottomNavigationView.Colored">

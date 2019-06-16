@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorLightGrey"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="@dimen/menu_space_small"
+        android:scrollbars="none"
+        android:visibility="visible"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_white"
+        android:layout_marginEnd="@dimen/menu_space_default"
+        android:layout_marginBottom="@dimen/menu_space_default"
+        android:layout_gravity="bottom|end"
+        android:visibility="visible"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
