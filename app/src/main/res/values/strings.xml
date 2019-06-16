@@ -6,6 +6,7 @@
     <string name="shisha">Shisha</string>
     <string name="general_attention">Achtung</string>
     <string name="general_please_wait">Bitte warten …</string>
+    <string name="general_unknown_error">Es ist ein unbekannter Fehler aufgetreten</string>
 
     <!-- LoadingScreen -->
     <string name="loading_please_be_patient">Einen Moment …</string>
@@ -47,6 +48,7 @@
     <string name="login_reset_password">Passwort vergessen?</string>
     <string name="login_already_signed_up">Bereits registriert?</string>
     <string name="login_go_to_registration">für MenuCard registieren</string>
+    <string name="login_register">registieren</string>
     <string name="login_action_sign_in">einloggen</string>
     <string name="login_action_sign_up">registrieren</string>
     <string name="login_validation_field_required">Pflichtfeld</string>
@@ -54,7 +56,6 @@
     <string name="login_validation_password_too_short">Bitte geben Sie mindestens 6 Zeichen ein</string>
     <string name="login_error_user_not_exists">Es wurde kein Account zu dieser E-Mail gefunden</string>
     <string name="login_error_user_already_exists">Es existiert bereits ein Account zu dieser E-Mail</string>
-    <string name="login_error_unknown_error">Es ist ein unbekannter Fehler aufgetreten</string>
     <string name="login_error_bad_password">Falsches Passwort</string>
     <string name="login_forgot_password_title">Haben Sie Ihr Password vergessen?</string>
     <string name="login_forgot_password_message">Geben Sie hier Ihre E-Mail ein und Sie werden ein neues Passwort zugeschickt bekommen.</string>
@@ -62,6 +63,10 @@
     <string name="login_forgot_password_cancel">Abbrechen</string>
     <string name="login_forgot_password_general_error">Es ist ein Fehler aufgetreten</string>
     <string name="login_forgot_password_send_success">Es wurde eine E-Mail an %s gesendet</string>
+    <string name="register_error_bad_password">Ungültiges Passwort</string>
+    <string name="register_error_invalid_email">Ungültiges Email</string>
+    <string name="register_error_user_exists">Zu dieser E-Mail existiert bereits ein Account</string>
+    <string name="register_success">Sie haben sich erfolgreich registriert. Bitte loggen Sie sich nun ein</string>
 
 
 </resources>

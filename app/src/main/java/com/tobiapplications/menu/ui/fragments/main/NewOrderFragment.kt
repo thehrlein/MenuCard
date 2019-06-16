@@ -50,7 +50,7 @@ class NewOrderFragment : BaseFragment() {
 
     private fun onMenuItemClicked(item: MenuItem) : Boolean {
         return when (item.itemId) {
-            R.id.menu_action_login -> consume { replaceFragment(LoginFragment.newInstance(), addToStack = true) }
+            R.id.menu_action_login -> consume { replaceFragment(LoginFragment.newInstance(), addToStack = false) }
             else -> false
         }
     }

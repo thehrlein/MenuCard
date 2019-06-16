@@ -16,6 +16,8 @@ object Constants {
      */
     const val ORDER_TYPE = "order_type"
     const val LOGGED_IN = "logged_in"
+    const val EMAIL = "email"
+    const val PW = "pw"
 
     /**
      * Shared Preference Keys

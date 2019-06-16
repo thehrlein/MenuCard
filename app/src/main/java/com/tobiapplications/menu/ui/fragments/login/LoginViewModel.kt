@@ -17,7 +17,6 @@ import com.tobiapplications.menu.model.authentication.LoginDataState
 import com.tobiapplications.menu.model.authentication.ResetPasswordResponse
 import com.tobiapplications.menu.utils.enums.AuthenticationUiType
 import com.tobiapplications.menu.utils.extensions.map
-import com.tobiapplications.menu.utils.general.CoreService
 import com.tobiapplications.menu.utils.mvvm.Result
 import com.tobiapplications.menu.utils.mvvm.SingleLiveEvent
 import java.lang.Exception
@@ -43,8 +42,7 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
     val validation : LiveData<LoginDataState?>
     val loading = SingleLiveEvent<Boolean>()
     private val loginTaskResult : MediatorLiveData<Result<Task<AuthResult>>>
-    val loginSuccess : LiveData<Task<AuthResult>?>
-    val loginException : LiveData<Exception?>
+    val loginResult : LiveData<Task<AuthResult>?>
     val resetPasswordResult : LiveData<ResetPasswordResponse?>
 
     init {
@@ -54,12 +52,8 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
 
         loginTaskResult = signInUseCase.observe()
 
-        loginSuccess = loginTaskResult.map {
+        loginResult = loginTaskResult.map {
             (it as? Result.Success<Task<AuthResult>>)?.data
-        }
-
-        loginException = loginTaskResult.map {
-            (it as? Result.Success<Task<AuthResult>>)?.data?.exception
         }
 
         resetPasswordResult = resetPasswordUseCase.observe().map {

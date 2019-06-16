@@ -5,6 +5,7 @@ import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.addtoorder.AddToOrderFragment
 import com.tobiapplications.menu.ui.fragments.login.LoginFragment
 import com.tobiapplications.menu.ui.fragments.main.*
+import com.tobiapplications.menu.ui.fragments.register.RegisterFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -22,6 +23,9 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract fun bindLoginFragment(): LoginFragment
+
+    @ContributesAndroidInjector
+    abstract fun bindRegisterFragment(): RegisterFragment
 
     @ContributesAndroidInjector
     abstract fun bindMenuFragment(): MainFragment

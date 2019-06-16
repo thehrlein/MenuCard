@@ -50,14 +50,11 @@ class AuthEditText @JvmOverloads constructor(context: Context, attrs: AttributeS
         loginEditText.setOnEditorActionListener { _, _, _ -> consume { onClick() } }
     }
 
-    fun getText(clearError: Boolean = false): String {
-        if (clearError) {
-            setErrorText(null)
-        }
+    fun getText(): String {
         return loginEditText.text.toString()
     }
 
-    fun setText(text: String) {
+    fun setText(text: String?) {
         loginEditText.setText(text)
     }
 

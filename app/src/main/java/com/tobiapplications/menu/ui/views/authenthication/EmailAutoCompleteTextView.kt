@@ -40,10 +40,7 @@ class EmailAutoCompleteTextView(context: Context, attrs: AttributeSet?) : Linear
             emailList))
     }
 
-    fun getText(clearError: Boolean = false): String {
-        if (clearError) {
-            setErrorText(null)
-        }
+    fun getText(): String {
         return email.text.toString()
     }
 

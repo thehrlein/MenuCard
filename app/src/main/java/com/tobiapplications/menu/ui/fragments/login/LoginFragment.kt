@@ -1,5 +1,6 @@
 package com.tobiapplications.menu.ui.fragments.login
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
@@ -14,6 +15,7 @@ import com.tobiapplications.menu.model.authentication.ResetPasswordResponse
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.main.MainFragment
+import com.tobiapplications.menu.ui.fragments.register.RegisterFragment
 import com.tobiapplications.menu.ui.views.general.LoadingStateDialog
 import com.tobiapplications.menu.ui.views.general.LoadingStateDialogHolder
 import com.tobiapplications.menu.utils.enums.AuthenticationUiType
@@ -21,6 +23,7 @@ import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.onClick
 import com.tobiapplications.menu.utils.extensions.replaceFragment
 import com.tobiapplications.menu.utils.extensions.toast
+import com.tobiapplications.menu.utils.general.Constants
 import kotlinx.android.synthetic.main.fragment_authentication_login.*
 import kotlinx.android.synthetic.main.view_login_reset_password_input.view.*
 import java.lang.Exception
@@ -35,8 +38,12 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
     private var loadingDialog : LoadingStateDialog? = null
 
     companion object {
-        fun newInstance() : LoginFragment {
-            return LoginFragment()
+        fun newInstance(email: String? = null, password: String? = null) : LoginFragment {
+            val bundle = Bundle().apply {
+                putString(Constants.EMAIL, email)
+                putString(Constants.PW, password)
+            }
+            return LoginFragment().apply { arguments = bundle }
         }
     }
 
@@ -62,20 +69,47 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
         }
 
         resetPassword.onClick { showResetEmailDialog(emailAutoComplete.getText()) }
+        goToRegistration.onClick { replaceFragment(RegisterFragment.newInstance(emailAutoComplete.getText(), password.getText())) }
+
+        arguments?.let {
+            emailAutoComplete.setText(it.getString(Constants.EMAIL))
+            password.setText(it.getString(Constants.PW))
+        }
     }
 
     private fun initViewModel() {
         viewModel = obtainViewModel()
         viewModel.validation.observe(this, Observer { validateLoginData(it) })
         viewModel.loading.observe(this, Observer { if (it) setDialogLoadingState(getString(R.string.general_please_wait)) })
-        viewModel.loginException.observe(this, Observer { tryExceptionHandling(it) })
-        viewModel.loginSuccess.observe(this, Observer { onLoginSuccess(it) })
+        viewModel.loginResult.observe(this, Observer { onLoginResult(it) })
         viewModel.resetPasswordResult.observe(this, Observer { onResetEmailResult(it) })
     }
 
-    private fun onLoginSuccess(it: Task<AuthResult>?) {
-        dismissDialog {  }
-        replaceFragment(MainFragment.newInstance(), addToStack = false)
+    private fun onLoginResult(it: Task<AuthResult>?) {
+        if (it?.isSuccessful == true) {
+            dismissDialog()
+            replaceFragment(MainFragment.newInstance(), addToStack = false)
+        } else {
+            tryExceptionHandling(it?.exception)
+        }
+    }
+
+    private fun tryExceptionHandling(exception: Exception?) {
+        if (exception == null) {
+            return
+        }
+
+        setDialogFailureState(try {
+            throw exception
+        } catch (e: FirebaseAuthInvalidUserException) {
+            getString(R.string.login_error_user_not_exists)
+        } catch (e: FirebaseAuthInvalidCredentialsException) {
+            getString(R.string.login_error_bad_password)
+        } catch (e: Exception) {
+            getString(R.string.general_unknown_error)
+        })
+
+        dismissDialogDelayed()
     }
 
     private fun onResetEmailResult(it: ResetPasswordResponse?) {
@@ -114,29 +148,9 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 
     private fun validateLoginData(loginState: LoginDataState?) {
         if (loginState != null) {
-
             emailAutoComplete.setErrorText(loginState.emailError)
             password.setErrorText(loginState.passwordError)
-
         }
-    }
-
-    private fun tryExceptionHandling(exception: Exception?) {
-        if (exception == null) {
-            return
-        }
-
-        setDialogFailureState(try {
-            throw exception
-        } catch (e: FirebaseAuthInvalidUserException) {
-           getString(R.string.login_error_user_not_exists)
-        } catch (e: FirebaseAuthInvalidCredentialsException) {
-           getString(R.string.login_error_bad_password)
-        } catch (e: Exception) {
-            getString(R.string.login_error_unknown_error)
-        })
-
-        dismissDialogDelayed()
     }
 
 //    private fun onResetEmailResult(resetEmailResult: ResetEmailResult?) {
