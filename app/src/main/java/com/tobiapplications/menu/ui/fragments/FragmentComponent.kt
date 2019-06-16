@@ -16,6 +16,10 @@ interface FragmentComponent {
         return "MenuCard"
     }
 
+    fun isToolbarBackButtonEnabled() : Boolean {
+        return false
+    }
+
     fun getToolbarMenuResId() : Int {
         return NO_MENU
     }

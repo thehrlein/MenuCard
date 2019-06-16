@@ -3,7 +3,6 @@ package com.tobiapplications.menu.ui.fragments.register
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.lifecycle.Observer
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.authentication.LoginDataState
@@ -106,6 +105,14 @@ class RegisterFragment : BaseFragment(), LoadingStateDialogHolder {
             emailAutoComplete.setErrorText(loginState.emailError)
             password.setErrorText(loginState.passwordError)
         }
+    }
+
+    override fun getToolbarTitle(): String {
+        return getString(R.string.register_toolbar_title)
+    }
+
+    override fun isToolbarBackButtonEnabled(): Boolean {
+        return true
     }
 
     override fun canModifyAppComponents(): Boolean {

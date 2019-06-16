@@ -215,6 +215,10 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 //        dialog.show()
 //    }
 
+    override fun getToolbarTitle(): String {
+        return getString(R.string.login_toolbar_title)
+    }
+
     override fun getBackPressAction(): (() -> Unit)? {
         return { activity?.finish() }
     }

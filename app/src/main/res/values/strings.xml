@@ -42,6 +42,7 @@
     <string name="overview_delete_cancel">abbrechen</string>
 
     <!-- Login & Registraion-->
+    <string name="login_toolbar_title">Login</string>
     <string name="login_hint_email">E-Mail</string>
     <string name="login_hint_password">Password</string>
     <string name="login_new_to_menucard">Neu bei MenuCard?</string>
@@ -63,6 +64,7 @@
     <string name="login_forgot_password_cancel">Abbrechen</string>
     <string name="login_forgot_password_general_error">Es ist ein Fehler aufgetreten</string>
     <string name="login_forgot_password_send_success">Es wurde eine E-Mail an %s gesendet</string>
+    <string name="register_toolbar_title">Registrieren</string>
     <string name="register_error_bad_password">Ungültiges Passwort</string>
     <string name="register_error_invalid_email">Ungültiges Email</string>
     <string name="register_error_user_exists">Zu dieser E-Mail existiert bereits ein Account</string>

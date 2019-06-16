@@ -6,10 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.tobiapplications.menu.model.authentication.LoginStateChanged
 import com.tobiapplications.menu.utils.general.CoreService
-import com.tobiapplications.menu.utils.general.OnNextObserver
 import rx.Observer
 import javax.inject.Inject
-import kotlin.math.log
 
 /**
  * Created by tobias.hehrlein on 04.06.2019.
@@ -19,6 +17,7 @@ class MainActivityViewModel @Inject constructor(firebaseAuth: FirebaseAuth,
 
     val loginStateChanged = MutableLiveData<LoginStateChanged>()
     var title = MutableLiveData<String>()
+    var toolbarBackButton = MutableLiveData<Boolean>()
     var toolbarMenuRes = MutableLiveData<Int>()
     var toolbarMenuListener = MutableLiveData<Toolbar.OnMenuItemClickListener>()
     private var currentLogInStatus : Boolean? = null
@@ -33,6 +32,7 @@ class MainActivityViewModel @Inject constructor(firebaseAuth: FirebaseAuth,
         }
 
         observeTitle()
+        observeMenuBackButton()
         observeMenuLayoutRes()
         observeMenuToolbarListener()
     }
@@ -46,6 +46,22 @@ class MainActivityViewModel @Inject constructor(firebaseAuth: FirebaseAuth,
             }
 
             override fun onCompleted() {}
+        })
+    }
+
+    private fun observeMenuBackButton() {
+        coreService.subscribeToolbarBackButton(object : Observer<Boolean> {
+            override fun onError(e: Throwable?) {
+
+            }
+
+            override fun onNext(t: Boolean?) {
+                toolbarBackButton.value = t
+            }
+
+            override fun onCompleted() {
+
+            }
         })
     }
 

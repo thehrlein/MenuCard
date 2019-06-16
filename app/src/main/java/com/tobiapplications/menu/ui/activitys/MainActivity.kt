@@ -38,12 +38,22 @@ class MainActivity : BaseActivity() {
         })
 
         viewModel.title.observe(this, Observer { toolbar.title = it })
+        viewModel.toolbarBackButton.observe(this, Observer { enableToolbarBackButton(it) })
         viewModel.toolbarMenuRes.observe(this, Observer { inflateToolbarMenu(it) })
         viewModel.toolbarMenuListener.observe(this, Observer { setToolbarMenuListener(it) })
     }
 
     fun showToolbar(show: Boolean) {
         toolbar.setVisible(show)
+    }
+
+    private fun enableToolbarBackButton(enable: Boolean) {
+        if (enable) {
+            toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_left_white)
+            toolbar.setNavigationOnClickListener { onBackPressed() }
+        } else {
+            toolbar.navigationIcon = null
+        }
     }
 
     private fun inflateToolbarMenu(@MenuRes menuRes: Int?) {

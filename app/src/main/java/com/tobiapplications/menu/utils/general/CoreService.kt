@@ -10,6 +10,7 @@ import javax.inject.Singleton
 class CoreService @Inject constructor() {
 
     private var titleObservable : PublishSubject<String> = PublishSubject.create()
+    private var toolbarBackButton : PublishSubject<Boolean> = PublishSubject.create()
     private var toolbarMenu : PublishSubject<Int> = PublishSubject.create()
     private var toolbarMenuListener : PublishSubject<Toolbar.OnMenuItemClickListener> = PublishSubject.create()
 
@@ -19,6 +20,14 @@ class CoreService @Inject constructor() {
 
     fun subscribeTitle(observer: Observer<String>) {
         titleObservable.subscribe(observer)
+    }
+
+    fun setBackButtonEnabled(enabled: Boolean) {
+        toolbarBackButton.onNext(enabled)
+    }
+
+    fun subscribeToolbarBackButton(observer: Observer<Boolean>) {
+        toolbarBackButton.subscribe(observer)
     }
 
     fun setToolbarMenu(menuRes : Int) {

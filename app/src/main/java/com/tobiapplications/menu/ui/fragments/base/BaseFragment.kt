@@ -32,8 +32,15 @@ abstract class BaseFragment : DaggerFragment(), FragmentComponent {
 
         init()
         setToolbarTitle()
+        setToolbarBackButtonEnabled(isToolbarBackButtonEnabled())
         setToolbarMenuRes(getToolbarMenuResId())
         setToolbarMenuClickListener(getToolbarMenuClickListener())
+    }
+
+    private fun setToolbarBackButtonEnabled(enabled: Boolean) {
+        if (canModifyAppComponents()) {
+            coreService.setBackButtonEnabled(enabled)
+        }
     }
 
     private fun setToolbarTitle() {
