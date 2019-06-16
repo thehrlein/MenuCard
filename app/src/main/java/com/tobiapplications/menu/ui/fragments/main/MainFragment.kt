@@ -57,6 +57,10 @@ class MainFragment : BaseFragment() {
         replaceFragment(fragment, container = R.id.child_fragment_container, addToStack = false)
     }
 
+    override fun getBackPressAction(): (() -> Unit)? {
+        return { activity?.finish() }
+    }
+
     override fun getLayout(): Int {
         return R.layout.fragment_menu
     }

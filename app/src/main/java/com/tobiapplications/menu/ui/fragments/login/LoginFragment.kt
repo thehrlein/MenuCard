@@ -215,6 +215,10 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 //        dialog.show()
 //    }
 
+    override fun getBackPressAction(): (() -> Unit)? {
+        return { activity?.finish() }
+    }
+
     override fun canModifyAppComponents(): Boolean {
         return true
     }

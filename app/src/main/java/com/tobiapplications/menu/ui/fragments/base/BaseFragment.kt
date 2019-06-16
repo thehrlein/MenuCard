@@ -59,5 +59,8 @@ abstract class BaseFragment : DaggerFragment(), FragmentComponent {
     open fun canModifyAppComponents() : Boolean {
         return false
     }
+    open fun getBackPressAction() : (() -> Unit)? {
+        return null
+    }
 }
 

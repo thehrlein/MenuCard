@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.ui.fragments.FragmentComponent
 import com.tobiapplications.menu.ui.fragments.base.BaseActivity
+import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.fragments.loadingscreen.LoadingScreenFragment
 import com.tobiapplications.menu.ui.fragments.main.MainFragment
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
@@ -54,6 +55,10 @@ class MainActivity : BaseActivity() {
 
     private fun setToolbarMenuListener(listener : Toolbar.OnMenuItemClickListener?) {
         toolbar.setOnMenuItemClickListener(listener)
+    }
+
+    override fun onBackPressed() {
+        (supportFragmentManager.findFragmentById(R.id.fragment_container) as? BaseFragment)?.getBackPressAction()?.invoke() ?: super.onBackPressed()
     }
 
     override fun getLayout(): Int {
