@@ -32,6 +32,16 @@ class SharedPreferencesManager(private val sharedPreferences: SharedPreferences)
         editor.apply()
     }
 
+    fun setPreferenceStringSet(key: String, value: HashSet<String>) {
+        val editor = sharedPreferences.edit()
+        editor.putStringSet(key, value)
+        editor.apply()
+    }
+
+    fun getPrefernceStringSet(key: String) : MutableSet<String> {
+        return sharedPreferences.getStringSet(key, HashSet()) ?: HashSet()
+    }
+
     /**
      * Get value with given key of SharedPreferencesManager if exist. If not, default value stored with this key and will be returned
      *

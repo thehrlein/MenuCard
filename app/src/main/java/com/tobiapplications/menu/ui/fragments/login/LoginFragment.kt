@@ -6,10 +6,10 @@ import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.tobiapplications.menu.R
+import com.tobiapplications.menu.model.authentication.AuthenticationResponse
 import com.tobiapplications.menu.model.authentication.LoginDataState
 import com.tobiapplications.menu.model.authentication.ResetPasswordResponse
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
@@ -23,10 +23,12 @@ import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.onClick
 import com.tobiapplications.menu.utils.extensions.replaceFragment
 import com.tobiapplications.menu.utils.extensions.toast
+import com.tobiapplications.menu.utils.general.AuthenticationHelper
 import com.tobiapplications.menu.utils.general.Constants
 import kotlinx.android.synthetic.main.fragment_authentication_login.*
 import kotlinx.android.synthetic.main.view_login_reset_password_input.view.*
 import java.lang.Exception
+import javax.inject.Inject
 
 /**
  * Created by Tobias Hehrlein on 05.03.2018.
@@ -36,6 +38,9 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 
     private lateinit var viewModel: LoginViewModel
     private var loadingDialog : LoadingStateDialog? = null
+
+    @Inject
+    lateinit var authenticationHelper: AuthenticationHelper
 
     companion object {
         fun newInstance(email: String? = null, password: String? = null) : LoginFragment {
@@ -59,6 +64,7 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
         emailAutoComplete.addOnTextChangeListener { emailAutoComplete.setErrorText(null) }
         emailAutoComplete.onFocusLost { viewModel.validateUi(it, AuthenticationUiType.EMAIL) }
         emailAutoComplete.onEditorActionClicked { password.requestFocus() }
+        emailAutoComplete.initPrefilling(authenticationHelper.getEmailDictionary())
 
         password.addOnTextChangeListener { password.setErrorText(null) }
         password.onFocusLost { viewModel.validateUi(it, AuthenticationUiType.PASSWORD) }
@@ -85,12 +91,13 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
         viewModel.resetPasswordResult.observe(this, Observer { onResetEmailResult(it) })
     }
 
-    private fun onLoginResult(it: Task<AuthResult>?) {
-        if (it?.isSuccessful == true) {
+    private fun onLoginResult(it: AuthenticationResponse?) {
+        if (it?.task?.isSuccessful == true) {
             dismissDialog()
+            authenticationHelper.addEmailToDictionary(it.email)
             replaceFragment(MainFragment.newInstance(), addToStack = false)
         } else {
-            tryExceptionHandling(it?.exception)
+            tryExceptionHandling(it?.task?.exception)
         }
     }
 
@@ -166,8 +173,8 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
 //
-//        val email = data?.getStringExtra(AuthenticationUtils.EMAIL)
-//        val pw = data?.getStringExtra(AuthenticationUtils.PW)
+//        val email = data?.getStringExtra(AuthenticationHelper.EMAIL)
+//        val pw = data?.getStringExtra(AuthenticationHelper.PW)
 //
 //        loginData = LoginData(email, pw)
 //    }

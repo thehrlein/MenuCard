@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseReference
 import com.tobiapplications.menu.domain.authentication.ResetPasswordUseCase
 import com.tobiapplications.menu.domain.authentication.SignInUseCase
 import com.tobiapplications.menu.domain.authentication.ValidateInputUseCase
+import com.tobiapplications.menu.model.authentication.AuthenticationResponse
 import com.tobiapplications.menu.model.authentication.LoginData
 import com.tobiapplications.menu.model.authentication.LoginDataState
 import com.tobiapplications.menu.model.authentication.ResetPasswordResponse
@@ -41,8 +42,8 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
     private val validationResult = MutableLiveData<Result<LoginDataState>>()
     val validation : LiveData<LoginDataState?>
     val loading = SingleLiveEvent<Boolean>()
-    private val loginTaskResult : MediatorLiveData<Result<Task<AuthResult>>>
-    val loginResult : LiveData<Task<AuthResult>?>
+    private val loginTaskResult : MediatorLiveData<Result<AuthenticationResponse>>
+    val loginResult : LiveData<AuthenticationResponse?>
     val resetPasswordResult : LiveData<ResetPasswordResponse?>
 
     init {
@@ -53,7 +54,7 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
         loginTaskResult = signInUseCase.observe()
 
         loginResult = loginTaskResult.map {
-            (it as? Result.Success<Task<AuthResult>>)?.data
+            (it as? Result.Success<AuthenticationResponse>)?.data
         }
 
         resetPasswordResult = resetPasswordUseCase.observe().map {
@@ -91,12 +92,12 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
 //    private fun safeUserInFirebaseDatabase(user: FirebaseUser) {
 //        databaseReference
 //                .child(Constants.FIREBASE_USERS)
-//                .child(AuthenticationUtils.reformatEmailForDatabase(user.email)!!)
+//                .child(AuthenticationHelper.reformatEmailForDatabase(user.email)!!)
 //                .setValue(user.uid)
 //    }
 //
 //    private fun safeEmailToDictionary(email: String) {
-//        AuthenticationUtils.addEmailToDictionary(sharedPreferences, email, AuthenticationUtils.EmailListType.LOGIN)
+//        AuthenticationHelper.addEmailToDictionary(sharedPreferences, email, AuthenticationHelper.EmailListType.LOGIN)
 //    }
 //
 //
@@ -106,11 +107,11 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
 //    }
 //
 //    fun getEmail(): String {
-//        return getInput(AuthenticationUtils.EMAIL)
+//        return getInput(AuthenticationHelper.EMAIL)
 //    }
 //
 //    fun getPassword(): String {
-//        return getInput(AuthenticationUtils.PW)
+//        return getInput(AuthenticationHelper.PW)
 //    }
 //
 //    private fun getInput(key : String) = authGroup?.getTextFrom(key) ?: ""

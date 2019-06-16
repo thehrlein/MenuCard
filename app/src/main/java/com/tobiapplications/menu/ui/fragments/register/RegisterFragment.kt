@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.google.firebase.auth.*
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.authentication.LoginDataState
-import com.tobiapplications.menu.model.authentication.RegisterResponse
+import com.tobiapplications.menu.model.authentication.AuthenticationResponse
 import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.fragments.login.LoginFragment
@@ -71,7 +71,7 @@ class RegisterFragment : BaseFragment(), LoadingStateDialogHolder {
         viewModel.registerResult.observe(this, Observer { onRegisterResult(it) })
     }
 
-    private fun onRegisterResult(it: RegisterResponse?) {
+    private fun onRegisterResult(it: AuthenticationResponse?) {
         if (it?.task?.isSuccessful == true) {
             setDialogSuccessState(getString(R.string.register_success))
             dismissDialogDelayed { replaceFragment(LoginFragment.newInstance(it.email), addToStack = false) }

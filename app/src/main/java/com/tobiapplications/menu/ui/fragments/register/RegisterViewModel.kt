@@ -4,13 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.tobiapplications.menu.domain.authentication.RegisterUseCase
 import com.tobiapplications.menu.domain.authentication.ValidateInputUseCase
 import com.tobiapplications.menu.model.authentication.LoginData
 import com.tobiapplications.menu.model.authentication.LoginDataState
-import com.tobiapplications.menu.model.authentication.RegisterResponse
+import com.tobiapplications.menu.model.authentication.AuthenticationResponse
 import com.tobiapplications.menu.utils.enums.AuthenticationUiType
 import com.tobiapplications.menu.utils.extensions.map
 import com.tobiapplications.menu.utils.mvvm.Result
@@ -26,8 +24,8 @@ class RegisterViewModel @Inject constructor(private val validateInputUseCase: Va
     private val validationResult = MutableLiveData<Result<LoginDataState>>()
     val validation : LiveData<LoginDataState?>
     val loading = SingleLiveEvent<Boolean>()
-    private val registerTaskResult : MediatorLiveData<Result<RegisterResponse>>
-    val registerResult : LiveData<RegisterResponse?>
+    private val registerTaskResult : MediatorLiveData<Result<AuthenticationResponse>>
+    val registerResult : LiveData<AuthenticationResponse?>
 
     init {
         validation = validationResult.map {
@@ -37,7 +35,7 @@ class RegisterViewModel @Inject constructor(private val validateInputUseCase: Va
         registerTaskResult = registerUseCase.observe()
 
         registerResult = registerTaskResult.map {
-            (it as? Result.Success<RegisterResponse>)?.data
+            (it as? Result.Success<AuthenticationResponse>)?.data
         }
 
     }

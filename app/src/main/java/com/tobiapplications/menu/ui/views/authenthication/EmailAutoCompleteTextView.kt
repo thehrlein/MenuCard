@@ -34,10 +34,10 @@ class EmailAutoCompleteTextView(context: Context, attrs: AttributeSet?) : Linear
         email.setOnEditorActionListener { _, _, _ -> consume { onClick() } }
     }
 
-    fun initPrefilling(emailList: Array<String>) {
+    fun initPrefilling(emailList: MutableSet<String>) {
         email.setAdapter(ArrayAdapter(context,
             android.R.layout.simple_dropdown_item_1line,
-            emailList))
+            emailList.toTypedArray()))
     }
 
     fun getText(): String {

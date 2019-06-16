@@ -23,4 +23,5 @@ object Constants {
      * Shared Preference Keys
      */
     const val USER_IS_LOGGED_IN = "user_is_logged_in"
+    const val EMAIL_DICTIONARY = "email_dictionary"
 }
