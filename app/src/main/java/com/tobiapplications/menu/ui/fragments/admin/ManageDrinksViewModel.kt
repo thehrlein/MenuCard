@@ -3,10 +3,12 @@ package com.tobiapplications.menu.ui.fragments.admin
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.tobiapplications.menu.domain.admin.AddDrinkToFireStoreUseCase
+import com.tobiapplications.menu.domain.admin.DeleteDrinkFromFireStoreUseCase
 import com.tobiapplications.menu.domain.admin.GetAllDrinksUseCase
 import com.tobiapplications.menu.model.admin.Drink
 import com.tobiapplications.menu.utils.extensions.map
 import com.tobiapplications.menu.utils.extensions.orFalse
+import com.tobiapplications.menu.utils.general.DisplayableItem
 import com.tobiapplications.menu.utils.mvvm.Result
 import javax.inject.Inject
 
@@ -14,7 +16,8 @@ import javax.inject.Inject
  *  Created by tobiashehrlein on 2019-06-16
  */
 class ManageDrinksViewModel @Inject constructor(getAllDrinksUseCase: GetAllDrinksUseCase,
-                                                private val addDrinkToFireStoreUseCase: AddDrinkToFireStoreUseCase) : ViewModel() {
+                                                private val addDrinkToFireStoreUseCase: AddDrinkToFireStoreUseCase,
+                                                private val deleteDrinkFromFireStoreUseCase: DeleteDrinkFromFireStoreUseCase) : ViewModel() {
 
     val drinks : LiveData<List<Drink>?>
     val addDrinkResult : LiveData<Boolean>
@@ -33,5 +36,13 @@ class ManageDrinksViewModel @Inject constructor(getAllDrinksUseCase: GetAllDrink
 
     fun addNewDrink(drink: Drink) {
         addDrinkToFireStoreUseCase.execute(drink)
+    }
+
+    fun deleteDrink(drink: Drink?) {
+        if (drink == null) {
+            return
+        }
+
+        deleteDrinkFromFireStoreUseCase.execute(drink)
     }
 }

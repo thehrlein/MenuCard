@@ -1,5 +1,6 @@
 package com.tobiapplications.menu.utils.extensions
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
@@ -119,6 +120,10 @@ fun BaseFragment.replaceFragment(fragment: BaseFragment, container: Int = R.id.f
 
 fun BaseFragment.getDimen(dimen: Int) : Float {
     return resources.getDimension(dimen)
+}
+
+fun BaseFragment.getDrawable(drawable: Int) : Drawable? {
+    return ContextCompat.getDrawable(requireContext(), drawable)
 }
 
 ///**

@@ -22,7 +22,9 @@ class GetAllDrinksUseCase @Inject constructor(private val firestore: FirebaseFir
                     val drinks = mutableListOf<Drink>()
                     snapShot?.let {
                         for (doc in it) {
-                            drinks.add(doc.toObject(Drink::class.java))
+                            val drink = doc.toObject(Drink::class.java)
+                            drink.id = doc.id
+                            drinks.add(drink)
                         }
                     }
 

@@ -41,5 +41,9 @@ open class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolde
         itemList.clear()
         notifyDataSetChanged()
     }
+
+    fun getItem(adapterPosition: Int): DisplayableItem {
+        return itemList[adapterPosition]
+    }
 }
 

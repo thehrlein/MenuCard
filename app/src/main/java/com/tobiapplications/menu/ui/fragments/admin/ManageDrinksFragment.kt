@@ -1,10 +1,12 @@
 package com.tobiapplications.menu.ui.fragments.admin
 
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.admin.Drink
@@ -12,13 +14,15 @@ import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.viewhandler.delegates.ManageDrinksAdapter
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
+import com.tobiapplications.menu.utils.general.SwipeDeleteCallback
+import com.tobiapplications.menu.utils.general.SwipeDeleteCallbackHolder
 import kotlinx.android.synthetic.main.fragment_manage_drinks.*
 import kotlinx.android.synthetic.main.view_alertdialog_add_drink.view.*
 
 /**
  *  Created by tobiashehrlein on 2019-06-16
  */
-class ManageDrinksFragment : BaseFragment() {
+class ManageDrinksFragment : BaseFragment(), SwipeDeleteCallbackHolder {
 
     private lateinit var viewModel: ManageDrinksViewModel
     private var recyclerLayoutManager: LinearLayoutManager? = null
@@ -44,6 +48,9 @@ class ManageDrinksFragment : BaseFragment() {
     private fun initRecyclerView() {
         recyclerLayoutManager = LinearLayoutManager(context)
         manageDrinksAdapter = ManageDrinksAdapter()
+        val itemTouchHelper = ItemTouchHelper(SwipeDeleteCallback(this, getDrawable(R.drawable.ic_delete_white)!!, ColorDrawable(getColor(R.color.colorRed))))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
         recyclerView.apply {
             layoutManager = recyclerLayoutManager
             adapter = manageDrinksAdapter
@@ -99,6 +106,10 @@ class ManageDrinksFragment : BaseFragment() {
             findViewById<ProgressBar>(R.id.progress)?.hide()
             findViewById<ConstraintLayout>(R.id.inputLayout)?.show()
         }
+    }
+
+    override fun onItemSwiped(adapterPosition: Int) {
+        viewModel.deleteDrink(manageDrinksAdapter?.getItem(adapterPosition) as? Drink)
     }
 
     override fun isToolbarBackButtonEnabled(): Boolean {
