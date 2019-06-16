@@ -4,10 +4,9 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.widget.FrameLayout
-import androidx.core.content.ContextCompat
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.utils.extensions.getColor
-import com.tobiapplications.menu.utils.extensions.onClick
+import com.tobiapplications.menu.utils.extensions.getDrawable
 import kotlinx.android.synthetic.main.view_primary_button.view.*
 
 /**
@@ -41,21 +40,21 @@ class PrimaryButton @JvmOverloads constructor(context: Context, attrs: Attribute
     }
 
     private fun setButtonSecondaryState() {
-        layoutButtons.setBackgroundColor(getColor(R.color.colorLightGrey))
+        cardView.background = getDrawable(R.drawable.background_color_state_primary_button_secondary_state)
         title.setTextColor(getColor(R.color.colorBlack))
     }
 
     private fun setButtonPrimaryState() {
-        layoutButtons.setBackgroundColor(getColor(R.color.buttonBackgroundBlue))
+        cardView.background = getDrawable(R.drawable.background_color_state_primary_button_primary_state)
         title.setTextColor(getColor(R.color.colorWhite))
     }
 
     override fun setEnabled(enabled: Boolean) {
-        if (enabled) {
-            layout.layoutButtons.setBackgroundColor(getColor(R.color.colorPrimary))
-        } else {
-            layout.layoutButtons.setBackgroundColor(getColor(R.color.colorLightGrey))
-        }
+//        if (enabled) {
+//            layout.layoutButtons.setBackgroundColor(getColor(R.color.colorPrimary))
+//        } else {
+//            layout.layoutButtons.setBackgroundColor(getColor(R.color.colorLightGrey))
+//        }
 
         super.setEnabled(enabled)
     }
