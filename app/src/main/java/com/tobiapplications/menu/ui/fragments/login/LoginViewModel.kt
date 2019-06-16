@@ -1,14 +1,9 @@
 package com.tobiapplications.menu.ui.fragments.login
 
-import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.tobiapplications.menu.domain.authentication.ResetPasswordUseCase
 import com.tobiapplications.menu.domain.authentication.SignInUseCase
 import com.tobiapplications.menu.domain.authentication.ValidateInputUseCase
@@ -20,24 +15,11 @@ import com.tobiapplications.menu.utils.enums.AuthenticationUiType
 import com.tobiapplications.menu.utils.extensions.map
 import com.tobiapplications.menu.utils.mvvm.Result
 import com.tobiapplications.menu.utils.mvvm.SingleLiveEvent
-import java.lang.Exception
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
-                                         private val databaseReference: DatabaseReference,
-                                         private val sharedPreferences: SharedPreferences,
-                                         private val validateInputUseCase: ValidateInputUseCase,
+class LoginViewModel @Inject constructor(private val validateInputUseCase: ValidateInputUseCase,
                                          private val signInUseCase: SignInUseCase,
                                          private val resetPasswordUseCase: ResetPasswordUseCase) : ViewModel() {
-
-
-
-//    private var loggedIn = false
-//    private var currentUser : User? = null
-//    var loading = SingleLiveEvent<Boolean>()
-//    val loginException = NonNullableLiveEvent<LoginException>()
-//    val loginSuccessful = SingleLiveEvent<User>()
-//    val resetEmailResult = SingleLiveEvent<ResetEmailResult>()
 
     private val validationResult = MutableLiveData<Result<LoginDataState>>()
     val validation : LiveData<LoginDataState?>
@@ -85,35 +67,4 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
         loading.value = true
         resetPasswordUseCase.execute(email)
     }
-
-
-
-//
-//    private fun safeUserInFirebaseDatabase(user: FirebaseUser) {
-//        databaseReference
-//                .child(Constants.FIREBASE_USERS)
-//                .child(AuthenticationHelper.reformatEmailForDatabase(user.email)!!)
-//                .setValue(user.uid)
-//    }
-//
-//    private fun safeEmailToDictionary(email: String) {
-//        AuthenticationHelper.addEmailToDictionary(sharedPreferences, email, AuthenticationHelper.EmailListType.LOGIN)
-//    }
-//
-//
-//    private fun onResetCompleted(result: Task<Void>, email: String) {
-//        showLoading(false)
-//        resetEmailResult.value = ResetEmailResult(result, email)
-//    }
-//
-//    fun getEmail(): String {
-//        return getInput(AuthenticationHelper.EMAIL)
-//    }
-//
-//    fun getPassword(): String {
-//        return getInput(AuthenticationHelper.PW)
-//    }
-//
-//    private fun getInput(key : String) = authGroup?.getTextFrom(key) ?: ""
-
 }

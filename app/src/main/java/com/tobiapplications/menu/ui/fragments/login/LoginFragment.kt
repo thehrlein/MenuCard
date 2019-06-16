@@ -126,7 +126,8 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
         }
 
         if (it.result.isSuccessful) {
-            toast(R.string.login_forgot_password_send_success)
+            setDialogSuccessState(getString(R.string.login_forgot_password_send_success, it.email))
+            dismissDialogDelayed()
         } else {
             onResetEmailFailed(it.result, it.email)
         }
@@ -160,26 +161,6 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
         }
     }
 
-//    private fun onResetEmailResult(resetEmailResult: ResetEmailResult?) {
-//        if (resetEmailResult?.result?.isSuccessful == true) {
-//            showResetEmailSendDialog(resetEmailResult.email)
-//        } else {
-//            onResetEmailFailed(resetEmailResult?.result, resetEmailResult?.email)
-//        }
-//    }
-//
-
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        val email = data?.getStringExtra(AuthenticationHelper.EMAIL)
-//        val pw = data?.getStringExtra(AuthenticationHelper.PW)
-//
-//        loginData = LoginData(email, pw)
-//    }
-//
-//
     private fun showResetEmailDialog(input: String?) {
         val view = LayoutInflater.from(requireContext()).inflate(R.layout.view_login_reset_password_input, null)
         view.emailInput.setText(input)
@@ -200,27 +181,6 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
             }
         }
     }
-//
-//    private fun showResetEmailSendDialog(email: String) {
-//        val dialog = alert(getString(R.string.successful), getString(R.string.action_reset_password_send, email))
-//        dialog.show()
-//    }
-//
-//    private fun onResetEmailFailed(result: Task<Void>?, email: String?) {
-//        val dialog : Dialog = try {
-//            throw result?.exception ?: RuntimeException()
-//        } catch (e: FirebaseAuthInvalidUserException) {
-//            DialogBuilderUtil.createOneButtonDialog(context, getString(R.string.error_title), getString(R.string.error_user_not_exists, email),
-//                    false) { showResetEmailDialog(email) }
-//
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//            DialogBuilderUtil.createOneButtonDialog(context, getString(R.string.error_title),getString(R.string.error_unknown_error),
-//                    false) { showResetEmailDialog(email) }
-//        }
-//
-//        dialog.show()
-//    }
 
     override fun getToolbarTitle(): String {
         return getString(R.string.login_toolbar_title)
