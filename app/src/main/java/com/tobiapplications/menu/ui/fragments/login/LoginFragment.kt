@@ -53,7 +53,7 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
         emailAutoComplete.onFocusLost { viewModel.validateUi(it, AuthenticationUiType.EMAIL) }
         emailAutoComplete.onEditorActionClicked { password.requestFocus() }
 
-        password.addOnTextChangeListener { emailAutoComplete.setErrorText(null) }
+        password.addOnTextChangeListener { password.setErrorText(null) }
         password.onFocusLost { viewModel.validateUi(it, AuthenticationUiType.PASSWORD) }
         password.onEditorActionClicked { viewModel.login(emailAutoComplete.getText(), password.getText()) }
 

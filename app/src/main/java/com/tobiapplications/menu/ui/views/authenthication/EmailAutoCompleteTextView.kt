@@ -2,6 +2,7 @@ package com.tobiapplications.menu.ui.views.authenthication
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
@@ -52,12 +53,14 @@ class EmailAutoCompleteTextView(context: Context, attrs: AttributeSet?) : Linear
 
     fun setErrorText(error: Int?) {
         if (error == null) {
-            email.error = null
-//            errorText.setGone()
+//            email.error = null
+            email.background.clearColorFilter()
+            errorText.setGone()
         } else {
-            email.error = getString(error)
-//            errorText.show()
-//            errorText.text = getString(error)
+//            email.error = getString(error)
+            email.background.setColorFilter(getColor(R.color.colorRed), PorterDuff.Mode.SRC_IN)
+            errorText.show()
+            errorText.text = getString(error)
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.tobiapplications.menu.ui.views.authenthication
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
@@ -62,12 +63,14 @@ class AuthEditText @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     fun setErrorText(error: Int?) {
         if (error == null) {
-//            errorText.setGone()
-            loginEditText.error = null
+            errorText.setGone()
+            loginEditText.background.clearColorFilter()
+//            loginEditText.error = null
         } else {
-            loginEditText.error = getString(error)
-//            errorText.show()
-//            errorText.text = getString(error)
+//            loginEditText.error = getString(error)
+            loginEditText.background.setColorFilter(getColor(R.color.colorRed), PorterDuff.Mode.SRC_IN)
+            errorText.show()
+            errorText.text = getString(error)
         }
     }
 }
