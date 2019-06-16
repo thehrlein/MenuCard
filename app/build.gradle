@@ -93,6 +93,7 @@ dependencies {
     // Firebase
     implementation "com.google.firebase:firebase-database:$firebase"
     implementation "com.google.firebase:firebase-auth:$firebase"
+    implementation "com.google.firebase:firebase-firestore:$firestore"
 
     // Testing
     testImplementation "junit:junit:$junit"

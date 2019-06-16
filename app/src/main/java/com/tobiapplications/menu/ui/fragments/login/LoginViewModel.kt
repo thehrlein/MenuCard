@@ -6,20 +6,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tobiapplications.menu.domain.authentication.ResetPasswordUseCase
 import com.tobiapplications.menu.domain.authentication.SignInUseCase
+import com.tobiapplications.menu.domain.authentication.SafeFireStoreUserUseCase
 import com.tobiapplications.menu.domain.authentication.ValidateInputUseCase
-import com.tobiapplications.menu.model.authentication.AuthenticationResponse
-import com.tobiapplications.menu.model.authentication.LoginData
-import com.tobiapplications.menu.model.authentication.LoginDataState
-import com.tobiapplications.menu.model.authentication.ResetPasswordResponse
+import com.tobiapplications.menu.model.authentication.*
 import com.tobiapplications.menu.utils.enums.AuthenticationUiType
 import com.tobiapplications.menu.utils.extensions.map
+import com.tobiapplications.menu.utils.general.AuthenticationHelper
 import com.tobiapplications.menu.utils.mvvm.Result
 import com.tobiapplications.menu.utils.mvvm.SingleLiveEvent
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(private val validateInputUseCase: ValidateInputUseCase,
                                          private val signInUseCase: SignInUseCase,
-                                         private val resetPasswordUseCase: ResetPasswordUseCase) : ViewModel() {
+                                         private val resetPasswordUseCase: ResetPasswordUseCase,
+                                         private val authenticationHelper: AuthenticationHelper,
+                                         private val safeFireStoreUserUseCase: SafeFireStoreUserUseCase) : ViewModel() {
 
     private val validationResult = MutableLiveData<Result<LoginDataState>>()
     val validation : LiveData<LoginDataState?>
@@ -27,6 +28,7 @@ class LoginViewModel @Inject constructor(private val validateInputUseCase: Valid
     private val loginTaskResult : MediatorLiveData<Result<AuthenticationResponse>>
     val loginResult : LiveData<AuthenticationResponse?>
     val resetPasswordResult : LiveData<ResetPasswordResponse?>
+    val safeFireStoreUserResult : LiveData<User?>
 
     init {
         validation = validationResult.map {
@@ -41,6 +43,10 @@ class LoginViewModel @Inject constructor(private val validateInputUseCase: Valid
 
         resetPasswordResult = resetPasswordUseCase.observe().map {
             (it as? Result.Success<ResetPasswordResponse>)?.data
+        }
+
+        safeFireStoreUserResult = safeFireStoreUserUseCase.observe().map {
+            (it as? Result.Success<User>)?.data
         }
     }
 
@@ -66,5 +72,10 @@ class LoginViewModel @Inject constructor(private val validateInputUseCase: Valid
     fun sendResetPassword(email: String) {
         loading.value = true
         resetPasswordUseCase.execute(email)
+    }
+
+    fun safeUserLocalAndInFireStore(user: User) {
+        authenticationHelper.addEmailToDictionary(user.email)
+        safeFireStoreUserUseCase.execute(user)
     }
 }

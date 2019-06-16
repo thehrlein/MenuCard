@@ -21,6 +21,7 @@ buildscript {
         fab = '1.6.4'
         facebook = '[4,5)'
         firebase = '17.0.0'
+        firestore = '19.0.2'
         fresco = '0.13.0'
         glide = '4.9.0'
         google_services = '4.2.0'

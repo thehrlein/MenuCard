@@ -70,5 +70,11 @@
     <string name="register_error_user_exists">Zu dieser E-Mail existiert bereits ein Account</string>
     <string name="register_success">Sie haben sich erfolgreich registriert. Bitte loggen Sie sich nun ein</string>
 
+    <!-- Admin -->
+    <string name="admin_manage_drinks">Getränke verwalten</string>
+    <string name="admin_manage_shisha">Tabake verwalten</string>
+    <string name="admin_welcome_message">Hallo Admin, über die betreffenden Buttons erhälst du Einsicht in die Getränke &amp; Shisha Tabak Auswahl und kannst diese bearbeiten.</string>
+    <string name="admin_toolbar_title">Admin</string>
+
 
 </resources>

@@ -12,8 +12,10 @@ import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.authentication.AuthenticationResponse
 import com.tobiapplications.menu.model.authentication.LoginDataState
 import com.tobiapplications.menu.model.authentication.ResetPasswordResponse
+import com.tobiapplications.menu.model.authentication.User
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.activitys.MainActivity
+import com.tobiapplications.menu.ui.fragments.admin.AdminStartPageFragment
 import com.tobiapplications.menu.ui.fragments.main.MainFragment
 import com.tobiapplications.menu.ui.fragments.register.RegisterFragment
 import com.tobiapplications.menu.ui.views.general.LoadingStateDialog
@@ -22,7 +24,6 @@ import com.tobiapplications.menu.utils.enums.AuthenticationUiType
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.onClick
 import com.tobiapplications.menu.utils.extensions.replaceFragment
-import com.tobiapplications.menu.utils.extensions.toast
 import com.tobiapplications.menu.utils.general.AuthenticationHelper
 import com.tobiapplications.menu.utils.general.Constants
 import kotlinx.android.synthetic.main.fragment_authentication_login.*
@@ -89,15 +90,23 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
         viewModel.loading.observe(this, Observer { if (it) setDialogLoadingState(getString(R.string.general_please_wait)) })
         viewModel.loginResult.observe(this, Observer { onLoginResult(it) })
         viewModel.resetPasswordResult.observe(this, Observer { onResetEmailResult(it) })
+        viewModel.safeFireStoreUserResult.observe(this, Observer { onFireStoreResult(it) })
     }
 
     private fun onLoginResult(it: AuthenticationResponse?) {
         if (it?.task?.isSuccessful == true) {
-            dismissDialog()
-            authenticationHelper.addEmailToDictionary(it.email)
-            replaceFragment(MainFragment.newInstance(), addToStack = false)
+            viewModel.safeUserLocalAndInFireStore(User(it.email))
         } else {
             tryExceptionHandling(it?.task?.exception)
+        }
+    }
+
+    private fun onFireStoreResult(it: User?) {
+        dismissDialog()
+        if (it?.admin == true) {
+            replaceFragment(AdminStartPageFragment.newInstance(), addToStack = false)
+        } else {
+            replaceFragment(MainFragment.newInstance(), addToStack = false)
         }
     }
 

@@ -5,7 +5,9 @@ package com.tobiapplications.menu.utils.general
  */
 object Constants {
 
-    /** General */
+    /**
+     * General
+     */
     const val EMPTY_STRING = ""
     const val DEFAULT_INT = 0
     const val DEFAULT_DOUBLE = 0.0
@@ -24,4 +26,9 @@ object Constants {
      */
     const val USER_IS_LOGGED_IN = "user_is_logged_in"
     const val EMAIL_DICTIONARY = "email_dictionary"
+
+    /**
+     * FireBase FireStore
+     */
+    const val USER_COLLECTION = "users"
 }
