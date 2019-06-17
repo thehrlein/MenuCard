@@ -88,6 +88,7 @@
     <string name="admin_add_drink_clear_input">löschen</string>
     <string name="admin_add_drink_success">Getränk erfolgreich angelegt</string>
     <string name="admin_add_drink_failed">Fehler: Getränk konnte nicht angelegt werden</string>
+    <string name="admin_error_no_drinks">Keine Getränke verfügbar\n\nFügen Sie über unten stehenden Button neue Getränke hinzu</string>
 
 
 </resources>

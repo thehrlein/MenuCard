@@ -59,11 +59,22 @@ class ManageDrinksFragment : BaseFragment(), SwipeDeleteCallbackHolder {
 
     private fun initViewModel() {
         viewModel = obtainViewModel()
-        viewModel.drinks.observe(this, Observer {
-            manageDrinksAdapter?.clear()
-            manageDrinksAdapter?.setItems(it)
-        })
+        viewModel.drinks.observe(this, Observer { setDrinks(it) })
         viewModel.addDrinkResult.observe(this, Observer { onAddDrinkResult(it) })
+    }
+
+    private fun setDrinks(it: List<Drink>?) {
+        manageDrinksAdapter?.clear()
+
+        if (it.isNullOrEmpty()) {
+            errorNoDrinks.show()
+        } else {
+            manageDrinksAdapter?.setItems(it)
+            recyclerView.show()
+            fabAdd.show()
+        }
+
+        progress.hide()
     }
 
     private fun openAddDrinkDialog() {

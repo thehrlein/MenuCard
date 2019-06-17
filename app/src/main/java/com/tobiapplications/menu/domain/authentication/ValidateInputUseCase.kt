@@ -3,14 +3,14 @@ package com.tobiapplications.menu.domain.authentication
 import android.util.Patterns
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.authentication.LoginData
-import com.tobiapplications.menu.model.authentication.LoginDataState
+import com.tobiapplications.menu.model.authentication.LoginValidationState
 import com.tobiapplications.menu.utils.mvvm.UseCase
 import javax.inject.Inject
 
 /**
  *  Created by tobiashehrlein on 2019-06-03
  */
-class ValidateInputUseCase @Inject constructor() : UseCase<LoginData, LoginDataState>() {
+class ValidateInputUseCase @Inject constructor() : UseCase<LoginData, LoginValidationState>() {
 
     companion object {
         // General
@@ -23,7 +23,7 @@ class ValidateInputUseCase @Inject constructor() : UseCase<LoginData, LoginDataS
         const val PASSWORD_TOO_SHORT = R.string.login_validation_password_too_short
     }
 
-    override fun execute(param: LoginData): LoginDataState {
+    override fun execute(param: LoginData): LoginValidationState {
         var emailError: Int? = null
         var passwordError : Int? = null
         if (param.email != null) {
@@ -33,7 +33,7 @@ class ValidateInputUseCase @Inject constructor() : UseCase<LoginData, LoginDataS
             passwordError = validatePassword(param.password)
         }
 
-        return LoginDataState(emailError, passwordError)
+        return LoginValidationState(emailError, passwordError)
     }
 
     private fun validateEmail(email: String): Int? {

@@ -9,6 +9,7 @@ import com.tobiapplications.menu.ui.fragments.login.LoginFragment
 import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.admin.AdminStartPageFragment
 import com.tobiapplications.menu.ui.fragments.main.MainFragment
+import com.tobiapplications.menu.utils.enums.LoginState
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.postDelayed
 import com.tobiapplications.menu.utils.extensions.replaceFragment
@@ -26,7 +27,7 @@ class LoadingScreenFragment : BaseFragment() {
             return LoadingScreenFragment()
         }
 
-        const val LOADING_ANIMATION_TIME = 1500L
+        const val LOADING_ANIMATION_TIME = 500L
     }
 
 
@@ -45,12 +46,16 @@ class LoadingScreenFragment : BaseFragment() {
     private fun initViewModel() {
         viewModel = obtainViewModel()
         viewModel.loggedInState.observe(this, Observer {
-            if (it) {
-                postDelayed({ openMenu() }, LOADING_ANIMATION_TIME)
-            } else {
-                postDelayed({ showLogInHintDialog() }, LOADING_ANIMATION_TIME)
+            when (it) {
+                LoginState.LOGGED_IN -> openDelayed{ openFragment(MainFragment.newInstance()) }
+                LoginState.ADMIN -> { openDelayed { openFragment(AdminStartPageFragment.newInstance()) } }
+                else -> openDelayed { showLogInHintDialog() }
             }
         })
+    }
+
+    private fun openDelayed(action: () -> Unit) {
+        postDelayed( { action() }, LOADING_ANIMATION_TIME)
     }
 
     private fun showLogInHintDialog() {
@@ -58,19 +63,13 @@ class LoadingScreenFragment : BaseFragment() {
             .setTitle(getString(R.string.loading_not_logged_in_title))
             .setMessage(getString(R.string.loading_not_logged_in_message))
             .setCancelable(false)
-            .setPositiveButton(R.string.loading_not_logged_login) { _, _ ->  openLogin()}
-            .setNegativeButton(R.string.loading_not_logged_stay_anonymous) { _, _ ->  openMenu()}
+            .setPositiveButton(R.string.loading_not_logged_login) { _, _ ->  openFragment(LoginFragment.newInstance()) }
+            .setNegativeButton(R.string.loading_not_logged_stay_anonymous) { _, _ ->  openFragment(MainFragment.newInstance()) }
             .show()
     }
 
-    private fun openLogin() {
-        replaceFragment(LoginFragment.newInstance(), addToStack = false)
-    }
-
-    // TODO Change back to MainFragment
-    private fun openMenu() {
-        replaceFragment(MainFragment.newInstance(), addToStack = false)
-//        replaceFragment(AdminStartPageFragment.newInstance(), addToStack = false)
+    private fun openFragment(fragment: BaseFragment) {
+        replaceFragment(fragment, addToStack = false)
     }
 
     private fun startAnimation() {

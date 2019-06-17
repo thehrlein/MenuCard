@@ -6,13 +6,13 @@ import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 /**
  *  Created by tobiashehrlein on 2019-06-16
  */
-class ManageShishaFragment : BaseFragment() {
+class ManageTobaccoFragment : BaseFragment() {
 
-    private lateinit var viewModel: ManageShishaViewModel
+    private lateinit var viewModel: ManageTobaccoViewModel
 
     companion object {
-        fun newInstance() : ManageShishaFragment {
-            return ManageShishaFragment()
+        fun newInstance() : ManageTobaccoFragment {
+            return ManageTobaccoFragment()
         }
     }
 

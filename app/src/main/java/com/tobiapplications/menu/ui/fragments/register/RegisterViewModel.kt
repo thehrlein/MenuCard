@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.tobiapplications.menu.domain.authentication.RegisterUseCase
 import com.tobiapplications.menu.domain.authentication.ValidateInputUseCase
 import com.tobiapplications.menu.model.authentication.LoginData
-import com.tobiapplications.menu.model.authentication.LoginDataState
+import com.tobiapplications.menu.model.authentication.LoginValidationState
 import com.tobiapplications.menu.model.authentication.AuthenticationResponse
 import com.tobiapplications.menu.utils.enums.AuthenticationUiType
 import com.tobiapplications.menu.utils.extensions.map
@@ -21,15 +21,15 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(private val validateInputUseCase: ValidateInputUseCase,
                                             private val registerUseCase: RegisterUseCase) : ViewModel() {
 
-    private val validationResult = MutableLiveData<Result<LoginDataState>>()
-    val validation : LiveData<LoginDataState?>
+    private val validationResult = MutableLiveData<Result<LoginValidationState>>()
+    val validation : LiveData<LoginValidationState?>
     val loading = SingleLiveEvent<Boolean>()
     private val registerTaskResult : MediatorLiveData<Result<AuthenticationResponse>>
     val registerResult : LiveData<AuthenticationResponse?>
 
     init {
         validation = validationResult.map {
-            (it as? Result.Success<LoginDataState>)?.data
+            (it as? Result.Success<LoginValidationState>)?.data
         }
 
         registerTaskResult = registerUseCase.observe()
@@ -46,7 +46,7 @@ class RegisterViewModel @Inject constructor(private val validateInputUseCase: Va
     }
 
     fun register(email: String, password: String) {
-        val registerResult = ((validateInputUseCase.executeNow(LoginData(email, password))) as? Result.Success<LoginDataState>)?.data
+        val registerResult = ((validateInputUseCase.executeNow(LoginData(email, password))) as? Result.Success<LoginValidationState>)?.data
         if (loginValid(registerResult)) {
             loading.value = true
             registerUseCase.execute(LoginData(email, password))
@@ -55,7 +55,7 @@ class RegisterViewModel @Inject constructor(private val validateInputUseCase: Va
         }
     }
 
-    private fun loginValid(loginResult: LoginDataState?): Boolean {
+    private fun loginValid(loginResult: LoginValidationState?): Boolean {
         return loginResult != null && loginResult.emailError == null && loginResult.passwordError == null
     }
 }

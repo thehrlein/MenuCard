@@ -6,7 +6,7 @@ import javax.inject.Inject
 /**
  *  Created by tobiashehrlein on 2019-06-16
  */
-class ManageShishaViewModel @Inject constructor() : ViewModel() {
+class ManageTobaccoViewModel @Inject constructor() : ViewModel() {
 
     init {
 

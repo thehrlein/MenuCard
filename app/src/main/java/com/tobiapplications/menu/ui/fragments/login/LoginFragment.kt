@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.authentication.AuthenticationResponse
-import com.tobiapplications.menu.model.authentication.LoginDataState
+import com.tobiapplications.menu.model.authentication.LoginValidationState
 import com.tobiapplications.menu.model.authentication.ResetPasswordResponse
 import com.tobiapplications.menu.model.authentication.User
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
@@ -163,7 +163,7 @@ class LoginFragment : BaseFragment(), LoadingStateDialogHolder {
 
     }
 
-    private fun validateLoginData(loginState: LoginDataState?) {
+    private fun validateLoginData(loginState: LoginValidationState?) {
         if (loginState != null) {
             emailAutoComplete.setErrorText(loginState.emailError)
             password.setErrorText(loginState.passwordError)

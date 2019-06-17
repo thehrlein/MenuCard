@@ -22,6 +22,10 @@ class MainActivity : BaseActivity() {
 
     private lateinit var viewModel: MainActivityViewModel
 
+    companion object {
+        const val FRAGMEND_CONTAINER_ID = R.id.fragment_container
+    }
+
     override fun init() {
         setSupportActionBar(toolbar)
         window?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)

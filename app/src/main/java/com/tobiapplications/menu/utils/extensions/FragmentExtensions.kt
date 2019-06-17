@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.tobiapplications.menu.R
+import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import timber.log.Timber
 
@@ -105,10 +106,10 @@ fun BaseFragment.getColor(res: Int) : Int {
 }
 
 fun BaseFragment.addFragment(fragment: BaseFragment) {
-    fragmentManager?.beginTransaction()?.add(R.id.fragment_container, fragment)?.commit()
+    fragmentManager?.beginTransaction()?.add(MainActivity.FRAGMEND_CONTAINER_ID, fragment)?.commit()
 }
 
-fun BaseFragment.replaceFragment(fragment: BaseFragment, container: Int = R.id.fragment_container, addToStack: Boolean = true) {
+fun BaseFragment.replaceFragment(fragment: BaseFragment, container: Int = MainActivity.FRAGMEND_CONTAINER_ID, addToStack: Boolean = true) {
     fragmentManager?.beginTransaction()?.apply {
         replace(container, fragment)
         if (addToStack) {

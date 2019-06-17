@@ -22,8 +22,8 @@ class LoginViewModel @Inject constructor(private val validateInputUseCase: Valid
                                          private val authenticationHelper: AuthenticationHelper,
                                          private val safeFireStoreUserUseCase: SafeFireStoreUserUseCase) : ViewModel() {
 
-    private val validationResult = MutableLiveData<Result<LoginDataState>>()
-    val validation : LiveData<LoginDataState?>
+    private val validationResult = MutableLiveData<Result<LoginValidationState>>()
+    val validation : LiveData<LoginValidationState?>
     val loading = SingleLiveEvent<Boolean>()
     private val loginTaskResult : MediatorLiveData<Result<AuthenticationResponse>>
     val loginResult : LiveData<AuthenticationResponse?>
@@ -32,7 +32,7 @@ class LoginViewModel @Inject constructor(private val validateInputUseCase: Valid
 
     init {
         validation = validationResult.map {
-            (it as? Result.Success<LoginDataState>)?.data
+            (it as? Result.Success<LoginValidationState>)?.data
         }
 
         loginTaskResult = signInUseCase.observe()
@@ -56,7 +56,7 @@ class LoginViewModel @Inject constructor(private val validateInputUseCase: Valid
     }
 
     fun login(email: String, password: String) {
-        val loginResult = ((validateInputUseCase.executeNow(LoginData(email, password))) as? Result.Success<LoginDataState>)?.data
+        val loginResult = ((validateInputUseCase.executeNow(LoginData(email, password))) as? Result.Success<LoginValidationState>)?.data
         if (loginValid(loginResult)) {
             loading.value = true
             signInUseCase.execute(LoginData(email, password))
@@ -65,7 +65,7 @@ class LoginViewModel @Inject constructor(private val validateInputUseCase: Valid
         }
     }
 
-    private fun loginValid(loginResult: LoginDataState?): Boolean {
+    private fun loginValid(loginResult: LoginValidationState?): Boolean {
         return loginResult != null && loginResult.emailError == null && loginResult.passwordError == null
     }
 

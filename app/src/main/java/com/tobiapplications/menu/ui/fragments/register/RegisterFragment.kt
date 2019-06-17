@@ -5,7 +5,7 @@ import android.view.WindowManager
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.*
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.authentication.LoginDataState
+import com.tobiapplications.menu.model.authentication.LoginValidationState
 import com.tobiapplications.menu.model.authentication.AuthenticationResponse
 import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
@@ -100,7 +100,7 @@ class RegisterFragment : BaseFragment(), LoadingStateDialogHolder {
         dismissDialogDelayed()
     }
 
-    private fun validateLoginData(loginState: LoginDataState?) {
+    private fun validateLoginData(loginState: LoginValidationState?) {
         if (loginState != null) {
             emailAutoComplete.setErrorText(loginState.emailError)
             password.setErrorText(loginState.passwordError)

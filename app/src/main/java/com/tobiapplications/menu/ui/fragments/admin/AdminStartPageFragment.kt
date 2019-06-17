@@ -24,7 +24,7 @@ class AdminStartPageFragment : BaseFragment() {
         (activity as? MainActivity)?.showToolbar(true)
 
         manageDrinks.onClick { replaceFragment(ManageDrinksFragment.newInstance()) }
-        manageShisha.onClick { replaceFragment(ManageShishaFragment.newInstance()) }
+        manageShisha.onClick { replaceFragment(ManageTobaccoFragment.newInstance()) }
     }
 
     override fun getToolbarTitle(): String {
