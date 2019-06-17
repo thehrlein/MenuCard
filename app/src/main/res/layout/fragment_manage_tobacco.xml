@@ -27,11 +27,11 @@
         android:visibility="visible"/>
 
     <TextView
-        android:id="@+id/errorNoDrinks"
+        android:id="@+id/errorNoTobacco"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/admin_error_no_drinks"
+        android:text="@string/admin_error_no_tobacco"
         android:visibility="gone"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

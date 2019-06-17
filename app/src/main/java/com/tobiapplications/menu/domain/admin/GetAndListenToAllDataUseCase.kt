@@ -1,8 +1,11 @@
 package com.tobiapplications.menu.domain.admin
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.tobiapplications.menu.model.admin.BuyableItem
 import com.tobiapplications.menu.model.admin.Drink
+import com.tobiapplications.menu.model.admin.GetManageDataModel
 import com.tobiapplications.menu.utils.general.Constants
+import com.tobiapplications.menu.utils.general.DisplayableItem
 import com.tobiapplications.menu.utils.mvvm.MediatorUseCase
 import com.tobiapplications.menu.utils.mvvm.Result
 import javax.inject.Inject
@@ -10,19 +13,19 @@ import javax.inject.Inject
 /**
  *  Created by tobiashehrlein on 2019-06-16
  */
-class GetAndListenToAllDrinksUseCase @Inject constructor(private val fireStore: FirebaseFirestore) : MediatorUseCase<Unit, List<Drink>>() {
+class GetAndListenToAllDataUseCase @Inject constructor(private val fireStore: FirebaseFirestore) : MediatorUseCase<GetManageDataModel, List<BuyableItem>>() {
 
-    override fun execute(parameters: Unit) {
-        fireStore.collection(Constants.DRINK_COLLECTION)
+    override fun execute(parameters: GetManageDataModel) {
+        fireStore.collection(parameters.collection)
                 .addSnapshotListener { snapShot, exception ->
                     if (exception != null) {
                         onFailure()
                     }
 
-                    val drinks = mutableListOf<Drink>()
+                    val drinks = mutableListOf<BuyableItem>()
                     snapShot?.let {
                         for (doc in it) {
-                            val drink = doc.toObject(Drink::class.java)
+                            val drink : BuyableItem = doc.toObject(parameters.clazz)
                             drink.id = doc.id
                             drinks.add(drink)
                         }
@@ -32,7 +35,7 @@ class GetAndListenToAllDrinksUseCase @Inject constructor(private val fireStore: 
                 }
     }
 
-    private fun onSuccess(drinks: List<Drink>) {
+    private fun onSuccess(drinks: List<BuyableItem>) {
         result.postValue(Result.Success(drinks))
     }
 

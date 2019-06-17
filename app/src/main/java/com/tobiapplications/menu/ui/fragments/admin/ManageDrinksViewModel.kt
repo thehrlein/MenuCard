@@ -2,46 +2,46 @@ package com.tobiapplications.menu.ui.fragments.admin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.tobiapplications.menu.domain.admin.AddDrinkToFireStoreUseCase
-import com.tobiapplications.menu.domain.admin.DeleteDrinkFromFireStoreUseCase
-import com.tobiapplications.menu.domain.admin.GetAndListenToAllDrinksUseCase
+import com.tobiapplications.menu.domain.admin.AddToFireStoreUseCase
+import com.tobiapplications.menu.domain.admin.DeleteFromFireStoreUseCase
+import com.tobiapplications.menu.domain.admin.GetAndListenToAllDataUseCase
+import com.tobiapplications.menu.model.admin.AddToFireStoreModel
+import com.tobiapplications.menu.model.admin.DeleteDataModel
 import com.tobiapplications.menu.model.admin.Drink
+import com.tobiapplications.menu.model.admin.GetManageDataModel
 import com.tobiapplications.menu.utils.extensions.map
 import com.tobiapplications.menu.utils.extensions.orFalse
+import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.mvvm.Result
 import javax.inject.Inject
 
 /**
  *  Created by tobiashehrlein on 2019-06-16
  */
-class ManageDrinksViewModel @Inject constructor(getAndListenToAllDrinksUseCase: GetAndListenToAllDrinksUseCase,
-                                                private val addDrinkToFireStoreUseCase: AddDrinkToFireStoreUseCase,
-                                                private val deleteDrinkFromFireStoreUseCase: DeleteDrinkFromFireStoreUseCase) : ViewModel() {
+class ManageDrinksViewModel @Inject constructor(getAndListenToAllDataUseCase: GetAndListenToAllDataUseCase,
+                                                private val addToFireStoreUseCase: AddToFireStoreUseCase,
+                                                private val deleteFromFireStoreUseCase: DeleteFromFireStoreUseCase) : ViewModel() {
 
     val drinks : LiveData<List<Drink>?>
     val addDrinkResult : LiveData<Boolean>
 
     init {
-        drinks = getAndListenToAllDrinksUseCase.observe().map {
+        drinks = getAndListenToAllDataUseCase.observe().map {
             (it as? Result.Success<List<Drink>>)?.data
         }
 
-        addDrinkResult = addDrinkToFireStoreUseCase.observe().map {
+        addDrinkResult = addToFireStoreUseCase.observe().map {
             (it as? Result.Success<Boolean>)?.data.orFalse()
         }
 
-        getAndListenToAllDrinksUseCase.execute(Unit)
+        getAndListenToAllDataUseCase.execute(GetManageDataModel(Constants.DRINK_COLLECTION, Drink::class.java))
     }
 
     fun addNewDrink(drink: Drink) {
-        addDrinkToFireStoreUseCase.execute(drink)
+        addToFireStoreUseCase.execute(AddToFireStoreModel(Constants.DRINK_COLLECTION, drink))
     }
 
     fun deleteDrink(drink: Drink?) {
-        if (drink == null) {
-            return
-        }
-
-        deleteDrinkFromFireStoreUseCase.execute(drink)
+        drink?.let { deleteFromFireStoreUseCase.execute(DeleteDataModel(Constants.DRINK_COLLECTION, it.id.orEmpty())) }
     }
 }

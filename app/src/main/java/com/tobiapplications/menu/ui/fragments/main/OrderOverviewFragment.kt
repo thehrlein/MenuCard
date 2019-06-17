@@ -116,7 +116,7 @@ class OrderOverviewFragment : BaseFragment() {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.overview_delete_order))
             .setCancelable(false)
-            .setPositiveButton(R.string.overview_delete_delete) { _, _ ->  deleteOrder()}
+            .setPositiveButton(R.string.general_delete) { _, _ ->  deleteOrder()}
             .setNegativeButton(R.string.general_cancel, null)
             .show()
     }

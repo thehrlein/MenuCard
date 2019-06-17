@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.ui.viewhandler.delegates
+package com.tobiapplications.menu.ui.viewhandler
 
 import com.tobiapplications.menu.ui.viewhandler.delegates.admin.AdminDrinkDelegate
 import com.tobiapplications.menu.utils.general.BaseRecyclerViewAdapter

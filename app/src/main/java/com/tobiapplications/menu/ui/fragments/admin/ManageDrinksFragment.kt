@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.admin.Drink
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
-import com.tobiapplications.menu.ui.viewhandler.delegates.ManageDrinksAdapter
+import com.tobiapplications.menu.ui.viewhandler.ManageDrinksAdapter
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.general.SwipeDeleteCallback
@@ -69,11 +69,12 @@ class ManageDrinksFragment : BaseFragment(), SwipeDeleteCallbackHolder {
         if (it.isNullOrEmpty()) {
             errorNoDrinks.show()
         } else {
+            errorNoDrinks.setGone()
             manageDrinksAdapter?.setItems(it)
             recyclerView.show()
-            fabAdd.show()
         }
 
+        fabAdd.show()
         progress.hide()
     }
 
@@ -84,7 +85,7 @@ class ManageDrinksFragment : BaseFragment(), SwipeDeleteCallbackHolder {
                 .setView(view)
                 .setCancelable(false)
                 .setPositiveButton(R.string.general_add, null)
-                .setNeutralButton(R.string.admin_add_drink_clear_input, null)
+                .setNeutralButton(R.string.general_delete, null)
                 .setNegativeButton(R.string.general_cancel, null)
                 .create()
         addDrinkDialog?.show()
