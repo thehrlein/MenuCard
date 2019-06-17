@@ -69,7 +69,8 @@ class LoadingScreenFragment : BaseFragment() {
 
     // TODO Change back to MainFragment
     private fun openMenu() {
-        replaceFragment(AdminStartPageFragment.newInstance(), addToStack = false)
+        replaceFragment(MainFragment.newInstance(), addToStack = false)
+//        replaceFragment(AdminStartPageFragment.newInstance(), addToStack = false)
     }
 
     private fun startAnimation() {

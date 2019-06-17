@@ -2,6 +2,7 @@ package com.tobiapplications.menu.ui.activitys
 
 import android.view.WindowManager
 import androidx.annotation.MenuRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import com.tobiapplications.menu.R
@@ -33,7 +34,7 @@ class MainActivity : BaseActivity() {
         viewModel = obtainViewModel()
         viewModel.loginStateChanged.observe(this, Observer {
             if (it.hasLoggedOut) {
-                replaceFragment(MainFragment.newInstance(), addToStack = false)
+                replaceFragment(LoadingScreenFragment.newInstance(), addToStack = false)
             }
         })
 
@@ -73,5 +74,14 @@ class MainActivity : BaseActivity() {
 
     override fun getLayout(): Int {
         return R.layout.activity_main
+    }
+
+    fun showLogOutOrQuitDialog() {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.main_logout_or_quit_dialog_title))
+            .setCancelable(false)
+            .setPositiveButton(R.string.main_logout_or_quit_dialog_logout) { _, _ -> viewModel.signOut() }
+            .setNegativeButton(R.string.main_logout_or_quit_dialog_quit) { _, _ -> finish() }
+            .show()
     }
 }

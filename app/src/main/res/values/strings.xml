@@ -25,8 +25,11 @@
     <string name="menu_main_anonym">Einloggen</string>
 
     <!-- Main -->
-    <string name="main_welcome">Willkommen</string>
+    <string name="main_welcome">Willkommen\nÜber unten stehenden Button können Sie Getränke oder Shisha zu Ihrer Bestellung hinzufügen</string>
     <string name="main_order_overview">Ihre Bestellung</string>
+    <string name="main_logout_or_quit_dialog_title">Möchten Sie sich ausloggen oder die App beenden?</string>
+    <string name="main_logout_or_quit_dialog_logout">Ausloggen</string>
+    <string name="main_logout_or_quit_dialog_quit">App beenden</string>
 
     <!-- AddToOrderFragment -->
 

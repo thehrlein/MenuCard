@@ -12,9 +12,12 @@
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/menu_space_default"
+        android:layout_marginEnd="@dimen/menu_space_default"
         android:layout_gravity="center"
+        android:gravity="center"
         android:text="@string/main_welcome"
-        android:textSize="@dimen/menu_text_size_big"/>
+        android:textSize="@dimen/menu_text_size_default"/>
 
     <fragment
         android:id="@+id/orderLayout"

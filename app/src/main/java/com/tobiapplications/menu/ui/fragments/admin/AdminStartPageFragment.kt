@@ -38,4 +38,8 @@ class AdminStartPageFragment : BaseFragment() {
     override fun getLayout(): Int {
         return R.layout.fragment_admin_start_page
     }
+
+    override fun getBackPressAction(): (() -> Unit)? {
+        return { (activity as? MainActivity)?.showLogOutOrQuitDialog() }
+    }
 }

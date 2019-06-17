@@ -4,6 +4,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.tobiapplications.menu.domain.authentication.SignOutUseCase
 import com.tobiapplications.menu.model.authentication.LoginStateChanged
 import com.tobiapplications.menu.utils.general.CoreService
 import rx.Observer
@@ -13,7 +14,8 @@ import javax.inject.Inject
  * Created by tobias.hehrlein on 04.06.2019.
  */
 class MainActivityViewModel @Inject constructor(firebaseAuth: FirebaseAuth,
-                                                private val coreService: CoreService) : ViewModel() {
+                                                private val coreService: CoreService,
+                                                private val signOutUseCase: SignOutUseCase) : ViewModel() {
 
     val loginStateChanged = MutableLiveData<LoginStateChanged>()
     var title = MutableLiveData<String>()
@@ -88,6 +90,10 @@ class MainActivityViewModel @Inject constructor(firebaseAuth: FirebaseAuth,
 
             override fun onCompleted() {}
         })
+    }
+
+    fun signOut() {
+        signOutUseCase.invoke(Unit)
     }
 }
 
