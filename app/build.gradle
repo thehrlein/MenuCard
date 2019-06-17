@@ -95,6 +95,9 @@ dependencies {
     implementation "com.google.firebase:firebase-auth:$firebase"
     implementation "com.google.firebase:firebase-firestore:$firestore"
 
+    // Stepper Touch
+    implementation "com.github.DanielMartinus:Stepper-Touch:$stepper_touch"
+
     // Testing
     testImplementation "junit:junit:$junit"
     androidTestImplementation "androidx.test:runner:$test_runner"

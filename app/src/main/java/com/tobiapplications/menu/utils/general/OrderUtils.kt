@@ -12,25 +12,14 @@ object OrderUtils {
 
     private val order = Order()
 
-    fun add(type: OrderType?, list: List<DisplayableItem>?) {
-        if (type == null || list.isNullOrEmpty()) {
-            return
-        }
-
-        when (type) {
-            OrderType.DRINKS -> addDrinks(list)
-            OrderType.SHISHA -> addShishas(list)
-        }
-    }
-
-    private fun addDrinks(list: List<DisplayableItem>) {
+    fun addDrinks(list: List<DisplayableItem>) {
         list.forEach { order ->
             if (order !is OrderDrink) return
             this.order.orderDrinks.firstOrNull { it.name == order.name }?.increaseCount(order.count) ?: this.order.orderDrinks.add(order)
         }
     }
 
-    private fun addShishas(list: List<DisplayableItem>) {
+    fun addShishas(list: List<DisplayableItem>) {
         list.forEach { order ->
             if (order !is Shisha) return
             this.order.shisha.firstOrNull { it.name == order.name }?.increaseCount(order.count) ?: this.order.shisha.add(order)

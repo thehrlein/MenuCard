@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tobiapplications.menu.di.scopes.ViewModelKey
 import com.tobiapplications.menu.ui.activitys.MainActivityViewModel
-import com.tobiapplications.menu.ui.fragments.addtoorder.AddToOrderViewModel
+import com.tobiapplications.menu.ui.fragments.addtoorder.AddDrinksViewModel
+import com.tobiapplications.menu.ui.fragments.addtoorder.AddShishaViewModel
 import com.tobiapplications.menu.ui.fragments.admin.ManageDrinksViewModel
 import com.tobiapplications.menu.ui.fragments.admin.ManageTobaccoViewModel
 import com.tobiapplications.menu.ui.fragments.loadingscreen.LoadingScreenViewModel
@@ -77,8 +78,13 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(AddToOrderViewModel::class)
-    abstract fun bindAddToOrderViewModel(viewModel: AddToOrderViewModel) : ViewModel
+    @ViewModelKey(AddDrinksViewModel::class)
+    abstract fun bindAddDrinksViewModel(viewModel: AddDrinksViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddShishaViewModel::class)
+    abstract fun bindAddShishaViewModel(viewModel: AddShishaViewModel) : ViewModel
 
 }
 

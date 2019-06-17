@@ -9,7 +9,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.ui.fragments.FragmentComponent
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
-import com.tobiapplications.menu.ui.fragments.addtoorder.AddToOrderFragment
+import com.tobiapplications.menu.ui.fragments.addtoorder.AddDrinksFragment
+import com.tobiapplications.menu.ui.fragments.addtoorder.AddShishaFragment
 import com.tobiapplications.menu.ui.fragments.login.LoginFragment
 import com.tobiapplications.menu.utils.enums.OrderType
 import com.tobiapplications.menu.utils.extensions.*
@@ -40,8 +41,8 @@ class NewOrderFragment : BaseFragment() {
 
     private fun initViews() {
         fab_menu.setClosedOnTouchOutside(true)
-        fab_drinks.onClick { replaceFragment(AddToOrderFragment.newInstance(OrderType.DRINKS)) }
-        fab_shisha.onClick { replaceFragment(AddToOrderFragment.newInstance(OrderType.SHISHA)) }
+        fab_drinks.onClick { replaceFragment(AddDrinksFragment.newInstance()) }
+        fab_shisha.onClick { replaceFragment(AddShishaFragment.newInstance()) }
     }
 
     private fun initViewModel() {

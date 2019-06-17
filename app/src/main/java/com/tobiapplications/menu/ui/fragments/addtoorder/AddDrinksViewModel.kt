@@ -13,8 +13,7 @@ import javax.inject.Inject
 /**
  * Created by tobias.hehrlein on 2019-06-17.
  */
-class AddToOrderViewModel @Inject constructor(private val getAllDrinksUseCase: GetAllDrinksUseCase,
-                                              private val getAllTobaccosUseCase: GetAllTobaccosUseCase) : ViewModel() {
+class AddDrinksViewModel @Inject constructor(private val getAllDrinksUseCase: GetAllDrinksUseCase) : ViewModel() {
 
     val drinks : LiveData<List<Drink>?>
 
@@ -23,11 +22,6 @@ class AddToOrderViewModel @Inject constructor(private val getAllDrinksUseCase: G
             (it as? Result.Success<List<Drink>>)?.data
         }
 
-    }
-
-    fun getData(orderType: OrderType?) {
-        if (orderType == OrderType.DRINKS) {
-            getAllDrinksUseCase.execute(false)
-        }
+        getAllDrinksUseCase.execute(false)
     }
 }

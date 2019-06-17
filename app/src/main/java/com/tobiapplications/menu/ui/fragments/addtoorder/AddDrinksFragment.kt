@@ -1,6 +1,5 @@
 package com.tobiapplications.menu.ui.fragments.addtoorder
 
-import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
@@ -8,32 +7,26 @@ import com.tobiapplications.menu.model.admin.Drink
 import com.tobiapplications.menu.model.order.OrderItem
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.viewhandler.OrderAdapter
-import com.tobiapplications.menu.utils.general.Constants
-import com.tobiapplications.menu.utils.enums.OrderType
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.OrderUtils
-import kotlinx.android.synthetic.main.fragment_order.*
+import kotlinx.android.synthetic.main.fragment_add_drinks.*
 
 /**
  *  Created by tobiashehrlein on 2019-05-23
  */
-class AddToOrderFragment : BaseFragment() {
+class AddDrinksFragment : BaseFragment() {
 
-    private lateinit var viewModel: AddToOrderViewModel
+    private lateinit var viewModel: AddDrinksViewModel
     private var orderAdapter : OrderAdapter? = null
     private var recyclerLayoutManager: LinearLayoutManager? = null
-    private var orderType : OrderType? = null
 
     companion object {
-        fun newInstance(type: OrderType) : AddToOrderFragment {
-            val bundle = Bundle().apply { putSerializable(Constants.ORDER_TYPE, type) }
-            return AddToOrderFragment().apply { arguments = bundle }
+        fun newInstance() : AddDrinksFragment {
+            return AddDrinksFragment()
         }
     }
 
     override fun init() {
-        orderType = arguments?.getSerializable(Constants.ORDER_TYPE) as OrderType
-
         initRecyclerViewAndAdapter()
         initViews()
         initViewModel()
@@ -50,7 +43,7 @@ class AddToOrderFragment : BaseFragment() {
 
     private fun initViews() {
         add.onClick {
-            OrderUtils.add(orderType, orderAdapter?.itemList?.filter { (it as? OrderItem)?.count.orDefault() > 0 })
+            OrderUtils.addDrinks(orderAdapter?.itemList?.filter { (it as? OrderItem)?.count.orDefault() > 0 }.orEmpty())
             activity?.onBackPressed()
         }
     }
@@ -58,7 +51,6 @@ class AddToOrderFragment : BaseFragment() {
     private fun initViewModel() {
         viewModel = obtainViewModel()
         viewModel.drinks.observe(this, Observer { setDrinks(it) })
-        viewModel.getData(orderType)
     }
 
     private fun setDrinks(it: List<Drink>?) {
@@ -81,6 +73,6 @@ class AddToOrderFragment : BaseFragment() {
     }
 
     override fun getLayout(): Int {
-        return R.layout.fragment_order
+        return R.layout.fragment_add_drinks
     }
 }
