@@ -7,10 +7,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tobiapplications.menu.R
+import com.tobiapplications.menu.model.admin.Drink
+import com.tobiapplications.menu.model.order.OrderableItem
+import com.tobiapplications.menu.model.order.Shisha
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.viewhandler.OrderOverviewAdapter
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
+import com.tobiapplications.menu.utils.general.DisplayableItem
 import com.tobiapplications.menu.utils.general.MenuUtils
 import com.tobiapplications.menu.utils.general.OrderUtils
 import kotlinx.android.synthetic.main.fragment_order_overview.*
@@ -25,7 +29,6 @@ class OrderOverviewFragment : BaseFragment() {
 
     private lateinit var viewModel: OrderOverviewViewModel
     private var bottomSheetBehavior: BottomSheetBehavior<View>? = null
-    private var recyclerLayoutManager: LinearLayoutManager? = null
     private var orderOverviewAdapter: OrderOverviewAdapter? = null
 
     override fun init() {
@@ -42,10 +45,9 @@ class OrderOverviewFragment : BaseFragment() {
     }
 
     private fun initRecyclerView() {
-        recyclerLayoutManager = LinearLayoutManager(context)
         orderOverviewAdapter = OrderOverviewAdapter()
         recyclerView.apply {
-            layoutManager = recyclerLayoutManager
+            layoutManager = LinearLayoutManager(context)
             adapter = orderOverviewAdapter
         }
     }
@@ -74,7 +76,7 @@ class OrderOverviewFragment : BaseFragment() {
 
     private fun setOrder() {
         val order = OrderUtils.getOrder()
-        if (order.orderDrinks.isEmpty() && order.shisha.isEmpty()) {
+        if (order.drinks.isEmpty() && order.shisha.isEmpty()) {
             return
         }
 
@@ -82,10 +84,13 @@ class OrderOverviewFragment : BaseFragment() {
             bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }, 200)
 
-        val list = order.orderDrinks.plus(order.shisha)
+        val list : List<DisplayableItem> = order.drinks.plus(order.shisha)
         orderOverviewAdapter?.setItems(list)
 
-        bottomLayout.totalPrice.text = list.sumByDouble { it.price * it.count }.formatEuro()
+        val sumDrinks = order.drinks.sumByDouble { it.price * it.count }
+        val sumShisha = order.shisha.sumByDouble { it.price * it.count }
+
+        bottomLayout.totalPrice.text = (sumDrinks + sumShisha).formatEuro()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

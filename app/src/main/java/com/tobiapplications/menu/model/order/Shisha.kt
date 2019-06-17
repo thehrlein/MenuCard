@@ -1,7 +1,18 @@
 package com.tobiapplications.menu.model.order
 
+import com.tobiapplications.menu.model.admin.Tobacco
+import com.tobiapplications.menu.utils.general.DisplayableItem
+
 
 /**
  *  Created by tobiashehrlein on 2019-05-23
  */
-class Shisha(name: String, price: Double, count: Int = 0) : OrderItem(name, price, count)
+data class Shisha(val name: String,
+                  val tabaccos: List<Tobacco> = emptyList(),
+                  val price: Double = 6.90,
+                  var count: Int = 0) : OrderableItem, DisplayableItem {
+
+    fun increaseCount(count: Int) {
+        this.count += count
+    }
+}

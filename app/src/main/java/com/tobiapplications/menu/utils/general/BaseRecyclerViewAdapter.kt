@@ -2,15 +2,20 @@ package com.tobiapplications.menu.utils.general
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 
 /**
  * Created by tobias.hehrlein on 07.02.2019.
  */
-open class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+open class BaseRecyclerViewAdapter(delegates: List<AdapterDelegate<List<DisplayableItem>>> = emptyList()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var itemList : MutableList<DisplayableItem> = ArrayList()
     var delegatesManager: AdapterDelegatesManager<List<DisplayableItem>> = AdapterDelegatesManager()
+
+    init {
+        delegates.forEach { delegatesManager.addDelegate(it) }
+    }
 
     /** ViewHolder Methods **/
 

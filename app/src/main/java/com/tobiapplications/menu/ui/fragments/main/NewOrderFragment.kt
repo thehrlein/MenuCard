@@ -12,7 +12,6 @@ import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.fragments.addtoorder.AddDrinksFragment
 import com.tobiapplications.menu.ui.fragments.addtoorder.AddShishaFragment
 import com.tobiapplications.menu.ui.fragments.login.LoginFragment
-import com.tobiapplications.menu.utils.enums.OrderType
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.general.OrderUtils
@@ -71,7 +70,7 @@ class NewOrderFragment : BaseFragment() {
         bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
 
         val order = OrderUtils.getOrder()
-        if (order.orderDrinks.isEmpty() && order.shisha.isEmpty()) {
+        if (order.drinks.isEmpty() && order.shisha.isEmpty()) {
             return
         }
 

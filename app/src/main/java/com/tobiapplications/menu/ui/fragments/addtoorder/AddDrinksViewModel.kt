@@ -13,7 +13,7 @@ import javax.inject.Inject
 /**
  * Created by tobias.hehrlein on 2019-06-17.
  */
-class AddDrinksViewModel @Inject constructor(private val getAllDrinksUseCase: GetAllDrinksUseCase) : ViewModel() {
+class AddDrinksViewModel @Inject constructor(getAllDrinksUseCase: GetAllDrinksUseCase) : ViewModel() {
 
     val drinks : LiveData<List<Drink>?>
 

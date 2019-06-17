@@ -33,7 +33,12 @@
     <string name="main_logout_or_quit_dialog_quit">App beenden</string>
 
     <!-- AddDrinksFragment -->
-    <string name="add_to_order_error_no_drinks">Entschuldigung - Es ist ein Fehler aufgetreten\n\nKeine Getränke verfügbar - bitte kontaktieren Sie den Administrator</string>
+    <string name="add_drinks_error_no_drinks">Entschuldigung - Es ist ein Fehler aufgetreten\n\nKeine Getränke verfügbar - bitte kontaktieren Sie den Administrator</string>
+
+    <!-- AddShishaFragment -->
+    <string name="add_shisha_stepper_explanation">Drücken Sie auf + / - oder swipen Sie in die entsprechende Richtung um die Anzahl Shishas zu verändern</string>
+    <string name="add_shisha_base_shisha_name">%1$d. Shisha</string>
+    <string name="add_shisha_tobaccos_placeholder">(%1$s)</string>
 
     <!-- OrderOverviewFragment -->
     <string name="overview_position">Pos.</string>

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.order.OrderItem
+import com.tobiapplications.menu.model.order.OrderableItem
 import com.tobiapplications.menu.ui.viewholder.OrderViewHolder
 import com.tobiapplications.menu.utils.general.DisplayableItem
 
@@ -15,7 +15,7 @@ import com.tobiapplications.menu.utils.general.DisplayableItem
 class OrderOverviewDelegate : AdapterDelegate<List<DisplayableItem>>() {
 
     override fun isForViewType(items: List<DisplayableItem>, position: Int): Boolean {
-        return items[position] is OrderItem
+        return items[position] is OrderableItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -24,7 +24,7 @@ class OrderOverviewDelegate : AdapterDelegate<List<DisplayableItem>>() {
 
     override fun onBindViewHolder(items: List<DisplayableItem>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {
         val orderHolder = holder as? OrderViewHolder
-        val item = items[position] as? OrderItem
+        val item = items[position] as? OrderableItem
 
         if (item != null) {
             orderHolder?.setOrder(item)

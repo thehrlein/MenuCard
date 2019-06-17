@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:gravity="center"
-        android:text="@string/add_to_order_error_no_drinks"
+        android:text="@string/add_drinks_error_no_drinks"
         android:visibility="gone"/>
 
     <com.tobiapplications.menu.ui.views.PrimaryButton

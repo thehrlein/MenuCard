@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.view_alertdialog_add_tobacco.view.*
 class ManageTobaccoFragment : BaseFragment(), SwipeDeleteCallbackHolder {
 
     private lateinit var viewModel: ManageTobaccoViewModel
-    private var recyclerLayoutManager: LinearLayoutManager? = null
     private var manageTobaccoAdapter: ManageTobaccoAdapter? = null
     private var addTobaccoDialog : AlertDialog? = null
 
@@ -46,13 +45,12 @@ class ManageTobaccoFragment : BaseFragment(), SwipeDeleteCallbackHolder {
     }
 
     private fun initRecyclerView() {
-        recyclerLayoutManager = LinearLayoutManager(context)
         manageTobaccoAdapter = ManageTobaccoAdapter()
         val itemTouchHelper = ItemTouchHelper(SwipeDeleteCallback(this, getDrawable(R.drawable.ic_delete_white)!!, ColorDrawable(getColor(R.color.colorRed))))
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
         recyclerView.apply {
-            layoutManager = recyclerLayoutManager
+            layoutManager = LinearLayoutManager(context)
             adapter = manageTobaccoAdapter
         }
     }

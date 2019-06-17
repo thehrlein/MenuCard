@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.fragment_previous_orders.*
  */
 class PreviousOrdersFragment : BaseFragment() {
 
-    private var recyclerLayoutManager: LinearLayoutManager? = null
     private var previousOrdersAdapter: PreviousOrdersAdapter? = null
 
     companion object {
@@ -32,10 +31,9 @@ class PreviousOrdersFragment : BaseFragment() {
     }
 
     private fun initRecyclerView() {
-        recyclerLayoutManager = LinearLayoutManager(context)
         previousOrdersAdapter = PreviousOrdersAdapter()
         recyclerView.apply {
-            layoutManager = recyclerLayoutManager
+            layoutManager = LinearLayoutManager(context)
             adapter = previousOrdersAdapter
         }
     }

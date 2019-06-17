@@ -22,31 +22,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    tools:text="Cherry"/>
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    tools:text="3,90 €"/>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/name"
-                android:layout_width="0dp"
-                android:layout_weight="2"
+                android:id="@+id/tobaccos"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Cherry"/>
-
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                tools:text="3,90 €"/>
-
-            <com.tobiapplications.menu.ui.views.OrderControl
-                android:id="@+id/orderControl"
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="wrap_content" />
+                tools:text="(Adalya Kirsch, Adalya Zitrone, Al Fakher Himbeere)"/>
 
         </LinearLayout>
-
 
     </androidx.cardview.widget.CardView>
 

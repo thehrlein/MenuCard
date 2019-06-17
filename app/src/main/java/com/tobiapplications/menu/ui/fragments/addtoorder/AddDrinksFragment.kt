@@ -4,10 +4,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.admin.Drink
-import com.tobiapplications.menu.model.order.OrderItem
+import com.tobiapplications.menu.model.order.OrderableItem
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
-import com.tobiapplications.menu.ui.viewhandler.OrderAdapter
+import com.tobiapplications.menu.ui.viewhandler.delegates.order.DrinkDelegate
 import com.tobiapplications.menu.utils.extensions.*
+import com.tobiapplications.menu.utils.general.BaseRecyclerViewAdapter
 import com.tobiapplications.menu.utils.general.OrderUtils
 import kotlinx.android.synthetic.main.fragment_add_drinks.*
 
@@ -17,8 +18,7 @@ import kotlinx.android.synthetic.main.fragment_add_drinks.*
 class AddDrinksFragment : BaseFragment() {
 
     private lateinit var viewModel: AddDrinksViewModel
-    private var orderAdapter : OrderAdapter? = null
-    private var recyclerLayoutManager: LinearLayoutManager? = null
+    private var drinksAdapter : BaseRecyclerViewAdapter? = null
 
     companion object {
         fun newInstance() : AddDrinksFragment {
@@ -33,17 +33,16 @@ class AddDrinksFragment : BaseFragment() {
     }
 
     private fun initRecyclerViewAndAdapter() {
-        recyclerLayoutManager = LinearLayoutManager(context)
-        orderAdapter = OrderAdapter()
+        drinksAdapter = BaseRecyclerViewAdapter(listOf(DrinkDelegate()))
         recyclerView.apply {
-            layoutManager = recyclerLayoutManager
-            adapter = orderAdapter
+            layoutManager = LinearLayoutManager(context)
+            adapter = drinksAdapter
         }
     }
 
     private fun initViews() {
         add.onClick {
-            OrderUtils.addDrinks(orderAdapter?.itemList?.filter { (it as? OrderItem)?.count.orDefault() > 0 }.orEmpty())
+            OrderUtils.addDrinks(drinksAdapter?.itemList?.filter { (it as? Drink)?.count.orDefault() > 0 }.orEmpty())
             activity?.onBackPressed()
         }
     }
@@ -57,7 +56,7 @@ class AddDrinksFragment : BaseFragment() {
         if (it.isNullOrEmpty()) {
             errorNoDrinks.show()
         } else {
-            orderAdapter?.setItems(it)
+            drinksAdapter?.setItems(it)
             recyclerView.show()
             add.show()
         }

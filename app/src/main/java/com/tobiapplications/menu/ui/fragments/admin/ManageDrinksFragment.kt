@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.view_alertdialog_add_drink.view.*
 class ManageDrinksFragment : BaseFragment(), SwipeDeleteCallbackHolder {
 
     private lateinit var viewModel: ManageDrinksViewModel
-    private var recyclerLayoutManager: LinearLayoutManager? = null
     private var manageDrinksAdapter: ManageDrinksAdapter? = null
     private var addDrinkDialog : AlertDialog? = null
 
@@ -46,13 +45,12 @@ class ManageDrinksFragment : BaseFragment(), SwipeDeleteCallbackHolder {
     }
 
     private fun initRecyclerView() {
-        recyclerLayoutManager = LinearLayoutManager(context)
         manageDrinksAdapter = ManageDrinksAdapter()
         val itemTouchHelper = ItemTouchHelper(SwipeDeleteCallback(this, getDrawable(R.drawable.ic_delete_white)!!, ColorDrawable(getColor(R.color.colorRed))))
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
         recyclerView.apply {
-            layoutManager = recyclerLayoutManager
+            layoutManager = LinearLayoutManager(context)
             adapter = manageDrinksAdapter
         }
     }
