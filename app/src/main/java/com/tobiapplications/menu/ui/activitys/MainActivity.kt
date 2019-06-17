@@ -14,6 +14,7 @@ import com.tobiapplications.menu.ui.fragments.main.MainFragment
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.replaceFragment
 import com.tobiapplications.menu.utils.extensions.setVisible
+import com.tobiapplications.menu.utils.general.OrderUtils
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -34,6 +35,7 @@ class MainActivity : BaseActivity() {
         viewModel = obtainViewModel()
         viewModel.loginStateChanged.observe(this, Observer {
             if (it.hasLoggedOut) {
+                OrderUtils.clearOrder()
                 replaceFragment(LoadingScreenFragment.newInstance(), addToStack = false)
             }
         })

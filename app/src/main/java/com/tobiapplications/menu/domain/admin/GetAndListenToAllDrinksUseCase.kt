@@ -10,10 +10,10 @@ import javax.inject.Inject
 /**
  *  Created by tobiashehrlein on 2019-06-16
  */
-class GetAllDrinksUseCase @Inject constructor(private val firestore: FirebaseFirestore) : MediatorUseCase<Unit, List<Drink>>() {
+class GetAndListenToAllDrinksUseCase @Inject constructor(private val fireStore: FirebaseFirestore) : MediatorUseCase<Unit, List<Drink>>() {
 
     override fun execute(parameters: Unit) {
-        firestore.collection(Constants.DRINK_COLLECTION)
+        fireStore.collection(Constants.DRINK_COLLECTION)
                 .addSnapshotListener { snapShot, exception ->
                     if (exception != null) {
                         onFailure()

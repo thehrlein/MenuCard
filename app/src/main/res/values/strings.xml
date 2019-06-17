@@ -32,6 +32,7 @@
     <string name="main_logout_or_quit_dialog_quit">App beenden</string>
 
     <!-- AddToOrderFragment -->
+    <string name="add_to_order_error_no_drinks">Entschuldigung - Es ist ein Fehler aufgetreten\n\nKeine Getränke verfügbar - bitte kontaktieren Sie den Administrator</string>
 
     <!-- OrderOverviewFragment -->
     <string name="overview_position">Pos.</string>

@@ -15,12 +15,33 @@
         android:overScrollMode="never"
         android:paddingBottom="@dimen/menu_space_small"
         android:scrollbars="none"
-        android:visibility="visible"
-        android:layout_marginBottom="50dp"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/menu_space_mini"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/add"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/errorNoDrinks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+        android:text="@string/add_to_order_error_no_drinks"
+        android:visibility="gone"/>
 
     <com.tobiapplications.menu.ui.views.PrimaryButton
         android:id="@+id/add"
@@ -30,6 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         app:text="@string/general_add"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
