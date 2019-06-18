@@ -1,5 +1,6 @@
 package com.tobiapplications.menu.ui.fragments.main
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -7,8 +8,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tobiapplications.menu.R
+import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.viewhandler.adapter.OrderOverviewAdapter
+import com.tobiapplications.menu.ui.views.general.LoadingStateDialog
+import com.tobiapplications.menu.ui.views.general.LoadingStateDialogHolder
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.general.DisplayableItem
@@ -18,6 +22,8 @@ import kotlinx.android.synthetic.main.fragment_order_overview.*
 import kotlinx.android.synthetic.main.fragment_order_overview.orderLayout
 import kotlinx.android.synthetic.main.view_order_item_bottom.*
 import kotlinx.android.synthetic.main.view_order_item_bottom.view.*
+import nl.dionsegijn.konfetti.models.Shape
+import nl.dionsegijn.konfetti.models.Size
 
 /**
  *  Created by tobiashehrlein on 2019-05-24
@@ -36,14 +42,11 @@ class OrderOverviewFragment : BaseFragment() {
 
     private fun initViewModel() {
         viewModel = obtainViewModel()
-        viewModel.headerAlpha.observe(this, Observer {
-            collapseArrow.rotation = if (it > 0.3f) 0f else 180f
-        })
+        viewModel.headerAlpha.observe(this, Observer { collapseArrow.rotation = if (it > 0.3f) 0f else 180f })
     }
 
     private fun initRecyclerView() {
-        orderOverviewAdapter =
-            OrderOverviewAdapter()
+        orderOverviewAdapter = OrderOverviewAdapter()
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = orderOverviewAdapter
@@ -70,17 +73,21 @@ class OrderOverviewFragment : BaseFragment() {
         }
 
         setOrder()
+
+        bottomLayout.confirmOrder.onClick {
+            postDelayed( { bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN }, 200)
+            (parentFragment as? NewOrderFragment)?.sendOrder(OrderUtils.getOrder())
+        }
     }
 
     private fun setOrder() {
         val order = OrderUtils.getOrder()
+
         if (order.drinks.isEmpty() && order.shisha.isEmpty()) {
             return
         }
 
-        postDelayed({
-            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-        }, 200)
+        postDelayed({ bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HALF_EXPANDED }, 200)
 
         val list : List<DisplayableItem> = order.drinks.plus(order.shisha)
         orderOverviewAdapter?.setItems(list)
@@ -112,7 +119,6 @@ class OrderOverviewFragment : BaseFragment() {
                 }
             }
         })
-
     }
 
     private fun showDeleteOrderDialog() {
@@ -124,13 +130,10 @@ class OrderOverviewFragment : BaseFragment() {
             .show()
     }
 
-    private fun deleteOrder() {
+    fun deleteOrder() {
         OrderUtils.clearOrder()
         orderOverviewAdapter?.clear()
         totalPrice.text = Constants.EMPTY_STRING
-        postDelayed( {
-            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
-        }, 200)
     }
 
     fun invalidate() {
@@ -139,5 +142,9 @@ class OrderOverviewFragment : BaseFragment() {
 
     override fun getLayout(): Int {
         return R.layout.fragment_order_overview
+    }
+
+    fun openOverview() {
+        postDelayed({ bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HALF_EXPANDED }, 200)
     }
 }

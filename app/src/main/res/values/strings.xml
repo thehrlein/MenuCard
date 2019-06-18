@@ -54,6 +54,8 @@
     <string name="overview_total_price">Gesamtpreis:</string>
     <string name="overview_confirm_order">Bestellung abschicken</string>
     <string name="overview_delete_order">Möchten Sie Ihre Bestellung löschen?</string>
+    <string name="overview_send_order_success">Herzlichen Glückwunsch\nIhre Bestellung wurde erfolgreich gesendet :)</string>
+    <string name="overview_send_order_failed">Ihre Bestellung konnte leider nicht gesendet werden</string>
 
     <!-- Login & Registraion-->
     <string name="login_toolbar_title">Login</string>

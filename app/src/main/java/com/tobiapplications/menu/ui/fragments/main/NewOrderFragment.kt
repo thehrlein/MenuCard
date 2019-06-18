@@ -1,30 +1,38 @@
 package com.tobiapplications.menu.ui.fragments.main
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
+import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tobiapplications.menu.R
+import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.ui.fragments.FragmentComponent
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.fragments.addtoorder.AddDrinksFragment
 import com.tobiapplications.menu.ui.fragments.addtoorder.AddShishaFragment
 import com.tobiapplications.menu.ui.fragments.login.LoginFragment
+import com.tobiapplications.menu.ui.views.general.LoadingStateDialog
+import com.tobiapplications.menu.ui.views.general.LoadingStateDialogHolder
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.general.OrderUtils
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.orderLayout
+import nl.dionsegijn.konfetti.models.Shape
+import nl.dionsegijn.konfetti.models.Size
 
 /**
  *  Created by tobiashehrlein on 2019-05-23
  */
-class NewOrderFragment : BaseFragment() {
+class NewOrderFragment : BaseFragment(), LoadingStateDialogHolder {
 
     private lateinit var viewModel: NewOrderViewModel
     private var bottomSheetBehavior : BottomSheetBehavior<View>? = null
+    private var loadingDialog : LoadingStateDialog? = null
 
     companion object {
         fun newInstance(loggedIn: Boolean): NewOrderFragment {
@@ -46,6 +54,20 @@ class NewOrderFragment : BaseFragment() {
 
     private fun initViewModel() {
         viewModel = obtainViewModel()
+        viewModel.addOrderResult.observe(this, Observer { onSendOrderResult(it) })
+    }
+
+    private fun onSendOrderResult(it: Boolean?) {
+        if (it == true) {
+            makeKonfetti()
+            setDialogSuccessState(getString(R.string.overview_send_order_success))
+            (orderLayout as? OrderOverviewFragment)?.deleteOrder()
+        } else {
+            setDialogFailureState(getString(R.string.overview_send_order_failed))
+            (orderLayout as? OrderOverviewFragment)?.openOverview()
+        }
+
+        dismissDialogDelayed()
     }
 
     private fun onMenuItemClicked(item: MenuItem) : Boolean {
@@ -101,5 +123,32 @@ class NewOrderFragment : BaseFragment() {
         postDelayed( {
             ViewCompat.animate(fab_menu).translationY(pixel).start()
         }, 200)
+    }
+
+    private fun makeKonfetti() {
+        konfetti.build()
+            .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+            .setDirection(0.0, 359.0)
+            .setSpeed(1f, 5f)
+            .setFadeOutEnabled(true)
+            .setTimeToLive(2000L)
+            .addShapes(Shape.RECT, Shape.CIRCLE)
+            .addSizes(Size(12, 5f))
+            .setPosition(-50f, konfetti.width + 50f, -50f, -50f)
+            .streamFor(300, 3000L)
+
+    }
+
+    override fun getLoadingDialog(): LoadingStateDialog {
+        if (loadingDialog == null) {
+            loadingDialog = LoadingStateDialog(requireContext())
+        }
+
+        return loadingDialog!!
+    }
+
+    fun sendOrder(order: Order) {
+        setDialogLoadingState(getString(R.string.general_please_wait))
+        viewModel.sendOrder(order)
     }
 }

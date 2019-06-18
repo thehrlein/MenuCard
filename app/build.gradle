@@ -98,6 +98,9 @@ dependencies {
     // Stepper Touch
     implementation "com.github.DanielMartinus:Stepper-Touch:$stepper_touch"
 
+    // Konfetti
+    implementation "nl.dionsegijn:konfetti:$konfetti"
+
     // Testing
     testImplementation "junit:junit:$junit"
     androidTestImplementation "androidx.test:runner:$test_runner"
