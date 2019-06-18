@@ -19,30 +19,8 @@ data class Drink(var name: String,
     fun increaseCount(count: Int) {
         this.count += count
     }
-//    override fun getCount(): Int {
-//        return _count
-//    }
-//
-//    override fun setCount(count: Int) {
-//        _count = count
-//    }
-//
-//    override fun getPrice(): Double {
-//        return _price
-//    }
-//
-//    override fun getName(): String {
-//        return _name
-//    }
-//
-//    /**
-//     * Need for de-serialization
-//     */
-//    fun setName(name: String) {
-//        _name = name
-//    }
-//
-//    fun setPrice(price: Double){
-//        _price = price
-//    }
+
+    fun getQualifier() : String {
+        return "${name}_${size}_$price"
+    }
 }

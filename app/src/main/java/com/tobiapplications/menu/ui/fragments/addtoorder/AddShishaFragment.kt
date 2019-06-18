@@ -54,10 +54,10 @@ class AddShishaFragment : BaseFragment() {
 
     private fun selectTobacco(pos: Int, selected: Shisha) {
         val possibleTobaccos = tobaccos ?: return
-        val tobaccoSelectionFragment = TobaccoSelectionFragment.newInstance(TobaccoSelectionModel(possibleTobaccos, selected.tabaccos, pos))
+        val tobaccoSelectionFragment = TobaccoSelectionFragment.newInstance(TobaccoSelectionModel(possibleTobaccos, selected.tobaccos, pos))
         tobaccoSelectionFragment.setOnTobaccoSelectedListener { pos, tobaccos ->
             val item = shishaAdapter?.getItem(pos) as? Shisha
-            item?.tabaccos = tobaccos
+            item?.tobaccos = tobaccos
             shishaAdapter?.notifyItemChanged(pos)
         }
 
@@ -89,7 +89,7 @@ class AddShishaFragment : BaseFragment() {
 
     private fun onAddShisha() {
         val shishas = shishaAdapter?.itemList.orEmpty().map { it as Shisha }
-        val valid = shishas.firstOrNull { it.tabaccos.isNullOrEmpty() } == null
+        val valid = shishas.firstOrNull { it.tobaccos.isNullOrEmpty() } == null
 
         if (valid) {
             shishas.forEach { it.count = 1 }
@@ -116,7 +116,7 @@ class AddShishaFragment : BaseFragment() {
             shishaAdapter
                 ?.itemList
                 ?.map { it as? Shisha }
-                ?.filter { it?.tabaccos.isNullOrEmpty() }
+                ?.filter { it?.tobaccos.isNullOrEmpty() }
 
         noTobaccoSelected?.forEach {
             if (it != null) {

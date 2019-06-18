@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/menu_space_small"
+    android:paddingTop="@dimen/menu_space_micro"
+    android:paddingBottom="@dimen/menu_space_micro"
     android:background="@drawable/border_order_overview_item">
 
     <TextView

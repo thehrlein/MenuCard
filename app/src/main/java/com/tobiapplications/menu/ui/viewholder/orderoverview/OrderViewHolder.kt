@@ -17,7 +17,7 @@ class OrderViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         view.position.text = (adapterPosition + 1).toString()
 
         if (item is Shisha) {
-            view.name.text = item.name
+            view.name.text = item.tobaccos.joinToString { it.getFullName() }
             view.price.text = item.price.formatEuro()
             view.count.text = item.count.toString()
         } else if (item is Drink) {

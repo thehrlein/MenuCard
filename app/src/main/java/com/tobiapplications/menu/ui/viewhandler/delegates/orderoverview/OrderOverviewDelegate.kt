@@ -19,11 +19,7 @@ class OrderOverviewDelegate : AdapterDelegate<List<DisplayableItem>>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return OrderViewHolder(
-            LayoutInflater.from(
-                parent.context
-            ).inflate(R.layout.viewholder_order_item, parent, false)
-        )
+        return OrderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.viewholder_order_item, parent, false))
     }
 
     override fun onBindViewHolder(items: List<DisplayableItem>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {

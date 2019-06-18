@@ -30,10 +30,10 @@ class ShishaViewHolder(private val view: View, onSelectTobaccoClicked: (Int, Shi
 
         view.name.text = shisha.name
         view.price.text = shisha.price.formatEuro()
-        if (shisha.tabaccos.isEmpty()) {
+        if (shisha.tobaccos.isEmpty()) {
             view.tobaccos.text = getString(R.string.add_shisha_click_to_add_tobacco)
         } else {
-            view.tobaccos.text = getTobaccoList(shisha.tabaccos)
+            view.tobaccos.text = getTobaccoList(shisha.tobaccos)
 
         }
     }
