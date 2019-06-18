@@ -75,9 +75,13 @@ class OrderOverviewFragment : BaseFragment() {
         setOrder()
 
         bottomLayout.confirmOrder.onClick {
-            postDelayed( { bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN }, 200)
+            hideOrder()
             (parentFragment as? NewOrderFragment)?.sendOrder(OrderUtils.getOrder())
         }
+    }
+
+    private fun hideOrder() {
+        postDelayed({ bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN }, 200)
     }
 
     private fun setOrder() {
@@ -134,6 +138,7 @@ class OrderOverviewFragment : BaseFragment() {
         OrderUtils.clearOrder()
         orderOverviewAdapter?.clear()
         totalPrice.text = Constants.EMPTY_STRING
+        hideOrder()
     }
 
     fun invalidate() {
