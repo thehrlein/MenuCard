@@ -9,6 +9,7 @@
     <string name="general_unknown_error">Es ist ein unbekannter Fehler aufgetreten</string>
     <string name="general_cancel">abbrechen</string>
     <string name="general_add">hinzufügen</string>
+    <string name="general_select">auswählen</string>
     <string name="general_delete">löschen</string>
 
     <!-- LoadingScreen -->
@@ -39,6 +40,10 @@
     <string name="add_shisha_stepper_explanation">Drücken Sie auf + / - oder swipen Sie in die entsprechende Richtung um die Anzahl Shishas zu verändern</string>
     <string name="add_shisha_base_shisha_name">%1$d. Shisha</string>
     <string name="add_shisha_tobaccos_placeholder">(%1$s)</string>
+    <string name="add_shisha_click_to_add_tobacco">Klicken Sie hier um den Tabak auszuwählen</string>
+    <string name="add_shisha_not_all_shisha_have_tobacco_message">Sie haben nicht bei jeder Shisha Ihren Tabak gewählt. Wollen Sie den Tabak auswählen oder sollen diese entfernt werden?</string>
+    <string name="add_shisha_not_all_shisha_have_tobacco_select">Auswählen</string>
+    <string name="add_shisha_not_all_shisha_have_tobacco_delete">Löschen</string>
 
     <!-- OrderOverviewFragment -->
     <string name="overview_position">Pos.</string>
@@ -99,6 +104,10 @@
     <string name="admin_add_tobacco_failed">Fehler: Tabak konnte nicht angelegt werden</string>
     <string name="admin_error_no_drinks">Keine Getränke verfügbar\n\nFügen Sie über unten stehenden Button neue Getränke hinzu</string>
     <string name="admin_error_no_tobacco">Keine Tabake verfügbar\n\nFügen Sie über unten stehenden Button neue Tabake hinzu</string>
+
+    <!-- Tobacco Selection -->
+    <string name="tobacco_selection_toolbar_title">Tabakauswahl</string>
+    <string name="tobacco_selection_explanation">Wählen Sie hier zwischen einem oder mehreren Tabaksorten Ihren individuellen Geschmack</string>
 
 
 </resources>

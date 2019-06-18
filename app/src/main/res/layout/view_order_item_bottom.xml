@@ -32,7 +32,7 @@
 
     </LinearLayout>
 
-    <com.tobiapplications.menu.ui.views.PrimaryButton
+    <com.tobiapplications.menu.ui.views.general.PrimaryButton
         android:id="@+id/confirmOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

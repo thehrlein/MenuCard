@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.ui.viewholder
+package com.tobiapplications.menu.ui.viewholder.previousorder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

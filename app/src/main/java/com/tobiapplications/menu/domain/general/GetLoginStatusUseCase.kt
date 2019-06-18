@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.domain
+package com.tobiapplications.menu.domain.general
 
 import com.google.firebase.auth.FirebaseAuth
 import com.tobiapplications.menu.utils.mvvm.UseCase

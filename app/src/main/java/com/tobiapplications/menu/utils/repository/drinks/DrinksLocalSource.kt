@@ -1,7 +1,7 @@
 package com.tobiapplications.menu.utils.repository.drinks
 
 import com.tobiapplications.menu.model.admin.Drink
-import com.tobiapplications.menu.utils.repository.BaseLocalSource
+import com.tobiapplications.menu.utils.repository.base.BaseLocalSource
 import javax.inject.Inject
 import javax.inject.Singleton
 

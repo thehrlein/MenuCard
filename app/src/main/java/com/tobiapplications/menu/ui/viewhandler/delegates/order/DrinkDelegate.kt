@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.admin.Drink
-import com.tobiapplications.menu.ui.viewholder.DrinkViewHolder
+import com.tobiapplications.menu.ui.viewholder.addtoorder.DrinkViewHolder
 import com.tobiapplications.menu.utils.general.DisplayableItem
 
 /**
@@ -19,7 +19,11 @@ class DrinkDelegate : AdapterDelegate<List<DisplayableItem>>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return DrinkViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.viewholder_drink, parent, false))
+        return DrinkViewHolder(
+            LayoutInflater.from(
+                parent.context
+            ).inflate(R.layout.viewholder_drink, parent, false)
+        )
     }
 
     override fun onBindViewHolder(items: List<DisplayableItem>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {

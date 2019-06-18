@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:gravity="center">
 
-    <com.tobiapplications.menu.ui.views.OrderButton
+    <com.tobiapplications.menu.ui.views.addtoorder.OrderButton
         android:id="@+id/plus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:gravity="center"
         android:minWidth="30dp"/>
 
-    <com.tobiapplications.menu.ui.views.OrderButton
+    <com.tobiapplications.menu.ui.views.addtoorder.OrderButton
         android:id="@+id/minus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

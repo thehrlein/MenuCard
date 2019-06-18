@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.order.OrderableItem
-import com.tobiapplications.menu.ui.viewholder.OrderViewHolder
+import com.tobiapplications.menu.ui.viewholder.orderoverview.OrderViewHolder
 import com.tobiapplications.menu.utils.general.DisplayableItem
 
 /**
@@ -19,7 +19,11 @@ class OrderOverviewDelegate : AdapterDelegate<List<DisplayableItem>>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return OrderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.viewholder_order_item, parent, false))
+        return OrderViewHolder(
+            LayoutInflater.from(
+                parent.context
+            ).inflate(R.layout.viewholder_order_item, parent, false)
+        )
     }
 
     override fun onBindViewHolder(items: List<DisplayableItem>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {

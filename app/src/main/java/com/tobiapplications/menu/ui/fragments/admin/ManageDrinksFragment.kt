@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.admin.Drink
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
-import com.tobiapplications.menu.ui.viewhandler.ManageDrinksAdapter
+import com.tobiapplications.menu.ui.viewhandler.adapter.ManageDrinksAdapter
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.general.SwipeDeleteCallback

@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.utils.repository
+package com.tobiapplications.menu.utils.repository.base
 
 import io.reactivex.Observable
 import retrofit2.Response
@@ -8,7 +8,8 @@ import java.util.concurrent.ConcurrentHashMap
  * Created by tobias.hehrlein on 10.01.19.
  */
 open class BaseRepository<I, T> constructor(private val localSource: LocalSourceDelegate<I, T>,
-                                            private val networkSource: NetworkSourceDelegate<I, T>) : RepositoryDelegate<I, T> {
+                                            private val networkSource: NetworkSourceDelegate<I, T>
+) : RepositoryDelegate<I, T> {
 
     private val REQUEST_CODE = "request_code"
     private val requestCache = ConcurrentHashMap<String, Observable<Response<T>>>()

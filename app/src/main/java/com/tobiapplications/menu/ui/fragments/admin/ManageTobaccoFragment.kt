@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.admin.Tobacco
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
-import com.tobiapplications.menu.ui.viewhandler.ManageTobaccoAdapter
+import com.tobiapplications.menu.ui.viewhandler.adapter.ManageTobaccoAdapter
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.general.SwipeDeleteCallback
@@ -45,7 +45,8 @@ class ManageTobaccoFragment : BaseFragment(), SwipeDeleteCallbackHolder {
     }
 
     private fun initRecyclerView() {
-        manageTobaccoAdapter = ManageTobaccoAdapter()
+        manageTobaccoAdapter =
+            ManageTobaccoAdapter()
         val itemTouchHelper = ItemTouchHelper(SwipeDeleteCallback(this, getDrawable(R.drawable.ic_delete_white)!!, ColorDrawable(getColor(R.color.colorRed))))
         itemTouchHelper.attachToRecyclerView(recyclerView)
 

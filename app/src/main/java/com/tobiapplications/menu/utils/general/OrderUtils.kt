@@ -21,7 +21,7 @@ object OrderUtils {
     fun addShishas(list: List<DisplayableItem>) {
         list.forEach { order ->
             if (order !is Shisha) return
-            this.order.shisha.firstOrNull { it.name== order.name }?.increaseCount(order.count) ?: this.order.shisha.add(order)
+            this.order.shisha.firstOrNull { it.name == order.name }?.increaseCount(order.count) ?: this.order.shisha.add(order)
 
         }
     }

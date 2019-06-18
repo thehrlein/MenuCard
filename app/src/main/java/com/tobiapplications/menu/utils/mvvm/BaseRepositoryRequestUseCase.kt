@@ -2,7 +2,7 @@ package com.tobiapplications.menu.utils.mvvm
 
 import com.tobiapplications.menu.model.exception.RequestFailedException
 import com.tobiapplications.menu.utils.extensions.applyScheduler
-import com.tobiapplications.menu.utils.repository.BaseRepository
+import com.tobiapplications.menu.utils.repository.base.BaseRepository
 import io.reactivex.disposables.CompositeDisposable
 import retrofit2.Response
 

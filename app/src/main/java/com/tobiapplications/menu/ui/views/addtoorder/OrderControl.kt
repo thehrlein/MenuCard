@@ -1,9 +1,8 @@
-package com.tobiapplications.menu.ui.views
+package com.tobiapplications.menu.ui.views.addtoorder
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.LinearLayout
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.utils.extensions.onClick

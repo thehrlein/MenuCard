@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.previousorders.PreviousOrder
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
-import com.tobiapplications.menu.ui.viewhandler.PreviousOrdersAdapter
+import com.tobiapplications.menu.ui.viewhandler.adapter.PreviousOrdersAdapter
 import kotlinx.android.synthetic.main.fragment_previous_orders.*
 
 /**
@@ -31,7 +31,8 @@ class PreviousOrdersFragment : BaseFragment() {
     }
 
     private fun initRecyclerView() {
-        previousOrdersAdapter = PreviousOrdersAdapter()
+        previousOrdersAdapter =
+            PreviousOrdersAdapter()
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = previousOrdersAdapter

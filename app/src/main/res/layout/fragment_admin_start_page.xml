@@ -25,7 +25,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4"/>
 
-    <com.tobiapplications.menu.ui.views.PrimaryButton
+    <com.tobiapplications.menu.ui.views.general.PrimaryButton
         android:id="@+id/manageDrinks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/menu_space_default"/>
 
-    <com.tobiapplications.menu.ui.views.PrimaryButton
+    <com.tobiapplications.menu.ui.views.general.PrimaryButton
         android:id="@+id/manageShisha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -4,6 +4,7 @@ import com.tobiapplications.menu.ui.fragments.loadingscreen.LoadingScreenFragmen
 import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.addtoorder.AddDrinksFragment
 import com.tobiapplications.menu.ui.fragments.addtoorder.AddShishaFragment
+import com.tobiapplications.menu.ui.fragments.addtoorder.TobaccoSelectionFragment
 import com.tobiapplications.menu.ui.fragments.admin.AdminStartPageFragment
 import com.tobiapplications.menu.ui.fragments.admin.ManageDrinksFragment
 import com.tobiapplications.menu.ui.fragments.admin.ManageTobaccoFragment
@@ -60,5 +61,8 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract fun bindManageShishaFragment() : ManageTobaccoFragment
+
+    @ContributesAndroidInjector
+    abstract fun bindTobaccoSelectionFragment() : TobaccoSelectionFragment
 }
 

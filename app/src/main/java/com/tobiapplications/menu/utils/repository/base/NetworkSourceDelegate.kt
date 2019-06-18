@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.utils.repository
+package com.tobiapplications.menu.utils.repository.base
 
 import io.reactivex.Single
 import retrofit2.Response

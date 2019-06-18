@@ -7,11 +7,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.admin.Drink
-import com.tobiapplications.menu.model.order.OrderableItem
-import com.tobiapplications.menu.model.order.Shisha
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
-import com.tobiapplications.menu.ui.viewhandler.OrderOverviewAdapter
+import com.tobiapplications.menu.ui.viewhandler.adapter.OrderOverviewAdapter
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.general.DisplayableItem
@@ -45,7 +42,8 @@ class OrderOverviewFragment : BaseFragment() {
     }
 
     private fun initRecyclerView() {
-        orderOverviewAdapter = OrderOverviewAdapter()
+        orderOverviewAdapter =
+            OrderOverviewAdapter()
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = orderOverviewAdapter

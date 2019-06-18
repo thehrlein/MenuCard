@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.ui.views
+package com.tobiapplications.menu.ui.views.addtoorder
 
 import android.content.Context
 import android.util.AttributeSet

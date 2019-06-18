@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.domain
+package com.tobiapplications.menu.domain.general
 
 import com.tobiapplications.menu.model.admin.Tobacco
 import com.tobiapplications.menu.utils.mvvm.BaseRepositoryRequestUseCase

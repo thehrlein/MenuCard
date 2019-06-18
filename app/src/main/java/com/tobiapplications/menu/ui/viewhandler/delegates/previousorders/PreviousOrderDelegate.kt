@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.previousorders.PreviousOrder
-import com.tobiapplications.menu.ui.viewholder.PreviousOrderViewHolder
+import com.tobiapplications.menu.ui.viewholder.previousorder.PreviousOrderViewHolder
 import com.tobiapplications.menu.utils.general.DisplayableItem
 
 /**
@@ -19,7 +19,13 @@ class PreviousOrderDelegate : AdapterDelegate<List<DisplayableItem>>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return PreviousOrderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.viewholder_previous_order, parent, false))
+        return PreviousOrderViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.viewholder_previous_order,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(items: List<DisplayableItem>, position: Int, holder: RecyclerView.ViewHolder, payloads: MutableList<Any>) {

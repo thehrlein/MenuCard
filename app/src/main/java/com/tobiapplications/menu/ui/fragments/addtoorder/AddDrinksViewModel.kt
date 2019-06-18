@@ -2,10 +2,8 @@ package com.tobiapplications.menu.ui.fragments.addtoorder
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.tobiapplications.menu.domain.GetAllDrinksUseCase
-import com.tobiapplications.menu.domain.GetAllTobaccosUseCase
+import com.tobiapplications.menu.domain.general.GetAllDrinksUseCase
 import com.tobiapplications.menu.model.admin.Drink
-import com.tobiapplications.menu.utils.enums.OrderType
 import com.tobiapplications.menu.utils.extensions.map
 import com.tobiapplications.menu.utils.mvvm.Result
 import javax.inject.Inject

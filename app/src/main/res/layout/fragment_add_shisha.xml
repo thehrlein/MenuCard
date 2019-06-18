@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
 
-    <com.tobiapplications.menu.ui.views.PrimaryButton
+    <com.tobiapplications.menu.ui.views.general.PrimaryButton
         android:id="@+id/add"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

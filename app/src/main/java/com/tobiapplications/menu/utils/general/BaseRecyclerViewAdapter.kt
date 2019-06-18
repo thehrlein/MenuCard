@@ -50,5 +50,11 @@ open class BaseRecyclerViewAdapter(delegates: List<AdapterDelegate<List<Displaya
     fun getItem(adapterPosition: Int): DisplayableItem {
         return itemList[adapterPosition]
     }
+
+    fun removeItem(item: DisplayableItem) {
+        val pos = itemList.indexOf(item)
+        itemList.remove(item)
+        notifyItemRemoved(pos)
+    }
 }
 

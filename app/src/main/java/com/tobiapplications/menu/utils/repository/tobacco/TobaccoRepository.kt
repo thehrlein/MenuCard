@@ -1,7 +1,7 @@
 package com.tobiapplications.menu.utils.repository.tobacco
 
 import com.tobiapplications.menu.model.admin.Tobacco
-import com.tobiapplications.menu.utils.repository.BaseRepository
+import com.tobiapplications.menu.utils.repository.base.BaseRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 

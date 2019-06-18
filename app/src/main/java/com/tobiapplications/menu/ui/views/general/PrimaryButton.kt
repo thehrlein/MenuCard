@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.ui.views
+package com.tobiapplications.menu.ui.views.general
 
 import android.content.Context
 import android.content.res.ColorStateList

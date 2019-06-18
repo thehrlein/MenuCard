@@ -1,4 +1,4 @@
-package com.tobiapplications.menu.ui.viewhandler
+package com.tobiapplications.menu.ui.viewhandler.adapter
 
 import com.tobiapplications.menu.ui.viewhandler.delegates.orderoverview.OrderOverviewDelegate
 import com.tobiapplications.menu.utils.general.BaseRecyclerViewAdapter

@@ -30,7 +30,7 @@
                 app:hint="@string/login_hint_password"
                 app:type="password"/>
 
-            <com.tobiapplications.menu.ui.views.PrimaryButton
+            <com.tobiapplications.menu.ui.views.general.PrimaryButton
                 android:id="@+id/signInButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
 
             </LinearLayout>
 
-            <com.tobiapplications.menu.ui.views.PrimaryButton
+            <com.tobiapplications.menu.ui.views.general.PrimaryButton
                 android:id="@+id/goToRegistration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
