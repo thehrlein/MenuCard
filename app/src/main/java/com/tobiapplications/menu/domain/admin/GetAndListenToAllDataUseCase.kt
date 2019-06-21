@@ -19,16 +19,16 @@ class GetAndListenToAllDataUseCase @Inject constructor(private val fireStore: Fi
                         onFailure()
                     }
 
-                    val drinks = mutableListOf<FireStoreItem>()
+                    val items = mutableListOf<FireStoreItem>()
                     snapShot?.let {
                         for (doc in it) {
-                            val drink : FireStoreItem = doc.toObject(parameters.clazz)
-                            drink.id = doc.id
-                            drinks.add(drink)
+                            val item : FireStoreItem = doc.toObject(parameters.clazz)
+                            item.id = doc.id
+                            items.add(item)
                         }
                     }
 
-                    onSuccess(drinks)
+                    onSuccess(items)
                 }
     }
 

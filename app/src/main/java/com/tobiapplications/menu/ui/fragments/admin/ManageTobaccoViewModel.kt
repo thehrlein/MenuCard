@@ -2,7 +2,7 @@ package com.tobiapplications.menu.ui.fragments.admin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.tobiapplications.menu.domain.admin.AddToFireStoreUseCase
+import com.tobiapplications.menu.domain.general.AddToFireStoreUseCase
 import com.tobiapplications.menu.domain.admin.DeleteFromFireStoreUseCase
 import com.tobiapplications.menu.domain.admin.GetAndListenToAllDataUseCase
 import com.tobiapplications.menu.model.admin.AddToFireStoreModel

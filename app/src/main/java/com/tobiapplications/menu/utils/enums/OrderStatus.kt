@@ -3,8 +3,10 @@ package com.tobiapplications.menu.utils.enums
 /**
  *  Created by tobiashehrlein on 2019-05-23
  */
-enum class OrderType  {
+enum class OrderStatus  {
 
-    DRINKS,
-    SHISHA
+    NEW,
+    SENT,
+    IN_PROGRESS,
+    DONE
 }

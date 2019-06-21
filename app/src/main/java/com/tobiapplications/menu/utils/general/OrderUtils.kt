@@ -3,13 +3,14 @@ package com.tobiapplications.menu.utils.general
 import com.tobiapplications.menu.model.admin.Drink
 import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.model.order.Shisha
+import com.tobiapplications.menu.utils.enums.OrderStatus
 
 /**
  *  Created by tobiashehrlein on 2019-05-23
  */
 object OrderUtils {
 
-    private val order = Order()
+    private var order = Order(status = OrderStatus.NEW)
 
     fun addDrinks(list: List<DisplayableItem>) {
         list.forEach { order ->
@@ -31,7 +32,6 @@ object OrderUtils {
     }
 
     fun clearOrder() {
-        order.drinks.clear()
-        order.shisha.clear()
+        order = Order(status = OrderStatus.NEW)
     }
 }

@@ -17,6 +17,7 @@ import com.tobiapplications.menu.ui.fragments.addtoorder.AddShishaFragment
 import com.tobiapplications.menu.ui.fragments.login.LoginFragment
 import com.tobiapplications.menu.ui.views.general.LoadingStateDialog
 import com.tobiapplications.menu.ui.views.general.LoadingStateDialogHolder
+import com.tobiapplications.menu.utils.enums.OrderStatus
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.general.OrderUtils
@@ -32,6 +33,7 @@ class NewOrderFragment : BaseFragment(), LoadingStateDialogHolder {
     private lateinit var viewModel: NewOrderViewModel
     private var bottomSheetBehavior : BottomSheetBehavior<View>? = null
     private var loadingDialog : LoadingStateDialog? = null
+    private var onParentActionSubmitted: ((f: (OrderOverviewFragment) -> Unit) -> Unit)? = null
 
     companion object {
         fun newInstance(loggedIn: Boolean): NewOrderFragment {
@@ -60,10 +62,10 @@ class NewOrderFragment : BaseFragment(), LoadingStateDialogHolder {
         if (it == true) {
             makeKonfetti()
             setDialogSuccessState(getString(R.string.overview_send_order_success))
-            (orderLayout as? OrderOverviewFragment)?.deleteOrder()
+            onParentActionSubmitted?.invoke { it.deleteOrder() }
         } else {
             setDialogFailureState(getString(R.string.overview_send_order_failed))
-            (orderLayout as? OrderOverviewFragment)?.openOverview()
+            onParentActionSubmitted?.invoke { it.openOverview() }
         }
 
         dismissDialogDelayed()
@@ -94,8 +96,6 @@ class NewOrderFragment : BaseFragment(), LoadingStateDialogHolder {
         if (order.drinks.isEmpty() && order.shisha.isEmpty()) {
             return
         }
-
-        (orderLayout as? OrderOverviewFragment)?.invalidate()
     }
 
     override fun getLayout(): Int {
@@ -148,6 +148,11 @@ class NewOrderFragment : BaseFragment(), LoadingStateDialogHolder {
 
     fun sendOrder(order: Order) {
         setDialogLoadingState(getString(R.string.general_please_wait))
+        order.status = OrderStatus.SENT
         viewModel.sendOrder(order)
+    }
+
+    fun setActionListener(onParentActionSubmitted: (f: (OrderOverviewFragment) -> Unit) -> Unit) {
+        this.onParentActionSubmitted = onParentActionSubmitted
     }
 }

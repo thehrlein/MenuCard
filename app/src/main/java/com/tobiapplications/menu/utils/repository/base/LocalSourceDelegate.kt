@@ -6,8 +6,7 @@ import retrofit2.Response
 /**
  * Created by tobias.hehrlein on 10.01.19.
  */
-interface LocalSourceDelegate<I, T> :
-    NetworkSourceDelegate<I, T> {
+interface LocalSourceDelegate<I, T> : NetworkSourceDelegate<I, T> {
 
     fun get() : T?
     fun set(response: T?)

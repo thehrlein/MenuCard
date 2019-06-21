@@ -16,8 +16,7 @@ import javax.inject.Inject
  */
 class MainFragmentViewModel @Inject constructor(getLoginStatusUseCase: GetLoginStatusUseCase,
                                                 getAllDrinksUseCase: GetAllDrinksUseCase,
-                                                getAllTobaccosUseCase: GetAllTobaccosUseCase
-) : ViewModel() {
+                                                getAllTobaccosUseCase: GetAllTobaccosUseCase) : ViewModel() {
 
     private val loginStatusResult = MutableLiveData<Result<Boolean>>()
     val loginStatus : LiveData<Boolean>

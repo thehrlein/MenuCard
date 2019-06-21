@@ -63,6 +63,11 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(PreviousOrdersViewModel::class)
+    abstract fun bindPreviousOrdersViewModel(viewModel: PreviousOrdersViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(ProfileViewModel::class)
     abstract fun bindProfileViewModel(viewModel: ProfileViewModel) : ViewModel
 

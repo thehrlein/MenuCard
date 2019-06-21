@@ -18,7 +18,8 @@ class GetAllDrinksUseCase @Inject constructor(drinksRepository: DrinksRepository
         super.execute(parameters)
     }
 
+    // set count back to 0
     override fun transformResponse(input: List<Drink>?): List<Drink> {
-        return input.orEmpty()
+        return input?.map { Drink(it.name, it.size, it.price) }.orEmpty()
     }
 }

@@ -1,10 +1,12 @@
 package com.tobiapplications.menu.ui.fragments.main
 
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.previousorders.PreviousOrder
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.viewhandler.adapter.PreviousOrdersAdapter
+import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import kotlinx.android.synthetic.main.fragment_previous_orders.*
 
 /**
@@ -12,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_previous_orders.*
  */
 class PreviousOrdersFragment : BaseFragment() {
 
+    private lateinit var viewModel: PreviousOrdersViewModel
     private var previousOrdersAdapter: PreviousOrdersAdapter? = null
 
     companion object {
@@ -27,12 +30,16 @@ class PreviousOrdersFragment : BaseFragment() {
     }
 
     fun initViewModel() {
-
+        viewModel = obtainViewModel()
+        viewModel.prevOrders.observe(this, Observer {
+            it?.let { prevOrders ->
+                previousOrdersAdapter?.setItems(prevOrders.list)
+            }
+        })
     }
 
     private fun initRecyclerView() {
-        previousOrdersAdapter =
-            PreviousOrdersAdapter()
+        previousOrdersAdapter = PreviousOrdersAdapter()
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = previousOrdersAdapter
@@ -40,7 +47,7 @@ class PreviousOrdersFragment : BaseFragment() {
     }
 
     private fun initViews() {
-        previousOrdersAdapter?.setItems(listOf(PreviousOrder(""), PreviousOrder("")))
+
     }
 
     override fun getLayout(): Int {
