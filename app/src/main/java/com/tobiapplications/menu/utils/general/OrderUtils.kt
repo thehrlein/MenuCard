@@ -13,18 +13,17 @@ object OrderUtils {
     private var order = Order(status = OrderStatus.NEW)
 
     fun addDrinks(list: List<DisplayableItem>) {
-        list.forEach { order ->
-            if (order !is Drink) return
-            this.order.drinks.firstOrNull { it.getQualifier() == order.getQualifier() }?.increaseCount(order.count) ?: this.order.drinks.add(order)
-        }
+        list.filterIsInstance<Drink>()
+            .forEach { order ->
+                this.order.drinks.firstOrNull { it.getQualifier() == order.getQualifier() }?.increaseCount(order.count) ?: this.order.drinks.add(order)
+            }
     }
 
     fun addShishas(list: List<DisplayableItem>) {
-        list.forEach { order ->
-            if (order !is Shisha) return
-            this.order.shisha.firstOrNull { it.getQualifier() == order.getQualifier() }?.increaseCount(order.count) ?: this.order.shisha.add(order)
-
-        }
+        list.filterIsInstance<Shisha>()
+            .forEach { order ->
+                this.order.shisha.firstOrNull { it.getQualifier() == order.getQualifier() }?.increaseCount(order.count) ?: this.order.shisha.add(order)
+            }
     }
 
     fun getOrder() : Order {

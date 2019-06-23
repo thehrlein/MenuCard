@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.jakewharton.rxbinding2.view.RxView
@@ -108,7 +109,7 @@ fun View.hide() {
 /**
  * Extension function to simplify setting an afterTextChanged action
  */
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+fun TextView.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(editable: Editable?) { afterTextChanged.invoke(editable.toString()) }
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}

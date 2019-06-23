@@ -39,7 +39,6 @@ dependencies {
     // RxJava & RxBinding
     implementation "com.jakewharton.rxbinding2:rxbinding:$rx_binding"
     implementation "com.jakewharton.rxbinding:rxbinding-kotlin:$rx_binding_kotlin"
-
     implementation "io.reactivex.rxjava2:rxjava:$rx_java"
     implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin"
 
@@ -51,7 +50,7 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger"
     kapt "com.google.dagger:dagger-compiler:$dagger"
 
-    //ViewModel
+    // ViewModel
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"

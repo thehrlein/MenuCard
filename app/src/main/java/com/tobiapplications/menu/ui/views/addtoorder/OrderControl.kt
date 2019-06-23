@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.tobiapplications.menu.R
+import com.tobiapplications.menu.utils.extensions.afterTextChanged
 import com.tobiapplications.menu.utils.extensions.onClick
 import com.tobiapplications.menu.utils.extensions.orDefault
-import com.tobiapplications.menu.utils.general.TextChangeListener
 import kotlinx.android.synthetic.main.view_order_control.view.*
 
 /**
@@ -23,7 +23,7 @@ class OrderControl @JvmOverloads constructor(context: Context, attrs: AttributeS
         plus.onClick({ changeCount(1) }, 100)
         minus.onClick( { changeCount(-1) }, 100)
 
-        value.addTextChangedListener(TextChangeListener { valueChangeListener?.invoke(it.toIntOrNull().orDefault()) })
+        value.afterTextChanged { valueChangeListener?.invoke(it.toIntOrNull().orDefault()) }
     }
 
     private fun changeCount(add: Int) {
