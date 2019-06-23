@@ -87,10 +87,14 @@
     <string name="register_success">Sie haben sich erfolgreich registriert. Bitte loggen Sie sich nun ein</string>
 
     <!-- Admin -->
+    <string name="admin_manage_items">Bestände verwalten</string>
+    <string name="admin_manage_orders">Bestellungen verwalten</string>
     <string name="admin_manage_drinks">Getränke verwalten</string>
     <string name="admin_manage_shisha">Tabake verwalten</string>
-    <string name="admin_welcome_message">Hallo Admin, über die betreffenden Buttons erhälst du Einsicht in die Getränke &amp; Shisha Tabak Auswahl und kannst diese bearbeiten.</string>
-    <string name="admin_toolbar_title">Admin</string>
+    <string name="admin_welcome_message">Hallo Admin, über die betreffenden Buttons erhälst du Einsicht in die Bestände und kannst Bestellungen bearbeiten</string>
+    <string name="admin_overview_toolbar_title">Admin - Übersicht</string>
+    <string name="admin_manage_items_toolbar_title">Admin - Bestände</string>
+    <string name="admin_manage_orders_toolbar_title">Admin - Bestellungen</string>
     <string name="admin_manage_drinks_toolbar_title">Getränke verwalten</string>
     <string name="admin_manage_shisha_toolbar_title">Tabak verwalten</string>
     <string name="admin_drink_name">Name</string>
@@ -106,6 +110,7 @@
     <string name="admin_add_tobacco_failed">Fehler: Tabak konnte nicht angelegt werden</string>
     <string name="admin_error_no_drinks">Keine Getränke verfügbar\n\nFügen Sie über unten stehenden Button neue Getränke hinzu</string>
     <string name="admin_error_no_tobacco">Keine Tabake verfügbar\n\nFügen Sie über unten stehenden Button neue Tabake hinzu</string>
+    <string name="admin_error_no_orders">Aktuell gibt es keine Bestellungen</string>
 
     <!-- Tobacco Selection -->
     <string name="tobacco_selection_toolbar_title">Tabakauswahl</string>

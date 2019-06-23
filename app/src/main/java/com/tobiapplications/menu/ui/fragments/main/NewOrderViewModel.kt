@@ -34,6 +34,7 @@ class NewOrderViewModel @Inject constructor(private val addToFireStoreUseCase: A
 
     fun sendOrder(order: Order) {
         val email = (userEmail.value as? Result.Success<String?>)?.data
+        order.id = email
         addToFireStoreUseCase.execute(AddToFireStoreModel(Constants.ORDER_COLLECTION, UserOrder(listOf(order)), email))
     }
 }

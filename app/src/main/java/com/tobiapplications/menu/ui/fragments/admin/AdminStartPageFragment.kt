@@ -6,15 +6,16 @@ import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.utils.extensions.onClick
 import com.tobiapplications.menu.utils.extensions.replaceFragment
+import com.tobiapplications.menu.utils.extensions.toast
 import kotlinx.android.synthetic.main.fragment_admin_start_page.*
 
 /**
- *  Created by tobiashehrlein on 2019-06-16
+ *  Created by tobiashehrlein on 2019-06-23
  */
 class AdminStartPageFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() : AdminStartPageFragment{
+        fun newInstance() : AdminStartPageFragment {
             return AdminStartPageFragment()
         }
     }
@@ -23,12 +24,12 @@ class AdminStartPageFragment : BaseFragment() {
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         (activity as? MainActivity)?.showToolbar(true)
 
-        manageDrinks.onClick { replaceFragment(ManageDrinksFragment.newInstance()) }
-        manageShisha.onClick { replaceFragment(ManageTobaccoFragment.newInstance()) }
+        manageItems.onClick { replaceFragment(AdminManageItemsOverviewFragment.newInstance()) }
+        viewAllOrders.onClick { replaceFragment(AdminAllOrdersFragment.newInstance()) }
     }
 
     override fun getToolbarTitle(): String {
-        return getString(R.string.admin_toolbar_title)
+        return getString(R.string.admin_overview_toolbar_title)
     }
 
     override fun canModifyAppComponents(): Boolean {

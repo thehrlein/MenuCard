@@ -6,6 +6,8 @@ import com.tobiapplications.menu.di.scopes.ViewModelKey
 import com.tobiapplications.menu.ui.activitys.MainActivityViewModel
 import com.tobiapplications.menu.ui.fragments.addtoorder.AddDrinksViewModel
 import com.tobiapplications.menu.ui.fragments.addtoorder.AddShishaViewModel
+import com.tobiapplications.menu.ui.fragments.admin.AdminAllOrdersFragment
+import com.tobiapplications.menu.ui.fragments.admin.AdminAllOrdersViewModel
 import com.tobiapplications.menu.ui.fragments.admin.ManageDrinksViewModel
 import com.tobiapplications.menu.ui.fragments.admin.ManageTobaccoViewModel
 import com.tobiapplications.menu.ui.fragments.loadingscreen.LoadingScreenViewModel
@@ -90,6 +92,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddShishaViewModel::class)
     abstract fun bindAddShishaViewModel(viewModel: AddShishaViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AdminAllOrdersViewModel::class)
+    abstract fun bindAdminAllOrdersViewModel(viewModel: AdminAllOrdersViewModel) : ViewModel
 
 }
 

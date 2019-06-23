@@ -7,17 +7,6 @@
     android:layout_height="match_parent"
     android:padding="@dimen/menu_space_small">
 
-    <TextView
-        android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/admin_welcome_message"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/verticalBarrierHalf"/>
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/verticalBarrierHalf"
         android:layout_width="wrap_content"
@@ -26,21 +15,21 @@
         app:layout_constraintGuide_percent="0.4"/>
 
     <com.tobiapplications.menu.ui.views.general.PrimaryButton
-        android:id="@+id/manageItems"
+        android:id="@+id/manageDrinks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:text="@string/admin_manage_items"
+        app:text="@string/admin_manage_drinks"
         app:layout_constraintTop_toBottomOf="@id/verticalBarrierHalf"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/menu_space_default"/>
 
     <com.tobiapplications.menu.ui.views.general.PrimaryButton
-        android:id="@+id/viewAllOrders"
+        android:id="@+id/manageShisha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:text="@string/admin_manage_orders"
-        app:layout_constraintTop_toBottomOf="@id/manageItems"
+        app:text="@string/admin_manage_shisha"
+        app:layout_constraintTop_toBottomOf="@id/manageDrinks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

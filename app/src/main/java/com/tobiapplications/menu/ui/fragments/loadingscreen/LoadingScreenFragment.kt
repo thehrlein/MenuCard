@@ -7,6 +7,7 @@ import com.tobiapplications.menu.R
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.fragments.login.LoginFragment
 import com.tobiapplications.menu.ui.activitys.MainActivity
+import com.tobiapplications.menu.ui.fragments.admin.AdminManageItemsOverviewFragment
 import com.tobiapplications.menu.ui.fragments.admin.AdminStartPageFragment
 import com.tobiapplications.menu.ui.fragments.main.MainFragment
 import com.tobiapplications.menu.utils.enums.LoginState

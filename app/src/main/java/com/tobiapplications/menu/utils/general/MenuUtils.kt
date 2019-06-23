@@ -11,4 +11,15 @@ object MenuUtils {
         val density = context.resources.displayMetrics.density
         return dp * density
     }
+
+    fun flattenList(nestedList: Collection<Any?>?, flatList: MutableList<Any>) {
+        nestedList
+            ?.filterNotNull()
+            ?.forEach { e ->
+            when (e) {
+                !is List<Any?> -> flatList.add(e)
+                else -> flattenList(e, flatList)
+            }
+        }
+    }
 }

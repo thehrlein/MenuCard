@@ -85,7 +85,7 @@ class MainActivity : BaseActivity() {
     fun showLogOutOrQuitDialog() {
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.main_logout_or_quit_dialog_title))
-            .setCancelable(false)
+            .setCancelable(true)
             .setPositiveButton(R.string.main_logout_or_quit_dialog_logout) { _, _ -> viewModel.signOut() }
             .setNegativeButton(R.string.main_logout_or_quit_dialog_quit) { _, _ -> finish() }
             .show()

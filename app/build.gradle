@@ -100,6 +100,9 @@ dependencies {
     // Konfetti
     implementation "nl.dionsegijn:konfetti:$konfetti"
 
+    // Expandable Layout
+    implementation "com.github.traex.expandablelayout:library:$expandable_layout"
+
     // Testing
     testImplementation "junit:junit:$junit"
     androidTestImplementation "androidx.test:runner:$test_runner"

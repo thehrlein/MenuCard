@@ -39,6 +39,8 @@ class AddToFireStoreUseCase @Inject constructor(private val fireStore: FirebaseF
     }
 
     private fun add(parameters: AddToFireStoreModel) {
+//        val item = parameters.value
+//        item.id = parameters.document
         fireStore.collection(parameters.collection)
             .document(parameters.document!!)
             .set(parameters.value)

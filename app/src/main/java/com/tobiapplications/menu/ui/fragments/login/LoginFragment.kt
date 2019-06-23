@@ -15,6 +15,7 @@ import com.tobiapplications.menu.model.authentication.ResetPasswordResponse
 import com.tobiapplications.menu.model.authentication.User
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.activitys.MainActivity
+import com.tobiapplications.menu.ui.fragments.admin.AdminManageItemsOverviewFragment
 import com.tobiapplications.menu.ui.fragments.admin.AdminStartPageFragment
 import com.tobiapplications.menu.ui.fragments.main.MainFragment
 import com.tobiapplications.menu.ui.fragments.register.RegisterFragment
