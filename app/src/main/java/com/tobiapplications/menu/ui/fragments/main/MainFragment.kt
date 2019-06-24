@@ -9,7 +9,7 @@ import com.tobiapplications.menu.utils.extensions.consume
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
 import com.tobiapplications.menu.utils.extensions.replaceFragment
 import com.tobiapplications.menu.utils.extensions.setVisible
-import kotlinx.android.synthetic.main.fragment_menu.*
+import kotlinx.android.synthetic.main.fragment_main.*
 
 /**
  * Created by tobias.hehrlein on 2019-05-29.
@@ -62,6 +62,6 @@ class MainFragment : BaseFragment() {
     }
 
     override fun getLayout(): Int {
-        return R.layout.fragment_menu
+        return R.layout.fragment_main
     }
 }

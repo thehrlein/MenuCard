@@ -101,7 +101,7 @@ dependencies {
     implementation "nl.dionsegijn:konfetti:$konfetti"
 
     // Expandable Layout
-    implementation "com.github.traex.expandablelayout:library:$expandable_layout"
+    implementation "net.cachapa.expandablelayout:expandablelayout:$expandable_layout"
 
     // Testing
     testImplementation "junit:junit:$junit"

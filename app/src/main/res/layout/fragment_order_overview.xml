@@ -36,23 +36,14 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:nestedScrollingEnabled="false"
-        android:orientation="vertical"
         android:padding="@dimen/menu_space_default"
         android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:layout_marginBottom="@dimen/menu_space_colossal"
+        app:layout_constraintTop_toBottomOf="@id/headline"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headline" />
-
-    <include
-        android:id="@+id/bottomLayout"
-        layout="@layout/view_order_item_bottom"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/menu_space_default"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <!--
       ~ Mimics raising the elevation of a container around the header elements (like when an

@@ -6,6 +6,7 @@ import com.tobiapplications.menu.model.admin.Drink
 import com.tobiapplications.menu.model.order.OrderableItem
 import com.tobiapplications.menu.model.order.Shisha
 import com.tobiapplications.menu.utils.extensions.formatEuro
+import com.tobiapplications.menu.utils.general.Constants
 import kotlinx.android.synthetic.main.viewholder_order_item.view.*
 
 /**
@@ -18,6 +19,7 @@ class OrderViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         if (item is Shisha) {
             view.name.text = item.tobaccos.joinToString { it.getFullName() }
+            view.size.text = Constants.EMPTY_STRING
             view.price.text = item.price.formatEuro()
             view.count.text = item.count.toString()
         } else if (item is Drink) {

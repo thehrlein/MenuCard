@@ -33,19 +33,10 @@ class ShishaViewHolder(private val view: View, onSelectTobaccoClicked: (Int, Shi
         if (shisha.tobaccos.isEmpty()) {
             view.tobaccos.text = getString(R.string.add_shisha_click_to_add_tobacco)
         } else {
-            view.tobaccos.text = getTobaccoList(shisha.tobaccos)
-
+            view.tobaccos.text = getString(R.string.add_shisha_tobaccos_placeholder, shisha.getTobaccoList())
         }
     }
 
-    private fun getTobaccoList(tobaccos: List<Tobacco>) : String {
-        var text = tobaccos.first().getFullName()
-        tobaccos.filterIndexed { index, tobacco -> index > 0 }.forEach {
-            text += ", ${it.getFullName()}"
 
-        }
-
-        return getString(R.string.add_shisha_tobaccos_placeholder, text)
-    }
 
 }

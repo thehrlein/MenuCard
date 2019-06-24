@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/menu_space_default"
+        android:layout_marginEnd="@dimen/menu_space_default"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/main_welcome"
+        android:textSize="@dimen/menu_text_size_default"/>
+
+    <fragment
+        android:id="@+id/orderLayout"
+        android:name="com.tobiapplications.menu.ui.fragments.main.OrderOverviewFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="4dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="@dimen/order_overview_title_height"
+        tools:layout="@layout/fragment_order_overview" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="0dp"
+        android:paddingEnd="@dimen/menu_space_default"
+        android:paddingBottom="@dimen/menu_space_default"
+        android:layout_gravity="bottom|end"
+        app:menu_colorNormal="@color/colorPrimary"
+        app:menu_colorPressed="@color/colorPrimaryDark"
+        app:menu_colorRipple="@color/colorPrimaryLight"
+        app:menu_backgroundColor="#ccffffff"
+        app:menu_labels_margin="10dp">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_drinks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fab_beer"
+            app:fab_label="@string/drinks"
+            style="@style/FloatingActionButtonSmall"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_shisha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fab_shisha"
+            app:fab_label="@string/shisha"
+            style="@style/FloatingActionButtonSmall" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+    <nl.dionsegijn.konfetti.KonfettiView
+        android:id="@+id/konfetti"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

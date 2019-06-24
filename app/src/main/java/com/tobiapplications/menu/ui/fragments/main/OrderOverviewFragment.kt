@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tobiapplications.menu.R
+import com.tobiapplications.menu.model.orderoverview.OrderOverviewItem
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.viewhandler.adapter.OrderOverviewAdapter
 import com.tobiapplications.menu.utils.extensions.*
@@ -16,8 +17,8 @@ import com.tobiapplications.menu.utils.general.MenuUtils
 import com.tobiapplications.menu.utils.general.OrderUtils
 import kotlinx.android.synthetic.main.fragment_order_overview.*
 import kotlinx.android.synthetic.main.fragment_order_overview.orderLayout
-import kotlinx.android.synthetic.main.view_order_item_bottom.*
-import kotlinx.android.synthetic.main.view_order_item_bottom.view.*
+import kotlinx.android.synthetic.main.viewholder_order_overview_bottom.*
+import kotlinx.android.synthetic.main.viewholder_order_overview_bottom.view.*
 
 /**
  *  Created by tobiashehrlein on 2019-05-24
@@ -40,7 +41,12 @@ class OrderOverviewFragment : BaseFragment() {
     }
 
     private fun initRecyclerView() {
-        orderOverviewAdapter = OrderOverviewAdapter()
+        val onSendClicked : () -> Unit = {
+            hideOrder()
+            (parentFragment as? NewOrderFragment)?.sendOrder(OrderUtils.getOrder())
+        }
+
+        orderOverviewAdapter = OrderOverviewAdapter(onSendClicked)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = orderOverviewAdapter
@@ -61,17 +67,12 @@ class OrderOverviewFragment : BaseFragment() {
         orderLayout.onClick{
             if (bottomSheetBehavior?.state == BottomSheetBehavior.STATE_EXPANDED) {
                 bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
-            } else if (bottomSheetBehavior?.state == BottomSheetBehavior.STATE_COLLAPSED) {
+            } else if (bottomSheetBehavior?.state == BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior?.state == BottomSheetBehavior.STATE_HALF_EXPANDED) {
                 bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }
 
         setOrder()
-
-        bottomLayout.confirmOrder.onClick {
-            hideOrder()
-            (parentFragment as? NewOrderFragment)?.sendOrder(OrderUtils.getOrder())
-        }
     }
 
     private fun hideOrder() {
@@ -88,12 +89,12 @@ class OrderOverviewFragment : BaseFragment() {
         postDelayed({ bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HALF_EXPANDED }, 200)
 
         val list : List<DisplayableItem> = order.drinks.plus(order.shisha)
-        orderOverviewAdapter?.setItems(list)
-
         val sumDrinks = order.drinks.sumByDouble { it.price * it.count }
         val sumShisha = order.shisha.sumByDouble { it.price * it.count }
 
-        bottomLayout.totalPrice.text = (sumDrinks + sumShisha).formatEuro()
+
+        orderOverviewAdapter?.setItems(list)
+        orderOverviewAdapter?.addItem(OrderOverviewItem((sumDrinks + sumShisha).formatEuro()))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

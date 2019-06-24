@@ -1,6 +1,8 @@
 package com.tobiapplications.menu.model.order
 
+import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.admin.Tobacco
+import com.tobiapplications.menu.utils.extensions.getString
 import com.tobiapplications.menu.utils.general.DisplayableItem
 
 
@@ -12,11 +14,23 @@ data class Shisha(val name: String,
                   val price: Double = 6.90,
                   var count: Int = 0) : OrderableItem, DisplayableItem {
 
+    constructor() : this("", emptyList(), 0.0, 0)
+
     fun increaseCount(count: Int) {
         this.count += count
     }
 
     fun getQualifier() : String {
         return "${tobaccos.joinToString { it.getFullName() }}_$price"
+    }
+
+    fun getTobaccoList() : String {
+        var text = tobaccos.first().getFullName()
+        tobaccos.filterIndexed { index, tobacco -> index > 0 }.forEach {
+            text += ", ${it.getFullName()}"
+
+        }
+
+        return text
     }
 }

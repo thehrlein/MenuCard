@@ -21,7 +21,7 @@ import com.tobiapplications.menu.utils.enums.OrderStatus
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.general.OrderUtils
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_new_order.*
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 
@@ -99,7 +99,7 @@ class NewOrderFragment : BaseFragment(), LoadingStateDialogHolder {
     }
 
     override fun getLayout(): Int {
-        return R.layout.fragment_main
+        return R.layout.fragment_new_order
     }
 
     override fun canModifyAppComponents(): Boolean {
