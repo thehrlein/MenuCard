@@ -1,24 +1,26 @@
 package com.tobiapplications.menu.ui.fragments.admin
 
+import android.graphics.drawable.ColorDrawable
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
+import com.tobiapplications.menu.model.admin.UpdateDataModel
 import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.model.order.UserOrder
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.viewhandler.delegates.admin.AdminOrderDelegate
-import com.tobiapplications.menu.utils.extensions.getFlattenedList
-import com.tobiapplications.menu.utils.extensions.obtainViewModel
-import com.tobiapplications.menu.utils.extensions.setGone
-import com.tobiapplications.menu.utils.extensions.show
+import com.tobiapplications.menu.utils.enums.OrderStatus
+import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.BaseRecyclerViewAdapter
-import com.tobiapplications.menu.utils.general.DisplayableItem
+import com.tobiapplications.menu.utils.general.SwipeDeleteCallback
+import com.tobiapplications.menu.utils.general.SwipeDeleteCallbackHolder
 import kotlinx.android.synthetic.main.fragment_admin_all_orders.*
 
 /**
  *  Created by tobiashehrlein on 2019-06-23
  */
-class AdminAllOrdersFragment : BaseFragment() {
+class AdminAllOrdersFragment : BaseFragment(), SwipeDeleteCallbackHolder {
 
     private lateinit var viewModel: AdminAllOrdersViewModel
     private var allOrdersAdapter: BaseRecyclerViewAdapter? = null
@@ -35,9 +37,9 @@ class AdminAllOrdersFragment : BaseFragment() {
     }
 
     private fun initRecyclerView() {
-        allOrdersAdapter = BaseRecyclerViewAdapter(listOf(AdminOrderDelegate()))
-//        val itemTouchHelper = ItemTouchHelper(SwipeDeleteCallback(this, getDrawable(R.drawable.ic_delete_white)!!, ColorDrawable(getColor(R.color.colorRed))))
-//        itemTouchHelper.attachToRecyclerView(recyclerView)
+        allOrdersAdapter = BaseRecyclerViewAdapter(listOf(AdminOrderDelegate { changeOrderStatus(it) }))
+        val itemTouchHelper = ItemTouchHelper(SwipeDeleteCallback(this, getDrawable(R.drawable.ic_delete_white)!!, ColorDrawable(getColor(R.color.colorRed))))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -45,9 +47,18 @@ class AdminAllOrdersFragment : BaseFragment() {
         }
     }
 
+    private fun changeOrderStatus(newStatus: UpdateDataModel) {
+        viewModel.updateStatus(newStatus)
+    }
+
     private fun initViewModel() {
         viewModel = obtainViewModel()
         viewModel.orders.observe(this, Observer { setOrders(it) })
+        viewModel.updateStatusResult.observe(this, Observer { onUpdateStatus(it) })
+    }
+
+    private fun onUpdateStatus(it: Boolean?) {
+        val a = it
     }
 
     private fun setOrders(it: List<UserOrder>?) {
@@ -57,13 +68,18 @@ class AdminAllOrdersFragment : BaseFragment() {
         } else {
             val flattend = mutableListOf<Order>()
             it.forEach {
-                flattend.addAll(it.list)
+                flattend.addAll(it.orders)
             }
+            allOrdersAdapter?.clear()
             allOrdersAdapter?.setItems(flattend)
             recyclerView.show()
             errorNoOrders.setGone()
         }
         progress.setGone()
+    }
+
+    override fun onItemSwiped(adapterPosition: Int) {
+
     }
 
     override fun getToolbarTitle(): String {

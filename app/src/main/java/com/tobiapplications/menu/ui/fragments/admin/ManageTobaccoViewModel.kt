@@ -7,7 +7,7 @@ import com.tobiapplications.menu.domain.admin.DeleteFromFireStoreUseCase
 import com.tobiapplications.menu.domain.admin.GetAndListenToAllDataUseCase
 import com.tobiapplications.menu.model.admin.AddToFireStoreModel
 import com.tobiapplications.menu.model.admin.DeleteDataModel
-import com.tobiapplications.menu.model.admin.GetManageDataModel
+import com.tobiapplications.menu.model.admin.ManageDataModel
 import com.tobiapplications.menu.model.admin.Tobacco
 import com.tobiapplications.menu.utils.extensions.map
 import com.tobiapplications.menu.utils.extensions.orFalse
@@ -34,7 +34,7 @@ class ManageTobaccoViewModel @Inject constructor(getAndListenToAllDataUseCase: G
             (it as? Result.Success<Boolean>)?.data.orFalse()
         }
 
-        getAndListenToAllDataUseCase.execute(GetManageDataModel(Constants.TOBACCO_COLLECTION, Tobacco::class.java))
+        getAndListenToAllDataUseCase.execute(ManageDataModel(Constants.TOBACCO_COLLECTION, Tobacco::class.java))
     }
 
     fun addNewTobacco(tobacco: Tobacco) {

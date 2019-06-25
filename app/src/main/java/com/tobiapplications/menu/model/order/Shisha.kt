@@ -24,10 +24,10 @@ data class Shisha(val name: String,
         return "${tobaccos.joinToString { it.getFullName() }}_$price"
     }
 
-    fun getTobaccoList() : String {
+    fun getTobaccoList(placeHolder: String? = ", ") : String {
         var text = tobaccos.first().getFullName()
         tobaccos.filterIndexed { index, tobacco -> index > 0 }.forEach {
-            text += ", ${it.getFullName()}"
+            text += "$placeHolder${it.getFullName()}"
 
         }
 

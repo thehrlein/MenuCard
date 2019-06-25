@@ -2,7 +2,7 @@ package com.tobiapplications.menu.domain.admin
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tobiapplications.menu.model.admin.FireStoreItem
-import com.tobiapplications.menu.model.admin.GetManageDataModel
+import com.tobiapplications.menu.model.admin.ManageDataModel
 import com.tobiapplications.menu.utils.mvvm.MediatorUseCase
 import com.tobiapplications.menu.utils.mvvm.Result
 import javax.inject.Inject
@@ -10,9 +10,9 @@ import javax.inject.Inject
 /**
  *  Created by tobiashehrlein on 2019-06-16
  */
-class GetAndListenToAllDataUseCase @Inject constructor(private val fireStore: FirebaseFirestore) : MediatorUseCase<GetManageDataModel, List<FireStoreItem>>() {
+class GetAndListenToAllDataUseCase @Inject constructor(private val fireStore: FirebaseFirestore) : MediatorUseCase<ManageDataModel, List<FireStoreItem>>() {
 
-    override fun execute(parameters: GetManageDataModel) {
+    override fun execute(parameters: ManageDataModel) {
         fireStore.collection(parameters.collection)
                 .addSnapshotListener { snapShot, exception ->
                     if (exception != null) {

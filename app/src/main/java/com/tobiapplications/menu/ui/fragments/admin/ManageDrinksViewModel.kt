@@ -8,7 +8,7 @@ import com.tobiapplications.menu.domain.admin.GetAndListenToAllDataUseCase
 import com.tobiapplications.menu.model.admin.AddToFireStoreModel
 import com.tobiapplications.menu.model.admin.DeleteDataModel
 import com.tobiapplications.menu.model.admin.Drink
-import com.tobiapplications.menu.model.admin.GetManageDataModel
+import com.tobiapplications.menu.model.admin.ManageDataModel
 import com.tobiapplications.menu.utils.extensions.map
 import com.tobiapplications.menu.utils.extensions.orFalse
 import com.tobiapplications.menu.utils.general.Constants
@@ -34,7 +34,7 @@ class ManageDrinksViewModel @Inject constructor(getAndListenToAllDataUseCase: Ge
             (it as? Result.Success<Boolean>)?.data.orFalse()
         }
 
-        getAndListenToAllDataUseCase.execute(GetManageDataModel(Constants.DRINK_COLLECTION, Drink::class.java))
+        getAndListenToAllDataUseCase.execute(ManageDataModel(Constants.DRINK_COLLECTION, Drink::class.java))
     }
 
     fun addNewDrink(drink: Drink) {

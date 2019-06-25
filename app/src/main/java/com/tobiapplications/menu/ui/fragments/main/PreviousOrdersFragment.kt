@@ -33,7 +33,7 @@ class PreviousOrdersFragment : BaseFragment() {
         viewModel = obtainViewModel()
         viewModel.prevOrders.observe(this, Observer {
             it?.let { prevOrders ->
-                previousOrdersAdapter?.setItems(prevOrders.list)
+                previousOrdersAdapter?.setItems(prevOrders.orders)
             }
         })
     }

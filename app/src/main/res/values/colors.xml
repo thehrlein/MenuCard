@@ -11,6 +11,8 @@
     <color name="colorBlack">#000000</color>
     <color name="colorRed">#FF0000</color>
     <color name="colorGreen">#7AB51D</color>
+    <color name="colorAqua">#00FFFF</color>
+    <color name="colorBlue">#0000FF</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorGrey">#cccccc</color>
     <color name="buttonBackgroundGrey">#e5e5e5</color>

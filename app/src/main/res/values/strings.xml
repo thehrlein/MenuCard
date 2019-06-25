@@ -2,8 +2,8 @@
 
     <!-- General -->
     <string name="app_name">Menu</string>
-    <string name="drinks">Getränke</string>
-    <string name="shisha">Shisha</string>
+    <string name="general_drinks">Getränke</string>
+    <string name="general_shisha">Shisha</string>
     <string name="general_attention">Achtung</string>
     <string name="general_please_wait">Bitte warten …</string>
     <string name="general_unknown_error">Es ist ein unbekannter Fehler aufgetreten</string>
@@ -11,6 +11,20 @@
     <string name="general_add">hinzufügen</string>
     <string name="general_select">auswählen</string>
     <string name="general_delete">löschen</string>
+    <string name="general_position">Pos.</string>
+    <string name="general_name">Name</string>
+    <string name="general_size">Größe</string>
+    <string name="general_price">Preis</string>
+    <string name="general_count">Anzahl</string>
+    <string name="general_tobacco">Tabak</string>
+    <string name="general_date_time">Wann?</string>
+    <string name="general_customer_email">Wer?</string>
+    <string name="general_total_price">Gesamtpreis:</string>
+    <string name="general_position_placeholder">%1$d.</string>
+    <string name="general_order_status_new">neu</string>
+    <string name="general_order_status_sent">gesendet</string>
+    <string name="general_order_status_in_progress">in Bearbeitung</string>
+    <string name="general_order_status_done">fertig</string>
 
     <!-- LoadingScreen -->
     <string name="loading_please_be_patient">Einen Moment …</string>
@@ -46,12 +60,6 @@
     <string name="add_shisha_not_all_shisha_have_tobacco_delete">Löschen</string>
 
     <!-- OrderOverviewFragment -->
-    <string name="overview_position">Pos.</string>
-    <string name="overview_name">Name</string>
-    <string name="overview_size">Größe</string>
-    <string name="overview_price">Preis</string>
-    <string name="overview_count">Anzahl</string>
-    <string name="overview_total_price">Gesamtpreis:</string>
     <string name="overview_confirm_order">Bestellung abschicken</string>
     <string name="overview_delete_order">Möchten Sie Ihre Bestellung löschen?</string>
     <string name="overview_send_order_success">Herzlichen Glückwunsch\nIhre Bestellung wurde erfolgreich gesendet :)</string>

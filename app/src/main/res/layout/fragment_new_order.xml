@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_fab_beer"
-            app:fab_label="@string/drinks"
+            app:fab_label="@string/general_drinks"
             style="@style/FloatingActionButtonSmall"/>
 
         <com.github.clans.fab.FloatingActionButton
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_fab_shisha"
-            app:fab_label="@string/shisha"
+            app:fab_label="@string/general_shisha"
             style="@style/FloatingActionButtonSmall" />
 
     </com.github.clans.fab.FloatingActionMenu>

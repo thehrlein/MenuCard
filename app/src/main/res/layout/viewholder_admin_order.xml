@@ -11,27 +11,53 @@
     android:padding="@dimen/menu_space_small">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/verticalBarrierHalf"
+        android:id="@+id/verticalBarrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.45"/>
+        app:layout_constraintGuide_percent="0.2"/>
+
+    <TextView
+        android:id="@+id/dateLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/general_date_time"/>
 
     <TextView
         android:id="@+id/date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/verticalBarrierHalf"
+        app:layout_constraintStart_toEndOf="@id/verticalBarrier"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:text="22.06.2019 - 16:45 Uhr"/>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_order_status"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="in Bearbeitung"/>
+
+    <TextView
+        android:id="@+id/nameLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/dateLabel"
+        app:layout_constraintStart_toStartOf="@id/dateLabel"
+        android:text="@string/general_customer_email"/>
 
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/verticalBarrierHalf"
+        app:layout_constraintTop_toBottomOf="@id/date"
+        app:layout_constraintStart_toStartOf="@id/date"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="vorname_nachname@mail.com"/>
 
@@ -39,7 +65,7 @@
         android:id="@+id/barrierHeadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/menu_space_small"
+        android:layout_marginTop="@dimen/menu_space_small"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="date, name"/>
 
@@ -48,7 +74,79 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="@dimen/menu_space_small"
         app:layout_constraintTop_toBottomOf="@id/barrierHeadline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/totalCountLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/general_total_price"
+        android:textSize="@dimen/menu_text_size_big"
+        android:layout_marginTop="@dimen/menu_space_default"
+        app:layout_constraintTop_toBottomOf="@id/orders"
+        app:layout_constraintStart_toStartOf="@id/dateLabel"/>
+
+    <TextView
+        android:id="@+id/totalCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/menu_text_size_big"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/menu_space_default"
+        app:layout_constraintTop_toTopOf="@id/totalCountLabel"
+        app:layout_constraintStart_toEndOf="@id/totalCountLabel"/>
+
+    <View
+        android:id="@+id/statusTopSeparator"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/colorGrey"
+        android:layout_marginTop="@dimen/menu_space_default"
+        app:layout_constraintTop_toBottomOf="@id/totalCountLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/prevStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/menu_space_mini"
+        app:layout_constraintTop_toBottomOf="@id/statusTopSeparator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/statusButtonSeparator"
+        tools:text="gesendet"/>
+
+    <View
+        android:id="@+id/statusButtonSeparator"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:background="@color/colorGrey"
+        app:layout_constraintTop_toBottomOf="@id/statusTopSeparator"
+        app:layout_constraintBottom_toTopOf="@id/statusBottomSeparator"
+        app:layout_constraintStart_toEndOf="@id/prevStatus"
+        app:layout_constraintEnd_toStartOf="@id/nextStatus"/>
+
+    <TextView
+        android:id="@+id/nextStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/prevStatus"
+        app:layout_constraintStart_toEndOf="@id/statusButtonSeparator"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="in Bearbeitung"/>
+
+    <View
+        android:id="@+id/statusBottomSeparator"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/colorGrey"
+        android:layout_marginTop="@dimen/menu_space_mini"
+        app:layout_constraintTop_toBottomOf="@id/prevStatus"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

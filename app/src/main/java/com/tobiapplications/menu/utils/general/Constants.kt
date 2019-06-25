@@ -35,4 +35,6 @@ object Constants {
     const val DRINK_COLLECTION = "drinks"
     const val TOBACCO_COLLECTION = "tobacco"
     const val ORDER_COLLECTION = "orders"
+    const val STATUS_FIELD = "status"
+    const val ORDERS_FIELD = "orders"
 }

@@ -49,13 +49,26 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:id="@+id/expandList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:dividerHeight="1dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="@dimen/menu_space_mini"
-            android:divider="@color/colorLightGrey" />
+            android:layout_marginBottom="@dimen/menu_space_mini">
+
+            <FrameLayout
+                android:id="@+id/listHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/expandList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="1dp"
+                android:orientation="vertical"
+                android:divider="@color/colorLightGrey" />
+
+        </LinearLayout>
+
 
     </net.cachapa.expandablelayout.ExpandableLayout>
 
