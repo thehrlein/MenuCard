@@ -42,6 +42,6 @@ class ManageTobaccoViewModel @Inject constructor(getAndListenToAllDataUseCase: G
     }
 
     fun deleteTobacco(tobacco: Tobacco?) {
-        tobacco?.let { deleteFromFireStoreUseCase.execute(DeleteDataModel(Constants.TOBACCO_COLLECTION, it.id.orEmpty())) }
+        tobacco?.let { deleteFromFireStoreUseCase.execute(DeleteDataModel(Constants.TOBACCO_COLLECTION, null, it.id.orEmpty())) }
     }
 }

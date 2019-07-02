@@ -9,10 +9,7 @@ import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.ui.views.general.AdminExpandableView
 import com.tobiapplications.menu.utils.enums.OrderStatus
 import com.tobiapplications.menu.utils.enums.OrderType
-import com.tobiapplications.menu.utils.extensions.formatEuro
-import com.tobiapplications.menu.utils.extensions.getColor
-import com.tobiapplications.menu.utils.extensions.getString
-import com.tobiapplications.menu.utils.extensions.onClick
+import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.general.DateUtils
 import kotlinx.android.synthetic.main.viewholder_admin_order.view.*
@@ -20,7 +17,7 @@ import kotlinx.android.synthetic.main.viewholder_admin_order.view.*
 /**
  *  Created by tobiashehrlein on 2019-06-23
  */
-class AdminOrderViewHolder(private val view: View, newStatus: (UpdateDataModel) -> Unit) : RecyclerView.ViewHolder(view) {
+class AdminOrderViewHolder(private val view: View, private val newStatus: (UpdateDataModel) -> Unit) : RecyclerView.ViewHolder(view) {
 
     private var order: Order? = null
 
@@ -29,11 +26,7 @@ class AdminOrderViewHolder(private val view: View, newStatus: (UpdateDataModel) 
             order?.let { order ->
                 val prevStatus = OrderStatus.getPrevStatus(order.status)
                 if (prevStatus != null)
-                    newStatus(UpdateDataModel(
-                        Constants.ORDER_COLLECTION,
-                        order.id!!,
-                        Constants.STATUS_FIELD,
-                        prevStatus))
+                    updateStatus(order, prevStatus)
             }
         }
 
@@ -41,17 +34,31 @@ class AdminOrderViewHolder(private val view: View, newStatus: (UpdateDataModel) 
             order?.let { order ->
                 val nextStatus = OrderStatus.getNextStatus(order.status)
                 if (nextStatus != null)
-                    newStatus(UpdateDataModel(
-                        Constants.ORDER_COLLECTION,
-                        order.id!!,
-                        Constants.STATUS_FIELD,
-                        nextStatus))
+                    updateStatus(order, nextStatus)
             }
         }
     }
 
+    private fun updateStatus(order: Order, nextStatus: OrderStatus) {
+        view.rootLayout.setBackgroundColor(getColor(R.color.colorUpdateStatusGrey))
+        view.progress.show()
+        newStatus(getUpdateDataModel(order, nextStatus))
+    }
+
+    private fun getUpdateDataModel(order: Order, updatedStatus: OrderStatus): UpdateDataModel {
+        return UpdateDataModel(
+            Constants.ORDER_COLLECTION,
+            order.id!!,
+            Constants.STATUS_FIELD,
+            updatedStatus,
+            order.timeStamp
+        )
+    }
+
     fun setOrder(order: Order) {
         this.order = order
+        view.progress.setGone()
+        view.rootLayout.setBackgroundColor(getColor(R.color.colorWhite))
         view.date.text = "${DateUtils.getDate(order.timeStamp)} Uhr"
         view.name.text = order.id
 
@@ -64,13 +71,8 @@ class AdminOrderViewHolder(private val view: View, newStatus: (UpdateDataModel) 
         val statusBackground = view.status.background as? GradientDrawable
         statusBackground?.setColor(getColor(status.colorRes))
 
-        OrderStatus.getPrevStatus(status)?.textRes?.let {
-            view.prevStatus.text = getString(it)
-        }
-
-        OrderStatus.getNextStatus(status)?.textRes?.let {
-            view.nextStatus.text = getString(it)
-        }
+        view.prevStatus.text = OrderStatus.getPrevStatus(status)?.textRes?.let { getString(it) } ?: Constants.EMPTY_STRING
+        view.nextStatus.text = OrderStatus.getNextStatus(status)?.textRes?.let { getString(it) } ?: Constants.EMPTY_STRING
     }
 
     private fun buildExpandableLayouts(order: Order) {

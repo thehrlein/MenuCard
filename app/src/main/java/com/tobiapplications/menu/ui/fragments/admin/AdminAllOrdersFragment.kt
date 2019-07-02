@@ -13,6 +13,7 @@ import com.tobiapplications.menu.ui.viewhandler.delegates.admin.AdminOrderDelega
 import com.tobiapplications.menu.utils.enums.OrderStatus
 import com.tobiapplications.menu.utils.extensions.*
 import com.tobiapplications.menu.utils.general.BaseRecyclerViewAdapter
+import com.tobiapplications.menu.utils.general.DisplayableItem
 import com.tobiapplications.menu.utils.general.SwipeDeleteCallback
 import com.tobiapplications.menu.utils.general.SwipeDeleteCallbackHolder
 import kotlinx.android.synthetic.main.fragment_admin_all_orders.*
@@ -57,8 +58,20 @@ class AdminAllOrdersFragment : BaseFragment(), SwipeDeleteCallbackHolder {
         viewModel.updateStatusResult.observe(this, Observer { onUpdateStatus(it) })
     }
 
-    private fun onUpdateStatus(it: Boolean?) {
-        val a = it
+    private fun onUpdateStatus(update: Order?) {
+        if (update == null) {
+            allOrdersAdapter?.notifyDataSetChanged()
+        } else {
+            val item = allOrdersAdapter?.itemList
+                ?.mapNotNull { it as? Order }
+                ?.firstOrNull { it.timeStamp ==  update.timeStamp}
+
+            item?.let {
+                it.status = update.status
+                allOrdersAdapter?.notifyItemChanged(it)
+            }
+        }
+        viewModel.listenToUpdates()
     }
 
     private fun setOrders(it: List<UserOrder>?) {
@@ -66,12 +79,9 @@ class AdminAllOrdersFragment : BaseFragment(), SwipeDeleteCallbackHolder {
             recyclerView.setGone()
             errorNoOrders.show()
         } else {
-            val flattend = mutableListOf<Order>()
-            it.forEach {
-                flattend.addAll(it.orders)
-            }
+            val orders = it.flatMap { it.orders }
             allOrdersAdapter?.clear()
-            allOrdersAdapter?.setItems(flattend)
+            allOrdersAdapter?.setItems(orders)
             recyclerView.show()
             errorNoOrders.setGone()
         }
@@ -79,7 +89,7 @@ class AdminAllOrdersFragment : BaseFragment(), SwipeDeleteCallbackHolder {
     }
 
     override fun onItemSwiped(adapterPosition: Int) {
-
+        viewModel.deleteItem(allOrdersAdapter?.getItem(adapterPosition) as? Order)
     }
 
     override fun getToolbarTitle(): String {

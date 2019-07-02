@@ -11,4 +11,6 @@ class PreviousOrdersAdapter : BaseRecyclerViewAdapter() {
     init {
         delegatesManager.addDelegate(PreviousOrderDelegate())
     }
+
+
 }

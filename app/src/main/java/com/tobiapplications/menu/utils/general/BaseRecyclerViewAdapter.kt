@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
+import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.utils.extensions.hasItems
 import com.tobiapplications.menu.utils.extensions.orDefault
 
@@ -66,7 +67,17 @@ open class BaseRecyclerViewAdapter(delegates: List<AdapterDelegate<List<Displaya
         } else {
             notifyItemRangeChanged(startIndex, items?.size.orDefault())
         }
+    }
 
+    fun addNonExtisting(items: List<DisplayableItem>?) {
+        val list = items?.filterNot { itemList.contains(it) }
+        setItems(list)
+    }
+
+    fun <T : DisplayableItem> update(item: T, clazz: Class<T>, find: (T, T) -> Boolean, modify: (T, T) -> Unit) {
+        val a = itemList.filterIsInstance(clazz).firstOrNull { find(it, item) } ?: return
+        modify(a, item)
+        notifyItemChanged(a)
     }
 
     /** add single item */
@@ -90,8 +101,6 @@ open class BaseRecyclerViewAdapter(delegates: List<AdapterDelegate<List<Displaya
             notifyItemRemoved(pos)
         }
     }
-
-
 
     /** notifying */
     fun notifyItemInserted(item: DisplayableItem) {

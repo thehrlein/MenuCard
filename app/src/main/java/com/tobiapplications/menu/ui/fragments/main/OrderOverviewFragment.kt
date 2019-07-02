@@ -37,7 +37,7 @@ class OrderOverviewFragment : BaseFragment() {
 
     private fun initViewModel() {
         viewModel = obtainViewModel()
-        viewModel.headerAlpha.observe(this, Observer { collapseArrow.rotation = if (it > 0.3f) 0f else 180f })
+        viewModel.headerAlpha.observe(this, Observer { collapseArrow.rotation = if (it > 0.7) 0f else 180f })
     }
 
     private fun initRecyclerView() {

@@ -1,11 +1,9 @@
 package com.tobiapplications.menu.utils.repository.base
 
-
 /**
  * Created by tobias.hehrlein on 10.01.19.
  */
-open class BaseLocalSource<I, T> :
-    LocalSourceDelegate<I, T> {
+open class BaseLocalSource<I, T> : LocalSourceDelegate<I, T> {
 
     private var t : T? = null
 

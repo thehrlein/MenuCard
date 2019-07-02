@@ -3,7 +3,7 @@ package com.tobiapplications.menu.ui.fragments.main
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.previousorders.PreviousOrder
+import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.viewhandler.adapter.PreviousOrdersAdapter
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
@@ -31,11 +31,7 @@ class PreviousOrdersFragment : BaseFragment() {
 
     fun initViewModel() {
         viewModel = obtainViewModel()
-        viewModel.prevOrders.observe(this, Observer {
-            it?.let { prevOrders ->
-                previousOrdersAdapter?.setItems(prevOrders.orders)
-            }
-        })
+        viewModel.prevOrders.observe(this, Observer { previousOrdersAdapter?.setItems(it?.orders, true) })
     }
 
     private fun initRecyclerView() {

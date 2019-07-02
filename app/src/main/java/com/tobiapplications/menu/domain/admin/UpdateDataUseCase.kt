@@ -14,7 +14,7 @@ import javax.inject.Inject
 /**
  *  Created by tobiashehrlein on 2019-06-25
  */
-class UpdateDataUseCase @Inject constructor(private val fireStore: FirebaseFirestore) : MediatorUseCase<UpdateDataModel, Boolean>() {
+class UpdateDataUseCase @Inject constructor(private val fireStore: FirebaseFirestore) : MediatorUseCase<UpdateDataModel, Order?>() {
 
     override fun execute(parameters: UpdateDataModel) {
         fireStore
@@ -23,8 +23,9 @@ class UpdateDataUseCase @Inject constructor(private val fireStore: FirebaseFires
             .get()
             .addOnSuccessListener {
                 val userOders = it.toObject(UserOrder::class.java)
-                val order = userOders?.orders?.firstOrNull { it.timeStamp == 1561492065593 } ?: return@addOnSuccessListener
-                val updatedOrder = Order(order.drinks, order.shisha, order.timeStamp, OrderStatus.DONE)
+                val order = userOders?.orders?.firstOrNull { it.timeStamp == parameters.timeStamp } ?: return@addOnSuccessListener
+                val updatedOrder = Order(order.drinks, order.shisha, order.timeStamp, parameters.newValue as OrderStatus)
+                updatedOrder.id = order.id
                 fireStore
                     .collection(parameters.collection)
                     .document(parameters.document)
@@ -34,7 +35,7 @@ class UpdateDataUseCase @Inject constructor(private val fireStore: FirebaseFires
                             .collection(parameters.collection)
                             .document(parameters.document)
                             .update(Constants.ORDERS_FIELD, FieldValue.arrayUnion(updatedOrder))
-                            .addOnSuccessListener { onSuccess() }
+                            .addOnSuccessListener { onSuccess(updatedOrder) }
                             .addOnFailureListener { onFailure() }
                     }
                     .addOnFailureListener { onFailure() }
@@ -43,11 +44,11 @@ class UpdateDataUseCase @Inject constructor(private val fireStore: FirebaseFires
     }
 
 
-    private fun onSuccess() {
-        result.postValue(Result.Success(true))
+    private fun onSuccess(newOrder: Order) {
+        result.postValue(Result.Success(newOrder))
     }
 
     private fun onFailure() {
-        result.postValue(Result.Success(false))
+        result.postValue(Result.Success(null))
     }
 }
