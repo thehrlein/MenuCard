@@ -12,11 +12,11 @@ import com.tobiapplications.menu.utils.general.DisplayableItem
 data class Shisha(val name: String,
                   var tobaccos: List<Tobacco> = emptyList(),
                   val price: Double = 6.90,
-                  var count: Int = 0) : OrderableItem, DisplayableItem {
+                  var count: Long = 0) : OrderableItem, DisplayableItem {
 
     constructor() : this("", emptyList(), 0.0, 0)
 
-    fun increaseCount(count: Int) {
+    fun increaseCount(count: Long) {
         this.count += count
     }
 

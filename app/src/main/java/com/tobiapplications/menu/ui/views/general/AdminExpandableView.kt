@@ -26,7 +26,7 @@ class AdminExpandableView(context: Context, attrs: AttributeSet? = null, defStyl
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_admin_order_expandable_group,  this)
-        expandView.onClick {
+        expandRoot.onClick {
             arrow.rotation = if (expandLayout.isExpanded) 0f else 180f
             separator.setVisible(expandLayout.isExpanded)
             expandLayout.toggle()

@@ -4,8 +4,6 @@ import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModel
@@ -108,10 +106,10 @@ fun BaseFragment.getColor(res: Int) : Int {
 }
 
 fun BaseFragment.addFragment(fragment: BaseFragment) {
-    fragmentManager?.beginTransaction()?.add(MainActivity.FRAGMEND_CONTAINER_ID, fragment)?.commit()
+    fragmentManager?.beginTransaction()?.add(MainActivity.FRAGMENT_CONTAINER_ID, fragment)?.commit()
 }
 
-fun BaseFragment.replaceFragment(fragment: BaseFragment, container: Int = MainActivity.FRAGMEND_CONTAINER_ID, addToStack: Boolean = true) {
+fun BaseFragment.replaceFragment(fragment: BaseFragment, container: Int = MainActivity.FRAGMENT_CONTAINER_ID, addToStack: Boolean = true) {
     fragmentManager?.beginTransaction()?.apply {
         replace(container, fragment)
         if (addToStack) {

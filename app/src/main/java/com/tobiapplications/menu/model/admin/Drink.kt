@@ -12,11 +12,11 @@ import java.io.Serializable
 data class Drink(var name: String,
                  var size: String,
                  var price: Double,
-                 var count: Int = 0) : FireStoreItem(), OrderableItem, DisplayableItem {
+                 var count: Long = 0) : FireStoreItem(), OrderableItem, DisplayableItem {
 
     constructor() : this("","", 0.0)
 
-    fun increaseCount(count: Int) {
+    fun increaseCount(count: Long) {
         this.count += count
     }
 

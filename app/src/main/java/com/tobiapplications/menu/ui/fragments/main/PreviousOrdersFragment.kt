@@ -31,7 +31,7 @@ class PreviousOrdersFragment : BaseFragment() {
 
     fun initViewModel() {
         viewModel = obtainViewModel()
-        viewModel.prevOrders.observe(this, Observer { previousOrdersAdapter?.setItems(it?.orders, true) })
+        viewModel.prevOrders.observe(this, Observer { previousOrdersAdapter?.setItems(it?.orders?.values?.toMutableList(), true) })
     }
 
     private fun initRecyclerView() {

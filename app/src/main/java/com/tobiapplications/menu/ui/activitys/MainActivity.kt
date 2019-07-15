@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
     private lateinit var viewModel: MainActivityViewModel
 
     companion object {
-        const val FRAGMEND_CONTAINER_ID = R.id.fragment_container
+        const val FRAGMENT_CONTAINER_ID = R.id.fragment_container
     }
 
     override fun init() {

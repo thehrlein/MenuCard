@@ -19,6 +19,10 @@ fun Int?.orDefault() : Int {
     return this ?: Constants.DEFAULT_INT
 }
 
+fun Long?.orDefault() : Long {
+    return this ?: Constants.DEFAULT_LONG
+}
+
 fun Double.formatEuro() : String {
     return String.format("%.2f €", this)
 }

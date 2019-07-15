@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.admin.UpdateDataModel
 import com.tobiapplications.menu.model.order.Order
+import com.tobiapplications.menu.model.order.UserOrder
 import com.tobiapplications.menu.ui.views.general.AdminExpandableView
 import com.tobiapplications.menu.utils.enums.OrderStatus
 import com.tobiapplications.menu.utils.enums.OrderType
@@ -46,11 +47,12 @@ class AdminOrderViewHolder(private val view: View, private val newStatus: (Updat
     }
 
     private fun getUpdateDataModel(order: Order, updatedStatus: OrderStatus): UpdateDataModel {
+        order.status = updatedStatus
         return UpdateDataModel(
             Constants.ORDER_COLLECTION,
             order.id!!,
             Constants.STATUS_FIELD,
-            updatedStatus,
+            UserOrder(mapOf(order.timeStamp.toString() to order)),
             order.timeStamp
         )
     }

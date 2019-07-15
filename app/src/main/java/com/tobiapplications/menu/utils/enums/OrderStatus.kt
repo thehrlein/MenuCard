@@ -13,6 +13,11 @@ enum class OrderStatus(val textRes: Int, val colorRes: Int)  {
     DONE(R.string.general_order_status_done, R.color.colorGreen);
 
     companion object {
+        fun getStatus(value: String) : OrderStatus {
+            return values()
+                .firstOrNull { it.name == value } ?: NEW
+        }
+
         fun getPrevStatus(status: OrderStatus) : OrderStatus? {
             return when (status) {
                 NEW -> null

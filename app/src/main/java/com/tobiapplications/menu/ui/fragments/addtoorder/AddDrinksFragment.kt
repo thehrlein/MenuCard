@@ -42,7 +42,7 @@ class AddDrinksFragment : BaseFragment() {
 
     private fun initViews() {
         add.onClick {
-            OrderUtils.addDrinks(drinksAdapter?.itemList?.filter { (it as? Drink)?.count.orDefault() > 0 }.orEmpty())
+            OrderUtils.addDrinks(drinksAdapter?.itemList?.filter { (it as? Drink)?.count.orDefault() > 0L }.orEmpty())
             activity?.onBackPressed()
         }
     }

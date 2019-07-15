@@ -22,9 +22,9 @@ class GetAllPreviousOrdersUseCase @Inject constructor(private val fireStore: Fir
                     onFailure()
                 }
 
-                var userOrder = UserOrder(emptyList())
+                var userOrder = UserOrder(emptyMap())
                 snapshot?.let {
-                    userOrder = it.toObject(UserOrder::class.java) ?: UserOrder(emptyList())
+                    userOrder = it.toObject(UserOrder::class.java) ?: UserOrder(emptyMap())
                 }
 
                 onSuccess(userOrder)
@@ -36,6 +36,6 @@ class GetAllPreviousOrdersUseCase @Inject constructor(private val fireStore: Fir
     }
 
     private fun onFailure() {
-        result.postValue(Result.Success(UserOrder(emptyList())))
+        result.postValue(Result.Success(UserOrder(emptyMap())))
     }
 }

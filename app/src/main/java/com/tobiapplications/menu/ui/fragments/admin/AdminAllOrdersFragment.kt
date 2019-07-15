@@ -74,14 +74,13 @@ class AdminAllOrdersFragment : BaseFragment(), SwipeDeleteCallbackHolder {
         viewModel.listenToUpdates()
     }
 
-    private fun setOrders(it: List<UserOrder>?) {
+    private fun setOrders(it: List<Order>?) {
         if (it == null || it.isEmpty()) {
             recyclerView.setGone()
             errorNoOrders.show()
         } else {
-            val orders = it.flatMap { it.orders }
             allOrdersAdapter?.clear()
-            allOrdersAdapter?.setItems(orders)
+            allOrdersAdapter?.setItems(it)
             recyclerView.show()
             errorNoOrders.setGone()
         }

@@ -6,10 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.tobiapplications.menu.R
 import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.base.BaseActivity
-import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 
 /**
  * Acitivity extension functions
@@ -28,7 +26,7 @@ fun AppCompatActivity.toast(message : String, duration: Int = Toast.LENGTH_LONG)
 
 fun AppCompatActivity.replaceFragment(fragment: Fragment, addToStack: Boolean = true) {
     val transaction = supportFragmentManager.beginTransaction()
-    transaction.replace(MainActivity.FRAGMEND_CONTAINER_ID, fragment)
+    transaction.replace(MainActivity.FRAGMENT_CONTAINER_ID, fragment)
     if (addToStack) {
         transaction.addToBackStack(null)
     }

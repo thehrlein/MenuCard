@@ -14,7 +14,7 @@ class DrinkViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     private var orderDrink : Drink? = null
 
     init {
-        view.orderControl.setOnValueChangeListener { orderDrink?.count = it }
+        view.orderControl.setOnValueChangeListener { orderDrink?.count = it.toLong() }
     }
 
     fun setDrink(item: Drink) {

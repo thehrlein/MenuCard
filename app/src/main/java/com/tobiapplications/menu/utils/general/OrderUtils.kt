@@ -4,6 +4,7 @@ import com.tobiapplications.menu.model.admin.Drink
 import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.model.order.Shisha
 import com.tobiapplications.menu.utils.enums.OrderStatus
+import com.tobiapplications.menu.utils.extensions.orDefault
 
 /**
  *  Created by tobiashehrlein on 2019-05-23
