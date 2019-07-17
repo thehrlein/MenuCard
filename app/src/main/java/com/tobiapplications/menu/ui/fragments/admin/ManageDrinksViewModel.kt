@@ -2,9 +2,9 @@ package com.tobiapplications.menu.ui.fragments.admin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.tobiapplications.menu.domain.general.AddToFireStoreUseCase
 import com.tobiapplications.menu.domain.admin.DeleteFromFireStoreUseCase
 import com.tobiapplications.menu.domain.admin.GetAndListenToAllDataUseCase
+import com.tobiapplications.menu.domain.general.AddToFireStoreUseCase
 import com.tobiapplications.menu.model.admin.AddToFireStoreModel
 import com.tobiapplications.menu.model.admin.DeleteDataModel
 import com.tobiapplications.menu.model.admin.Drink
@@ -34,7 +34,7 @@ class ManageDrinksViewModel @Inject constructor(getAndListenToAllDataUseCase: Ge
             (it as? Result.Success<Boolean>)?.data.orFalse()
         }
 
-        getAndListenToAllDataUseCase.execute(ManageDataModel(Constants.DRINK_COLLECTION, Drink::class.java))
+        getAndListenToAllDataUseCase.execute(ManageDataModel(Constants.DRINK_COLLECTION, clazz = Drink::class.java))
     }
 
     fun addNewDrink(drink: Drink) {

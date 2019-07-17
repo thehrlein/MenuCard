@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.admin.UpdateDataModel
+import com.tobiapplications.menu.model.admin.AddToFireStoreModel
 import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.ui.viewholder.admin.AdminOrderViewHolder
 import com.tobiapplications.menu.utils.enums.OrderStatus
@@ -14,7 +14,7 @@ import com.tobiapplications.menu.utils.general.DisplayableItem
 /**
  *  Created by tobiashehrlein on 2019-06-23
  */
-class AdminOrderDelegate(private val newStatus: (UpdateDataModel) -> Unit) : AdapterDelegate<List<DisplayableItem>>() {
+class AdminOrderDelegate(private val newStatus: (AddToFireStoreModel) -> Unit) : AdapterDelegate<List<DisplayableItem>>() {
 
     override fun isForViewType(items: List<DisplayableItem>, position: Int): Boolean {
         return items[position] is Order

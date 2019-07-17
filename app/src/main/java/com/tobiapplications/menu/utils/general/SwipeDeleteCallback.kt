@@ -37,7 +37,6 @@ class SwipeDeleteCallback(private val fragment: SwipeDeleteCallbackHolder, priva
 
         background.draw(c)
         deleteIcon.draw(c)
-
     }
 
     private fun onSwipeRight(view: View, offset: Int, iconMargin: Int, iconTop: Int, iconBottom: Int, dX: Float) {

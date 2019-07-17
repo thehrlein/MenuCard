@@ -23,7 +23,7 @@ class GetAndListenToAllDataUseCase @Inject constructor(private val fireStore: Fi
 
     private fun registerSnapSnotListener() {
         val model = dataModel
-        if (model == null) {
+        if (model?.clazz == null) {
             onFailure()
         } else {
              snapShotListener = fireStore.collection(model.collection)
@@ -52,13 +52,5 @@ class GetAndListenToAllDataUseCase @Inject constructor(private val fireStore: Fi
 
     private fun onFailure() {
         result.postValue(Result.Success(emptyList()))
-    }
-
-    fun removeSnapShotListener() {
-        snapShotListener?.remove()
-    }
-
-    fun addSnapShotListener() {
-        registerSnapSnotListener()
     }
 }

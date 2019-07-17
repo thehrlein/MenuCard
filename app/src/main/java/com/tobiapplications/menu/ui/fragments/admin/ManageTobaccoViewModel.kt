@@ -34,7 +34,7 @@ class ManageTobaccoViewModel @Inject constructor(getAndListenToAllDataUseCase: G
             (it as? Result.Success<Boolean>)?.data.orFalse()
         }
 
-        getAndListenToAllDataUseCase.execute(ManageDataModel(Constants.TOBACCO_COLLECTION, Tobacco::class.java))
+        getAndListenToAllDataUseCase.execute(ManageDataModel(Constants.TOBACCO_COLLECTION, clazz = Tobacco::class.java))
     }
 
     fun addNewTobacco(tobacco: Tobacco) {

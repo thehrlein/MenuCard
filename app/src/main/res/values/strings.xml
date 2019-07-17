@@ -25,6 +25,7 @@
     <string name="general_order_status_sent">gesendet</string>
     <string name="general_order_status_in_progress">in Bearbeitung</string>
     <string name="general_order_status_done">fertig</string>
+    <string name="general_order_status_delete">löschen</string>
 
     <!-- LoadingScreen -->
     <string name="loading_please_be_patient">Einen Moment …</string>
@@ -34,7 +35,6 @@
     <string name="loading_not_logged_stay_anonymous">Als Gast bestellen</string>
 
     <!-- Menu -->
-    <string name="menu_welcome_message">Herzlich Willkommen in unserer Bar &amp; Shisha Lounge!\nSehen Sie Ihre alten bzw. aktuellen Bestellungen ein oder geben Sie eine neue auf. Viel Spaß :)</string>
     <string name="menu_navigation_last_order">Bestellungen</string>
     <string name="menu_navigation_new_order">Neue Bestellung</string>
     <string name="menu_navigation_profile">Profil</string>
@@ -46,6 +46,9 @@
     <string name="main_logout_or_quit_dialog_title">Möchten Sie sich ausloggen oder die App beenden?</string>
     <string name="main_logout_or_quit_dialog_logout">Ausloggen</string>
     <string name="main_logout_or_quit_dialog_quit">App beenden</string>
+
+    <!-- PreviousOrdersFragment -->
+    <string name="previous_orders_no_orders">Keine Bestellungen verfügbar</string>
 
     <!-- AddDrinksFragment -->
     <string name="add_drinks_error_no_drinks">Entschuldigung - Es ist ein Fehler aufgetreten\n\nKeine Getränke verfügbar - bitte kontaktieren Sie den Administrator</string>

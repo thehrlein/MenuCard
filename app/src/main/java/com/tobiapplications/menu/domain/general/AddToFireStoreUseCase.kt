@@ -1,11 +1,9 @@
 package com.tobiapplications.menu.domain.general
 
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.tobiapplications.menu.model.admin.AddToFireStoreModel
 import com.tobiapplications.menu.model.order.UserOrder
-import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.mvvm.MediatorUseCase
 import com.tobiapplications.menu.utils.mvvm.Result
 import javax.inject.Inject
@@ -40,7 +38,6 @@ class AddToFireStoreUseCase @Inject constructor(private val fireStore: FirebaseF
 
     private fun add(parameters: AddToFireStoreModel) {
         val order = (parameters.value as UserOrder).orders
-//        val map = mapOf(order.timeStamp.toString() to order)
         fireStore
             .collection(parameters.collection)
             .document(parameters.document!!)
@@ -50,12 +47,11 @@ class AddToFireStoreUseCase @Inject constructor(private val fireStore: FirebaseF
     }
 
     private fun update(parameters: AddToFireStoreModel) {
-        val order = (parameters.value as UserOrder).orders
-//        val map = mapOf(order.timeStamp.toString() to order)
+        val orders = (parameters.value as UserOrder).orders
         fireStore
             .collection(parameters.collection)
             .document(parameters.document!!)
-            .set(order, SetOptions.merge())
+            .set(orders, SetOptions.merge())
             .addOnSuccessListener { onSuccess() }
             .addOnFailureListener { onFailure() }
     }

@@ -7,6 +7,8 @@ import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
 import com.tobiapplications.menu.ui.viewhandler.adapter.PreviousOrdersAdapter
 import com.tobiapplications.menu.utils.extensions.obtainViewModel
+import com.tobiapplications.menu.utils.extensions.setGone
+import com.tobiapplications.menu.utils.extensions.show
 import kotlinx.android.synthetic.main.fragment_previous_orders.*
 
 /**
@@ -31,7 +33,20 @@ class PreviousOrdersFragment : BaseFragment() {
 
     fun initViewModel() {
         viewModel = obtainViewModel()
-        viewModel.prevOrders.observe(this, Observer { previousOrdersAdapter?.setItems(it?.orders?.values?.toMutableList(), true) })
+        viewModel.prevOrders.observe(this, Observer { setPreviousOrders(it) })
+    }
+
+    private fun setPreviousOrders(it: List<Order>?) {
+        if (it == null || it.isEmpty()) {
+            recyclerView.setGone()
+            errorNoOrders.show()
+        } else {
+            previousOrdersAdapter?.clear()
+            previousOrdersAdapter?.setItems(it?.toMutableList(), true)
+            recyclerView.show()
+            errorNoOrders.setGone()
+        }
+        progress.setGone()
     }
 
     private fun initRecyclerView() {

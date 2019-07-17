@@ -4,7 +4,7 @@ import android.graphics.drawable.GradientDrawable
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.tobiapplications.menu.R
-import com.tobiapplications.menu.model.admin.UpdateDataModel
+import com.tobiapplications.menu.model.admin.AddToFireStoreModel
 import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.model.order.UserOrder
 import com.tobiapplications.menu.ui.views.general.AdminExpandableView
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.viewholder_admin_order.view.*
 /**
  *  Created by tobiashehrlein on 2019-06-23
  */
-class AdminOrderViewHolder(private val view: View, private val newStatus: (UpdateDataModel) -> Unit) : RecyclerView.ViewHolder(view) {
+class AdminOrderViewHolder(private val view: View, private val newStatus: (AddToFireStoreModel) -> Unit) : RecyclerView.ViewHolder(view) {
 
     private var order: Order? = null
 
@@ -46,13 +46,12 @@ class AdminOrderViewHolder(private val view: View, private val newStatus: (Updat
         newStatus(getUpdateDataModel(order, nextStatus))
     }
 
-    private fun getUpdateDataModel(order: Order, updatedStatus: OrderStatus): UpdateDataModel {
+    private fun getUpdateDataModel(order: Order, updatedStatus: OrderStatus): AddToFireStoreModel {
         order.status = updatedStatus
-        return UpdateDataModel(
+        return AddToFireStoreModel(
             Constants.ORDER_COLLECTION,
-            order.id!!,
-            Constants.STATUS_FIELD,
             UserOrder(mapOf(order.timeStamp.toString() to order)),
+            order.id!!,
             order.timeStamp
         )
     }

@@ -2,18 +2,87 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/menu_space_default"
+    android:background="@color/colorWhite"
+    android:padding="@dimen/menu_space_small">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2"/>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/dateLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/general_date_time"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/verticalBarrier"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="HELLO"/>
+        tools:text="22.06.2019 - 16:45 Uhr"/>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_order_status"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="in Bearbeitung"/>
+
+    <LinearLayout
+        android:id="@+id/orders"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/menu_space_small"
+        app:layout_constraintTop_toBottomOf="@id/dateLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/totalCountLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/general_total_price"
+        android:textSize="@dimen/menu_text_size_big"
+        android:layout_marginTop="@dimen/menu_space_default"
+        app:layout_constraintTop_toBottomOf="@id/orders"
+        app:layout_constraintStart_toStartOf="@id/dateLabel"/>
+
+    <TextView
+        android:id="@+id/totalCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/menu_text_size_big"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/menu_space_default"
+        app:layout_constraintTop_toTopOf="@id/totalCountLabel"
+        app:layout_constraintStart_toEndOf="@id/totalCountLabel"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

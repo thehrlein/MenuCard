@@ -1,15 +1,12 @@
 package com.tobiapplications.menu.domain.admin
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ListenerRegistration
 import com.tobiapplications.menu.model.admin.Drink
 import com.tobiapplications.menu.model.admin.ManageDataModel
 import com.tobiapplications.menu.model.admin.Tobacco
 import com.tobiapplications.menu.model.order.Order
 import com.tobiapplications.menu.model.order.Shisha
-import com.tobiapplications.menu.model.order.UserOrder
 import com.tobiapplications.menu.utils.enums.OrderStatus
-import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.mvvm.MediatorUseCase
 import com.tobiapplications.menu.utils.mvvm.Result
 import javax.inject.Inject
@@ -19,20 +16,11 @@ import javax.inject.Inject
  */
 class GetAndListenToAllOrdersUseCase @Inject constructor(private val fireStore: FirebaseFirestore) : MediatorUseCase<ManageDataModel, List<Order>>() {
 
-    private var snapShotListener : ListenerRegistration? = null
-    private var dataModel : ManageDataModel? = null
 
     override fun execute(parameters: ManageDataModel) {
-        this.dataModel = parameters
-        registerSnapSnotListener()
-    }
-
-    private fun registerSnapSnotListener() {
-        val model = dataModel
-        if (model == null) {
-            onFailure()
-        } else {
-            snapShotListener = fireStore.collection(model.collection)
+        // get all orders, no specific user
+        if (parameters.document == null) {
+            fireStore.collection(parameters.collection)
                 .addSnapshotListener { snapShot, exception ->
                     if (exception != null) {
                         onFailure()
@@ -41,23 +29,49 @@ class GetAndListenToAllOrdersUseCase @Inject constructor(private val fireStore: 
                     val items = mutableListOf<Order>()
                     snapShot?.let {
                         for (doc in it) {
-//                            item.id = doc.id
-                            val b = doc.data as? HashMap<String, HashMap<String, Any>> ?: continue
-
-                            b.forEach {
-                                val drinks = buildDrinks(it.value.get("drinks") as ArrayList<Map<String, Any>>)
-                                val shisha = buildShishas(it.value.get("shisha") as ArrayList<Map<String, Any>>)
-                                val timeStamp = it.value.get("timeStamp") as Long
-                                val status = OrderStatus.getStatus(it.value.get("status") as String)
-                                items.add(Order(drinks, shisha, timeStamp, status))
-                            }
-
+                            val id = doc.id
+                            val data = doc.data as? HashMap<String, HashMap<String, Any>>
+                            items.addAll(buildItems(data, id))
                         }
                     }
 
                     onSuccess(items)
                 }
         }
+        // get only orders of one specific user (for his previous order history)
+        else {
+            fireStore
+                .collection(parameters.collection)
+                .document(parameters.document)
+                .addSnapshotListener { snapshot, exception ->
+                    if (exception != null) {
+                        onFailure()
+                    }
+
+                    var items = emptyList<Order>()
+                    snapshot?.let {
+                        val data = it.data as? HashMap<String, HashMap<String, Any>>
+                        items = buildItems(data, parameters.document)
+                    }
+
+                    onSuccess(items)
+                }
+        }
+    }
+
+    private fun buildItems(data: HashMap<String, HashMap<String, Any>>?, id: String) : MutableList<Order> {
+        val list = mutableListOf<Order>()
+        data?.forEach {
+            val drinks = buildDrinks(it.value.get("drinks") as ArrayList<Map<String, Any>>)
+            val shisha = buildShishas(it.value.get("shisha") as ArrayList<Map<String, Any>>)
+            val timeStamp = it.value.get("timeStamp") as Long
+            val status = OrderStatus.getStatus(it.value.get("status") as String)
+            val order = Order(drinks, shisha, timeStamp, status)
+            order.id = id
+            list.add(order)
+        }
+
+        return list
     }
 
     private fun buildDrinks(list: List<Map<String, Any>>): MutableList<Drink> {
@@ -102,17 +116,5 @@ class GetAndListenToAllOrdersUseCase @Inject constructor(private val fireStore: 
     private fun onFailure() {
         result.postValue(Result.Success(emptyList()))
     }
-
-    fun removeSnapShotListener() {
-        snapShotListener?.remove()
-    }
-
-    fun addSnapShotListener() {
-        registerSnapSnotListener()
-    }
-
 }
 
-class AA(val map : Map<String, UserOrder>) {
-    constructor() : this(emptyMap())
-}

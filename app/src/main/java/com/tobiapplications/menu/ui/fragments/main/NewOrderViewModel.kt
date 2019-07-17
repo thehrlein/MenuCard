@@ -38,8 +38,7 @@ class NewOrderViewModel @Inject constructor(private val addToFireStoreUseCase: A
         addToFireStoreUseCase.execute(AddToFireStoreModel(
             Constants.ORDER_COLLECTION,
             UserOrder(mapOf(order.timeStamp.toString() to order)),
-            email,
-            Constants.ORDERS_FIELD)
+            email)
         )
     }
 }

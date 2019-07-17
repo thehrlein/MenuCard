@@ -6,4 +6,4 @@ package com.tobiapplications.menu.model.admin
 data class AddToFireStoreModel(val collection: String,
                                val value: FireStoreItem,
                                val document: String? = null,
-                               val field: String? = null)
+                               val timeStamp: Long? = null)
