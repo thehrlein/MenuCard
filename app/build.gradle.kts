@@ -91,6 +91,7 @@ dependencies {
     // Firebase
     implementation(Dependencies.firebaseAuth)
     implementation(Dependencies.firebaseFirestore)
+    implementation(Dependencies.firebaseMessaging)
 
     // Stepper Touch
     implementation(Dependencies.stepperTouch)

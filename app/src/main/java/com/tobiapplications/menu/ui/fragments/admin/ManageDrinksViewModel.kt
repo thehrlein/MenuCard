@@ -42,6 +42,6 @@ class ManageDrinksViewModel @Inject constructor(getAndListenToAllDataUseCase: Ge
     }
 
     fun deleteDrink(drink: Drink?) {
-        drink?.let { deleteFromFireStoreUseCase.execute(DeleteDataModel(Constants.DRINK_COLLECTION, null, it.id.orEmpty())) }
+        drink?.let { deleteFromFireStoreUseCase.execute(DeleteDataModel(Constants.DRINK_COLLECTION, null, it.fireId.orEmpty())) }
     }
 }

@@ -67,7 +67,7 @@ class GetAndListenToAllOrdersUseCase @Inject constructor(private val fireStore: 
             val timeStamp = it.value.get("timeStamp") as Long
             val status = OrderStatus.getStatus(it.value.get("status") as String)
             val order = Order(drinks, shisha, timeStamp, status)
-            order.id = id
+            order.fireId = id
             list.add(order)
         }
 

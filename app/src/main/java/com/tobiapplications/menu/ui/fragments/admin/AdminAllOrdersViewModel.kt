@@ -37,7 +37,7 @@ class AdminAllOrdersViewModel @Inject constructor(private val getAndListenToAllO
     }
 
     fun deleteItem(order: Order) {
-        deleteFromFireStoreUseCase.execute(DeleteDataModel(Constants.ORDER_COLLECTION, order.id, order.timeStamp.toString()))
+        deleteFromFireStoreUseCase.execute(DeleteDataModel(Constants.ORDER_COLLECTION, order.fireId, order.timeStamp.toString()))
     }
 
 }

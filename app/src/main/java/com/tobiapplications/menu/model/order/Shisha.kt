@@ -1,8 +1,6 @@
 package com.tobiapplications.menu.model.order
 
-import com.tobiapplications.menu.R
 import com.tobiapplications.menu.model.admin.Tobacco
-import com.tobiapplications.menu.utils.extensions.getString
 import com.tobiapplications.menu.utils.general.DisplayableItem
 
 
@@ -26,7 +24,7 @@ data class Shisha(val name: String,
 
     fun getTobaccoList(placeHolder: String? = ", ") : String {
         var text = tobaccos.first().getFullName()
-        tobaccos.filterIndexed { index, tobacco -> index > 0 }.forEach {
+        tobaccos.filterIndexed { index, _ -> index > 0 }.forEach {
             text += "$placeHolder${it.getFullName()}"
 
         }

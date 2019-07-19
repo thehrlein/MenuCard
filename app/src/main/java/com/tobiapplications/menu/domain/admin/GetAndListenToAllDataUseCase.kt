@@ -36,7 +36,7 @@ class GetAndListenToAllDataUseCase @Inject constructor(private val fireStore: Fi
                     snapShot?.let {
                         for (doc in it) {
                             val item: FireStoreItem = doc.toObject(model.clazz)
-                            item.id = doc.id
+                            item.fireId = doc.id
                             items.add(item)
                         }
                     }

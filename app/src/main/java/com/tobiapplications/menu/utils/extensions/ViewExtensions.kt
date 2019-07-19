@@ -121,7 +121,7 @@ fun TextView.afterTextChanged(afterTextChanged: (String) -> Unit) {
  * Extension function to simplify setting an onFocusLostListener
  */
 fun EditText.onFocusLost(onFocusLost: () -> Unit) {
-    this.setOnFocusChangeListener { v, hasFocus ->
+    this.setOnFocusChangeListener { _, hasFocus ->
         if (!hasFocus) { onFocusLost.invoke() }
     }
 }

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "665916160001-oblrkq7qjv1ca78p3s1knr4hdvi16ms1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tobiapplications.menu",
+            "certificate_hash": "b276c785a362c51837d81b4fa238c22bf01fe962"
+          }
+        },
+        {
           "client_id": "665916160001-r17s82moq3u2qhcocn0qtsj5an1ipgde.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

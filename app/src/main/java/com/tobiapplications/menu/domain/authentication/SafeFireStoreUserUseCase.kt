@@ -1,11 +1,11 @@
 package com.tobiapplications.menu.domain.authentication
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceId
 import com.tobiapplications.menu.model.authentication.User
 import com.tobiapplications.menu.utils.general.Constants
 import com.tobiapplications.menu.utils.mvvm.MediatorUseCase
 import com.tobiapplications.menu.utils.mvvm.Result
-import java.lang.Exception
 import javax.inject.Inject
 
 /**
@@ -20,10 +20,22 @@ class SafeFireStoreUserUseCase @Inject constructor(private val firestore: Fireba
             .addOnSuccessListener { query ->
                 val user = query.firstOrNull()?.toObject(User::class.java)
                 if (user == null) {
-                    addUser(parameters)
+                    getInstanceId(parameters)
                 } else {
                     onSuccess(user)
                 }
+            }
+    }
+
+    private fun getInstanceId(user: User) {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    onFailure(user)
+                }
+
+                user.firebaseToken = task.result?.token
+                addUser(user)
             }
     }
 

@@ -51,7 +51,7 @@ class AdminOrderViewHolder(private val view: View, private val newStatus: (AddTo
         return AddToFireStoreModel(
             Constants.ORDER_COLLECTION,
             UserOrder(mapOf(order.timeStamp.toString() to order)),
-            order.id!!,
+            order.fireId!!,
             order.timeStamp
         )
     }
@@ -61,7 +61,7 @@ class AdminOrderViewHolder(private val view: View, private val newStatus: (AddTo
         view.progress.setGone()
         view.rootLayout.setBackgroundColor(getColor(R.color.colorWhite))
         view.date.text = "${DateUtils.getDate(order.timeStamp)} Uhr"
-        view.name.text = order.id
+        view.name.text = order.fireId
 
         setStatus(order.status)
         buildExpandableLayouts(order)

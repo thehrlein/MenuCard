@@ -11,10 +11,12 @@ object Dependencies {
         const val aviLoadingIndicatorVersion = "2.1.3"
         const val circularImageViewVersion = "3.0.0"
         const val constraintLayoutVersion = "1.1.3"
+        const val coroutinesVersion = "1.3.0-M2"
         const val daggerVersion = "2.21"
         const val expandableLayoutVersion = "2.9.2"
         const val fabVersion = "1.6.4"
         const val firebaseAuthVersion = "17.0.0"
+        const val firebaseMessaging = "17.3.4"
         const val firebaseFirestoreVersion = "19.0.2"
         const val frescoVersion = "0.13.0"
         const val glideVersion = "4.9.0"
@@ -25,7 +27,7 @@ object Dependencies {
         const val lifecycleVersion = "2.0.0"
         const val materialVersion = "1.1.0-alpha07"
         const val okHttpClientVersion = "3.12.1"
-        const val recyclerViewVersion = "1.1.0-alpha06"
+        const val recyclerViewVersion = "1.1.0-alpha01"
         const val retrofitVersion = "2.5.0"
         const val rxBinding2Version = "2.2.0"
         const val rxBindingKotlinVersion = "0.4.0"
@@ -95,6 +97,7 @@ object Dependencies {
     // Firebase
     const val firebaseAuth = "com.google.firebase:firebase-auth:${Versions.firebaseAuthVersion}"
     const val firebaseFirestore = "com.google.firebase:firebase-firestore:${Versions.firebaseFirestoreVersion}"
+    const val firebaseMessaging = "com.google.firebase:firebase-messaging:${Versions.firebaseMessaging}"
 
     // Stepper Touch
     const val stepperTouch = "com.github.DanielMartinus:Stepper-Touch:${Versions.stepperTouchVersion}"
@@ -105,7 +108,8 @@ object Dependencies {
     // Expandable Layout
     const val expandableLayout = "net.cachapa.expandablelayout:expandablelayout:${Versions.expandableLayoutVersion}"
 
-
+    // Coroutines
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesVersion}"
 }
 
 object TestLibraries {

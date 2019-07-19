@@ -30,7 +30,7 @@ class DrinksNetworkSource @Inject constructor(private val fireStore: FirebaseFir
 
         for (doc in snapshot) {
             val drink = doc.toObject(Drink::class.java)
-            drink.id = doc.id
+            drink.fireId = doc.id
             drinks.add(drink)
         }
 
