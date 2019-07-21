@@ -19,11 +19,7 @@ class SafeFireStoreUserUseCase @Inject constructor(private val firestore: Fireba
             .get()
             .addOnSuccessListener { query ->
                 val user = query.firstOrNull()?.toObject(User::class.java)
-                if (user == null) {
-                    getInstanceId(parameters)
-                } else {
-                    onSuccess(user)
-                }
+                getInstanceId(user ?: parameters)
             }
     }
 
@@ -34,7 +30,11 @@ class SafeFireStoreUserUseCase @Inject constructor(private val firestore: Fireba
                     onFailure(user)
                 }
 
-                user.firebaseToken = task.result?.token
+                val token = task.result?.token
+                if (token != null && !user.firebaseToken.contains(token)) {
+                    user.firebaseToken.add(token)
+                }
+
                 addUser(user)
             }
     }
