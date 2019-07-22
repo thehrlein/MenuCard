@@ -28,6 +28,7 @@ class SafeFireStoreUserUseCase @Inject constructor(private val firestore: Fireba
             .addOnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     onFailure(user)
+                    return@addOnCompleteListener
                 }
 
                 val token = task.result?.token
@@ -35,11 +36,11 @@ class SafeFireStoreUserUseCase @Inject constructor(private val firestore: Fireba
                     user.firebaseToken.add(token)
                 }
 
-                addUser(user)
+                setUser(user)
             }
     }
 
-    private fun addUser(user: User) {
+    private fun setUser(user: User) {
         firestore.collection(Constants.USER_COLLECTION)
             .document(user.email)
             .set(user)

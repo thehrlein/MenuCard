@@ -13,7 +13,7 @@ import javax.inject.Inject
 /**
  * Created by tobias.hehrlein on 04.06.2019.
  */
-class MainActivityViewModel @Inject constructor(firebaseAuth: FirebaseAuth,
+class MainActivityViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth,
                                                 private val coreService: CoreService,
                                                 private val signOutUseCase: SignOutUseCase) : ViewModel() {
 
@@ -42,58 +42,37 @@ class MainActivityViewModel @Inject constructor(firebaseAuth: FirebaseAuth,
     private fun observeTitle() {
         coreService.subscribeTitle(object : Observer<String> {
             override fun onError(e: Throwable?) {}
-
-            override fun onNext(t: String?) {
-                title.value = t
-            }
-
+            override fun onNext(t: String?) { title.value = t }
             override fun onCompleted() {}
         })
     }
 
     private fun observeMenuBackButton() {
         coreService.subscribeToolbarBackButton(object : Observer<Boolean> {
-            override fun onError(e: Throwable?) {
-
-            }
-
-            override fun onNext(t: Boolean?) {
-                toolbarBackButton.value = t
-            }
-
-            override fun onCompleted() {
-
-            }
+            override fun onError(e: Throwable?) {}
+            override fun onNext(t: Boolean?) { toolbarBackButton.value = t }
+            override fun onCompleted() {}
         })
     }
 
     private fun observeMenuLayoutRes() {
         coreService.subscribeToolbarMenu(object : Observer<Int> {
             override fun onError(e: Throwable?) {}
-
-            override fun onNext(t: Int?) {
-                toolbarMenuRes.value = t
-            }
-
+            override fun onNext(t: Int?) { toolbarMenuRes.value = t }
             override fun onCompleted() {}
         })
-
     }
 
     private fun observeMenuToolbarListener() {
         coreService.subscribeToolbarMenuListener(object : Observer<Toolbar.OnMenuItemClickListener> {
             override fun onError(e: Throwable?) {}
-
-            override fun onNext(t: Toolbar.OnMenuItemClickListener?) {
-                toolbarMenuListener.value = t
-            }
-
+            override fun onNext(t: Toolbar.OnMenuItemClickListener?) { toolbarMenuListener.value = t }
             override fun onCompleted() {}
         })
     }
 
     fun signOut() {
-        signOutUseCase.invoke(Unit)
+        signOutUseCase.invoke(firebaseAuth.currentUser?.email)
     }
 }
 

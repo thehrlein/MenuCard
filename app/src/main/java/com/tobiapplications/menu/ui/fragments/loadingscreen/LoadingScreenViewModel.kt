@@ -1,7 +1,6 @@
 package com.tobiapplications.menu.ui.fragments.loadingscreen
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.tobiapplications.menu.domain.admin.IsAdminUseCase
@@ -40,30 +39,6 @@ class LoadingScreenViewModel @Inject constructor(firebaseAuth: FirebaseAuth, isA
                 loggedInStateControlFunction())
 
         isAdminUseCase.execute(email)
-
-//        loggedInState = isAdminUseCase.observe().map {
-//            val isAdmin = (it as? Result.Success<Boolean>)?.data.orFalse()
-//            if (isAdmin) LoginState.ADMIN else LoginState.LOGGED_IN
-//        }
-//
-//        if (isLoggedIn && email != null) {
-//            isAdminUseCase.execute(email)
-//        } else {
-//            loggedInState.value = LoginState.LOGGED_OUT
-//        }
-
-//        loggedInState.value = isAdminResult.map {
-//            val isAdmin = (it as? Result.Success<Boolean>)?.data.orFalse()
-//            if (isAdmin) LoginState.ADMIN else LoginState.LOGGED_IN
-//        }
-//
-//        isAdminResult.addSource(isLoggedIn) {
-//            if (it && email != null) {
-//                isAdminUseCase.execute(email)
-//            } else {
-//                loggedInState.value = LoginState.LOGGED_OUT
-//            }
-//        }
     }
 
     private fun loggedInStateControlFunction() : (Boolean?, Boolean?) -> Boolean = { loggedIn, isAdmin -> loggedIn != null && isAdmin != null }
