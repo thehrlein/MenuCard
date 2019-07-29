@@ -5,7 +5,7 @@ Demo Project - This is just a demo application to test some stuff and improve my
 ## What?
 - menu application for restaurants, bars etc.
 - opportunity for customers to order drinks and hookahs
-- admin can log in and add / delete possible drinks / tobaccos (stored in firstore)
+- admin can log in and add / delete possible drinks / tobaccos (stored in firestore)
 
 
 ## ToDo
