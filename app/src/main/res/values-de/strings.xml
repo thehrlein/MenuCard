@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- General -->
+    <string name="app_name">Menu</string>
+    <string name="general_drinks">Getränke</string>
+    <string name="general_shisha">Shisha</string>
+    <string name="general_attention">Achtung</string>
+    <string name="general_please_wait">Bitte warten …</string>
+    <string name="general_unknown_error">Es ist ein unbekannter Fehler aufgetreten</string>
+    <string name="general_cancel">abbrechen</string>
+    <string name="general_add">hinzufügen</string>
+    <string name="general_select">auswählen</string>
+    <string name="general_delete">löschen</string>
+    <string name="general_position">Pos.</string>
+    <string name="general_name">Name</string>
+    <string name="general_size">Größe</string>
+    <string name="general_price">Preis</string>
+    <string name="general_count">Anzahl</string>
+    <string name="general_tobacco">Tabak</string>
+    <string name="general_date_time">Wann?</string>
+    <string name="general_customer_email">Wer?</string>
+    <string name="general_total_price">Gesamtpreis:</string>
+    <string name="general_position_placeholder">%1$d.</string>
+    <string name="general_order_status_new">neu</string>
+    <string name="general_order_status_sent">gesendet</string>
+    <string name="general_order_status_in_progress">in Bearbeitung</string>
+    <string name="general_order_status_done">fertig</string>
+    <string name="general_order_status_delete">löschen</string>
+
+    <!-- LoadingScreen -->
+    <string name="loading_please_be_patient">Einen Moment …</string>
+    <string name="loading_not_logged_in_title">Möchten Sie sich anmelden oder anonym bestellen?</string>
+    <string name="loading_not_logged_in_message">Eingeloggte Nutzer sehen neben Ihrem Profil alte Bestellungen</string>
+    <string name="loading_not_logged_login">Einloggen</string>
+    <string name="loading_not_logged_stay_anonymous">Als Gast bestellen</string>
+
+    <!-- Menu -->
+    <string name="menu_navigation_last_order">Bestellungen</string>
+    <string name="menu_navigation_new_order">Neue Bestellung</string>
+    <string name="menu_navigation_profile">Profil</string>
+    <string name="menu_main_anonym">Einloggen</string>
+
+    <!-- Main -->
+    <string name="main_welcome">Willkommen\nÜber unten stehenden Button können Sie Getränke oder Shisha zu Ihrer Bestellung hinzufügen</string>
+    <string name="main_order_overview">Ihre Bestellung</string>
+    <string name="main_logout_or_quit_dialog_title">Möchten Sie sich ausloggen oder die App beenden?</string>
+    <string name="main_logout_or_quit_dialog_logout">Ausloggen</string>
+    <string name="main_logout_or_quit_dialog_quit">App beenden</string>
+
+    <!-- PreviousOrdersFragment -->
+    <string name="previous_orders_no_orders">Keine Bestellungen verfügbar</string>
+
+    <!-- AddDrinksFragment -->
+    <string name="add_drinks_error_no_drinks">Entschuldigung - Es ist ein Fehler aufgetreten\n\nKeine Getränke verfügbar - bitte kontaktieren Sie den Administrator</string>
+
+    <!-- AddShishaFragment -->
+    <string name="add_shisha_stepper_explanation">Drücken Sie auf + / - oder swipen Sie in die entsprechende Richtung um die Anzahl Shishas zu verändern</string>
+    <string name="add_shisha_base_shisha_name">%1$d. Shisha</string>
+    <string name="add_shisha_tobaccos_placeholder">(%1$s)</string>
+    <string name="add_shisha_click_to_add_tobacco">Klicken Sie hier um den Tabak auszuwählen</string>
+    <string name="add_shisha_not_all_shisha_have_tobacco_message">Sie haben nicht bei jeder Shisha Ihren Tabak gewählt. Wollen Sie den Tabak auswählen oder sollen diese entfernt werden?</string>
+    <string name="add_shisha_not_all_shisha_have_tobacco_select">Auswählen</string>
+    <string name="add_shisha_not_all_shisha_have_tobacco_delete">Löschen</string>
+
+    <!-- OrderOverviewFragment -->
+    <string name="overview_confirm_order">Bestellung abschicken</string>
+    <string name="overview_delete_order">Möchten Sie Ihre Bestellung löschen?</string>
+    <string name="overview_send_order_success">Herzlichen Glückwunsch\nIhre Bestellung wurde erfolgreich gesendet :)</string>
+    <string name="overview_send_order_failed">Ihre Bestellung konnte leider nicht gesendet werden</string>
+
+    <!-- Login & Registraion-->
+    <string name="login_toolbar_title">Login</string>
+    <string name="login_hint_email">E-Mail</string>
+    <string name="login_hint_password">Passwort</string>
+    <string name="login_new_to_menucard">Neu bei MenuCard?</string>
+    <string name="login_reset_password">Passwort vergessen?</string>
+    <string name="login_already_signed_up">Bereits registriert?</string>
+    <string name="login_go_to_registration">für MenuCard registieren</string>
+    <string name="login_register">registieren</string>
+    <string name="login_action_sign_in">einloggen</string>
+    <string name="login_action_sign_up">registrieren</string>
+    <string name="login_validation_field_required">Pflichtfeld</string>
+    <string name="login_validation_email_invalid">Bitte geben Sie eine gültige E-Mail ein</string>
+    <string name="login_validation_password_too_short">Bitte geben Sie mindestens 6 Zeichen ein</string>
+    <string name="login_error_user_not_exists">Es wurde kein Account zu dieser E-Mail gefunden</string>
+    <string name="login_error_user_already_exists">Es existiert bereits ein Account zu dieser E-Mail</string>
+    <string name="login_error_bad_password">Falsches Passwort</string>
+    <string name="login_forgot_password_title">Haben Sie Ihr Passwort vergessen?</string>
+    <string name="login_forgot_password_message">Geben Sie hier Ihre E-Mail ein und Sie werden ein neues Passwort zugeschickt bekommen.</string>
+    <string name="login_forgot_password_send">Absenden</string>
+    <string name="login_forgot_password_cancel">Abbrechen</string>
+    <string name="login_forgot_password_general_error">Es ist ein Fehler aufgetreten</string>
+    <string name="login_forgot_password_send_success">Es wurde eine E-Mail an %s gesendet</string>
+    <string name="register_toolbar_title">Registrieren</string>
+    <string name="register_error_bad_password">Ungültiges Passwort</string>
+    <string name="register_error_invalid_email">Ungültiges Email</string>
+    <string name="register_error_user_exists">Zu dieser E-Mail existiert bereits ein Account</string>
+    <string name="register_success">Sie haben sich erfolgreich registriert. Bitte loggen Sie sich nun ein</string>
+
+    <!-- Admin -->
+    <string name="admin_manage_items">Bestände verwalten</string>
+    <string name="admin_manage_orders">Bestellungen verwalten</string>
+    <string name="admin_manage_drinks">Getränke verwalten</string>
+    <string name="admin_manage_shisha">Tabake verwalten</string>
+    <string name="admin_welcome_message">Hallo Admin, über die betreffenden Buttons erhälst du Einsicht in die Bestände und kannst Bestellungen bearbeiten</string>
+    <string name="admin_overview_toolbar_title">Admin - Übersicht</string>
+    <string name="admin_manage_items_toolbar_title">Admin - Bestände</string>
+    <string name="admin_manage_orders_toolbar_title">Admin - Bestellungen</string>
+    <string name="admin_manage_drinks_toolbar_title">Getränke verwalten</string>
+    <string name="admin_manage_shisha_toolbar_title">Tabak verwalten</string>
+    <string name="admin_drink_name">Name</string>
+    <string name="admin_drink_size">Größe (in L)</string>
+    <string name="admin_drink_price">Preis (in €)</string>
+    <string name="admin_tobacco_brand">Marke</string>
+    <string name="admin_tobacco_name">Name</string>
+    <string name="admin_add_drink_title">Welches Getränk möchten Sie hinzufügen?</string>
+    <string name="admin_add_drink_success">Getränk erfolgreich angelegt</string>
+    <string name="admin_add_drink_failed">Fehler: Getränk konnte nicht angelegt werden</string>
+    <string name="admin_add_tobacco_title">Welchen Tabak möchten Sie hinzufügen?</string>
+    <string name="admin_add_tobacco_success">Tabak erfolgreich angelegt</string>
+    <string name="admin_add_tobacco_failed">Fehler: Tabak konnte nicht angelegt werden</string>
+    <string name="admin_error_no_drinks">Keine Getränke verfügbar\n\nFügen Sie über unten stehenden Button neue Getränke hinzu</string>
+    <string name="admin_error_no_tobacco">Keine Tabake verfügbar\n\nFügen Sie über unten stehenden Button neue Tabake hinzu</string>
+    <string name="admin_error_no_orders">Aktuell gibt es keine Bestellungen</string>
+
+    <!-- Tobacco Selection -->
+    <string name="tobacco_selection_toolbar_title">Tabakauswahl</string>
+    <string name="tobacco_selection_explanation">Wählen Sie hier zwischen einem oder mehreren Tabaksorten Ihren individuellen Geschmack</string>
+
+</resources>
