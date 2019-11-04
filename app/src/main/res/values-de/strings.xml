@@ -123,6 +123,7 @@
     <string name="admin_error_no_drinks">Keine Getränke verfügbar\n\nFügen Sie über unten stehenden Button neue Getränke hinzu</string>
     <string name="admin_error_no_tobacco">Keine Tabake verfügbar\n\nFügen Sie über unten stehenden Button neue Tabake hinzu</string>
     <string name="admin_error_no_orders">Aktuell gibt es keine Bestellungen</string>
+    <string name="admin_menu_item_log_out">Ausloggen</string>
 
     <!-- Tobacco Selection -->
     <string name="tobacco_selection_toolbar_title">Tabakauswahl</string>

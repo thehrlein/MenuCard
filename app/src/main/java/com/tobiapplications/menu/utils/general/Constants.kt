@@ -21,6 +21,7 @@ object Constants {
     const val LOGGED_IN = "logged_in"
     const val EMAIL = "email"
     const val PW = "pw"
+    const val ADMIN = "admin"
     const val TOBACCO_SELECTION_MODEL = "tobacco_selection_model"
 
     /**

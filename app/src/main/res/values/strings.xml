@@ -122,6 +122,7 @@
     <string name="admin_error_no_drinks">No drinks available\n\nAdd drinks with the button at the bottom</string>
     <string name="admin_error_no_tobacco">No tobaccos available\n\nAdd tobaccos with the button at the bottom</string>
     <string name="admin_error_no_orders">Currently there are no orders</string>
+    <string name="admin_menu_item_log_out">Log out</string>
 
     <!-- Tobacco Selection -->
     <string name="tobacco_selection_toolbar_title">Tabaccos</string>

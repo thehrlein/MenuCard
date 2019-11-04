@@ -15,12 +15,22 @@ class SafeFireStoreUserUseCase @Inject constructor(private val firestore: Fireba
 
     override fun execute(parameters: User) {
         firestore.collection(Constants.USER_COLLECTION)
-            .whereEqualTo("email", parameters.email)
+            .whereEqualTo(Constants.EMAIL, parameters.email)
             .get()
             .addOnSuccessListener { query ->
-                val user = query.firstOrNull()?.toObject(User::class.java)
-                getInstanceId(user ?: parameters)
+                val user = query.firstOrNull()?.toObject(User::class.java) ?: User(parameters.email)
+                user.admin = checkIfAdminAccount(user)
+                getInstanceId(user)
             }
+    }
+
+    private fun checkIfAdminAccount(user: User): Boolean {
+        if (user.email.isEmpty()) {
+            return false
+        }
+
+        val local = user.email.substringBefore("@")
+        return local == Constants.ADMIN
     }
 
     private fun getInstanceId(user: User) {

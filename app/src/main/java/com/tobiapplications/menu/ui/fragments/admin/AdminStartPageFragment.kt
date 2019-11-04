@@ -1,9 +1,11 @@
 package com.tobiapplications.menu.ui.fragments.admin
 
 import android.view.WindowManager
+import androidx.appcompat.widget.Toolbar
 import com.tobiapplications.menu.R
 import com.tobiapplications.menu.ui.activitys.MainActivity
 import com.tobiapplications.menu.ui.fragments.base.BaseFragment
+import com.tobiapplications.menu.utils.extensions.consume
 import com.tobiapplications.menu.utils.extensions.onClick
 import com.tobiapplications.menu.utils.extensions.replaceFragment
 import com.tobiapplications.menu.utils.extensions.toast
@@ -34,6 +36,20 @@ class AdminStartPageFragment : BaseFragment() {
 
     override fun canModifyAppComponents(): Boolean {
         return true
+    }
+
+    override fun getToolbarMenuResId(): Int {
+        return R.menu.menu_admin
+    }
+
+    override fun getToolbarMenuClickListener(): Toolbar.OnMenuItemClickListener? {
+        return Toolbar.OnMenuItemClickListener {
+            if (it.itemId == R.id.menu_action_logout) {
+                consume { activity?.onBackPressed() }
+            }
+
+            false
+        }
     }
 
     override fun getLayout(): Int {
